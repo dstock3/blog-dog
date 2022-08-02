@@ -6,7 +6,7 @@ import DeleteArticle from "../modals/DeleteArticle";
 import expandComment from "../../assets/expand.svg";
 import CommentSection from "../sections/CommentSection";
 
-const Article = ({ users, article, articleId, userInfo, theme, layout, limit, author, setUpdate, comments, setComments, commentMessage, setCommentMessage, landing }) => {
+const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layout, limit, author, setUpdate, comments, setComments, commentMessage, setCommentMessage, landing }) => {
     const [abstract, setAbstract] = useState(article["content"])
     const [isAuthorized, setIsAuthorized] = useState(false)
     const [commentUpdate, setCommentUpdate] = useState(false)
@@ -30,7 +30,7 @@ const Article = ({ users, article, articleId, userInfo, theme, layout, limit, au
             setCommentMessage("Some error occured");
         }
     }
-
+    
     useEffect(()=> {
         if (articleId) {
             fetchComments(articleId)
@@ -100,7 +100,7 @@ const Article = ({ users, article, articleId, userInfo, theme, layout, limit, au
             </div>
 
             {article["img"] ?
-                layout.main === "card" ?
+                layout === "card" ?
                     <div className="img-container img-card-view">
                         <img className="article-img" src={article["img"]} alt={article["img-desc"]}></img>
                         <div className="article-img-caption">{article["img-desc"]}</div>
@@ -116,7 +116,7 @@ const Article = ({ users, article, articleId, userInfo, theme, layout, limit, au
                     <DeleteArticle theme={theme} toDelete={toDelete} userInfo={userInfo} articleId={articleId} setToDelete={setToDelete} /> : null}
             </>
             {limit ?
-                article["content"].length < 400 ?
+                article.content.length < 400 ?
                     <div className="article-content">{article["content"]}</div> :
                     <div className="article-content">
                         {abstract}...
@@ -130,8 +130,9 @@ const Article = ({ users, article, articleId, userInfo, theme, layout, limit, au
                     <div className="article-content">
                         {article["content"]}
                     </div>
-                    <CommentForm users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} />
-                    
+                    {isLoggedIn ?
+                        <CommentForm users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
+                    }
                     {Object.keys(comments).length !== 0 ?
                         <ul className={"comments-container " + theme + "-accent"}>
                             <div className="comment-head-container">

@@ -13,7 +13,8 @@
 }
   
 article {
-    width: 100%;
+    width: 85%;
+    padding-inline-start: 7.5%;;
     padding-bottom: 15px;
     margin-bottom: 15px;
     border-radius: 5px;
@@ -25,9 +26,7 @@ article {
 }
   
 .article-head {
-    display: flex;
-    justify-content: space-between;
-    margin-inline: 25px;
+    width: 100%;
     margin-bottom: 15px;
 }
 
@@ -41,7 +40,7 @@ article {
 }
     
 .article-content {
-    margin-inline: 25px;
+    width: 85%;
 }
   
 .img-container {
@@ -95,7 +94,6 @@ article {
 }
 
 .comments-container {
-    margin: auto;
     width: 85%;
     border-radius: 5px;
     margin-top: 15px;

@@ -5,7 +5,7 @@ import Intro from './Intro';
 import CommentedArticles from './CommentedArticles';
 import Profile from './Profile';
 
-const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome, fetchArticle}) => {
+const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome}) => {
     if (isHome) {
         return (
             <div className={"sidebar " + theme}>
@@ -26,8 +26,8 @@ const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome, fetchArticle}) 
         return (
             <div className={"sidebar " + theme}>
                 <Profile mode="prof-side" userInfo={userInfo} />
-                <Archive userInfo={userInfo} articles={articles} fetchArticle={fetchArticle}/>
-                <CommentedArticles theme={theme} fetchArticle={fetchArticle}/>
+                <Archive userInfo={userInfo} articles={articles} />
+                <CommentedArticles theme={theme} />
             </div>
         );
     }

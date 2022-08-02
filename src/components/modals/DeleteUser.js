@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom';
 
-const DeletePortal = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete}) => {
+const DeleteUser = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete}) => {
     const [message, setMessage] = useState("")
     const nav = useNavigate()
 
@@ -49,6 +49,6 @@ const DeletePortal = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete}) =
     )
 }
 
-export default DeletePortal
+export default DeleteUser
 
 

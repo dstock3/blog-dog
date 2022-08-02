@@ -70,35 +70,42 @@ const HomePage = () => {
       deleteArticleModal.style.zIndex = 0
   }, [])
 
-    if (users && isLoggedIn) {
-        /* If request for users is successful and the user is logged in */
-        return (
-          <div className={"App " + theme + "-accent"}>
-            <Header userInfo={user} theme={theme} title={user.blogTitle} />
-            <Home isLoggedIn={isLoggedIn} theme={theme} userInfo={user} layout={layout} users={users}  />
-            <Footer theme={theme} />
-          </div>
-          ) 
-    } else if (users && !isLoggedIn) {
-        /* If request for users is successful and user is not logged in... */
-        return (
-          <div className="App dark-accent">
-            <Header theme="dark" title="BlogDog - Simple CMS" />
-            <Home theme="dark" users={users} />
-            <Footer theme="dark" />
-          </div> 
-        )
-    } else if (!users) {
-      /* If request for users fails */
+
+  if (isLoading) {
+    /* If request is still Loading */
+    return(
+      <div className="App dark-accent">
+        <Header theme="dark" title="BlogDog - Simple CMS" />
+        <Spinner theme="dark"/>
+        <Footer theme="dark" />
+      </div>
+    )
+  } else if (users && isLoggedIn) {
+      /* If request for users is successful and the user is logged in */
       return (
-        <div>{errorMessage}</div>
-      )
-    } else if (isLoading) {
-      /* If request is still Loading */
+        <div className={"App " + theme + "-accent"}>
+          <Header userInfo={user} theme={theme} title={user.blogTitle} />
+          <Home isLoggedIn={isLoggedIn} theme={theme} userInfo={user} layout={layout} users={users} />
+          <Footer theme={theme} />
+        </div>
+        ) 
+    } else if (users && !isLoggedIn) {
+      /* If request for users is successful and user is not logged in... */
       return (
         <div className="App dark-accent">
           <Header theme="dark" title="BlogDog - Simple CMS" />
-          <Spinner theme="dark"/>
+          <Home theme="dark" users={users} />
+          <Footer theme="dark" />
+        </div> 
+      )
+    } else if (errorMessage) {
+      /* If request for users fails */
+      return (
+        <div className="App dark-accent">
+          <Header theme="dark" title="BlogDog - Simple CMS" />
+          <main className={"home dark-accent"}>
+            <div>{errorMessage}</div>
+          </main>
           <Footer theme="dark" />
         </div>
       )

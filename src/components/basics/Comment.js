@@ -8,20 +8,23 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
     const [fullyAuthorized, setFullyAuthorized] = useState(false)
 
     const authorizeComment = () => {
-        let thisUser = parseJwt(localStorage.getItem('user'))
+        let thisUser = localStorage.getItem('user')
 
-        //if the user is the author of both the article and the comment itself, authorize to delete and edit
-        if (thisUser._id === articleAuthor._id && thisUser._id === comment.userId) {
-            setFullyAuthorized(true) 
-        } else if (thisUser._id === articleAuthor._id && thisUser._id !== comment.userId) { 
-            //if the user is the author of the article, authorize to delete
-            setAuthorizedToDelete(true)
-        } else if (thisUser._id === comment.userId && thisUser._id !== articleAuthor._id ) {
-            //if user is author of the comment itself, authorize to delete and edit
-            setFullyAuthorized(true)
-        } else {
-            setFullyAuthorized(false)
-            setAuthorizedToDelete(false)
+        if (thisUser) {
+            let parsedUser = parseJwt(thisUser)
+            //if the user is the author of both the article and the comment itself, authorize to delete and edit
+            if (parsedUser._id === articleAuthor._id && parsedUser._id === comment.userId) {
+                setFullyAuthorized(true) 
+            } else if (parsedUser._id === articleAuthor._id && parsedUser._id !== comment.userId) { 
+                //if the user is the author of the article, authorize to delete
+                setAuthorizedToDelete(true)
+            } else if (parsedUser._id === comment.userId && parsedUser._id !== articleAuthor._id ) {
+                //if user is author of the comment itself, authorize to delete and edit
+                setFullyAuthorized(true)
+            } else {
+                setFullyAuthorized(false)
+                setAuthorizedToDelete(false)
+            }
         }
     }
 
