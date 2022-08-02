@@ -1,0 +1,53 @@
+.login {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
+    margin-top: 5%;
+    z-index: 2;
+}
+
+.form-head {
+    text-align: center;
+}
+
+.user-login-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-password-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.log-label {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.prompt-container {
+    margin-top: 15px;
+}
+  
+.log-btn {
+    text-align: center;
+    font-weight: bold;
+    padding: 7px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 900px) {
+    .loginForm {
+        margin-bottom: 15px;
+        width: 95%;
+    }
+
+}

@@ -1,0 +1,57 @@
+.user {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 85%;
+    min-height: 75vh;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
+}
+
+#prof-main {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: fit-content;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.user > div {
+    width: 95%;
+}
+
+.main-pic-container {
+    height: 200px;
+    width: 200px;
+    margin-right: 25px;
+}
+
+.main-pic {
+    height: 100%;
+    width: 100%;
+}
+
+.main-prof-info {
+    width: 25%;
+}
+
+#archive-main {
+    min-height: 40vh;
+}
+
+.archive-head {
+    align-self: center;
+}
+
+.main-archive-list {
+    align-self: center;
+}
+
+.date-joined {
+    margin-top: 10px;
+    margin-left: 15px;
+    font-weight: bold;
+    font-size: .75em;
+
+}

@@ -1,0 +1,277 @@
+.title {
+    margin-left: 7%;
+}
+  
+.title a {
+    text-decoration: none;
+}
+  
+.articles-container {
+    width: 75%;
+    min-height: fit-content;
+    margin-bottom: 25px;
+}
+  
+article {
+    width: 100%;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
+}
+
+.article-author {
+    margin-bottom: 10px;
+}
+  
+.article-head {
+    display: flex;
+    justify-content: space-between;
+    margin-inline: 25px;
+    margin-bottom: 15px;
+}
+
+.article-head-subcontainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-posted {
+    font-size: .75em;
+}
+    
+.article-content {
+    margin-inline: 25px;
+}
+  
+.img-container {
+    height: 200px;
+    float: left;
+    margin-left: 25px;
+    margin-right: 15px;
+    padding-bottom: 25px;
+}
+  
+.article-img {
+    height: 100%;
+}
+  
+.article-img-caption {
+    font-size: .75em;
+}
+
+.read-more {
+    margin-top: 15px;
+}
+
+.article-dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 125px;
+}
+
+.article-edit-btn {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-head-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: 15px;
+}
+
+.show-comments-btn {
+    padding: 10px;
+    height: fit-content;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comments-container {
+    margin: auto;
+    width: 85%;
+    border-radius: 5px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding-inline-start: 0;
+    padding-bottom: 5px;
+}
+
+.comment-head {
+    text-align: center;
+}
+
+.comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+    margin-bottom: 5px;
+    margin-inline: 15px;
+    border-radius: 5px;
+}
+
+.comment-username {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.comment-dashboard {
+    display: flex;
+    justify-content: space-between;
+    width: 125px;
+}
+
+.comment-edit-btn {
+    padding: 7px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.comment-form {
+    margin: auto;
+    width: 85%;
+    border-radius: 5px;
+    margin-top: 2%;
+}
+
+.comment-subcontainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-label {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.comment-input {
+    margin-inline: 15px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+.comment-btn-subcontainer {
+    margin-inline: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment-btn {
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.compose-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 75vh;
+    border-radius: 5px;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
+}
+
+.compose-prompt > p {
+    font-size: 1.25em;
+}
+
+.compose-prompt > a {
+    font-size: 1.33em;
+    font-weight: bold;
+}
+
+#article-delete-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 65px;
+    width: 20vw;
+    z-index: 0;
+}
+
+.delete-prompt {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
+}
+
+.logout-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.logout-message{
+    font-size: 1.25em;
+    width: 350px;
+    height: 250px;
+    padding: 5px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-icon-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 25px;
+}
+
+.comment-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 900px) {        
+    article {
+        width: 100%;
+    }
+        
+    .card-child {
+        min-width: 100%;
+    }
+        
+    .articles-container {
+        width: 95%;
+        margin-bottom: 15px;
+    }
+        
+    .article-content {
+        margin-bottom: 15px;
+    }
+
+    .comments-container {
+        width: 85%;
+    }
+}
+
+
+
+  

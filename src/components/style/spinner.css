@@ -1,0 +1,71 @@
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner-container {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 80vh;
+}
+
+.mini-spinner-container {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 25vh;
+}
+
+.spinner {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    animation: spinner 1.5s linear infinite;
+}
+
+.mini-spinner {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    animation: spinner 1.5s linear infinite;
+}
+
+/* Themes (need to customize) */
+
+.loading-dark {
+    border: 10px solid #f3f3f3; 
+    border-top: 10px solid #383636; 
+}
+
+.loading-light {
+    border: 10px solid black;
+    border-top: 10px solid rgb(245, 245, 245);
+}
+
+.loading-artic {
+    border: 10px solid rgb(3, 9, 73); 
+    border-top: 10px solid rgb(29, 197, 248); 
+}
+
+.loading-forest {
+    border: 10px solid rgb(251, 248, 163); 
+    border-top: 10px solid rgb(0, 39, 12);
+}
+
+.loading-azure {
+    border: 10px solid rgb(19, 10, 0); 
+    border-top: 10px solid rgb(88, 182, 254);;
+}
+
+
+
+

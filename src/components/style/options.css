@@ -1,0 +1,91 @@
+.options-page {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 2;
+    margin-block: 15px;
+    width: 75%;
+}
+
+.options-desc {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.theme-option {
+    width: 150px;
+    height: 15px;
+}
+
+.dark-option {
+    background-color: black;
+}
+  
+.light-option {
+    background-color: white;
+}
+
+.artic-option {
+    background-color: rgb(133, 218, 244);
+}
+
+.forest-option {
+    background-color: rgb(0, 39, 12);
+}
+
+.azure-option {
+    background-color: rgb(0, 142, 251);
+}
+
+.deleteForm {
+    margin-top: 5%;
+}
+
+#select-theme {
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+}
+
+.options-btn {
+    font-weight: bold;
+    padding: 7px;
+    border-radius: 5px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+#user-delete-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 65px;
+    width: 20vw;
+    z-index: 0;
+}
+
+.delete-prompt {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
+}
+
+.delete-options {
+    margin-top: 15px;
+    align-self: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-btn {
+    font-weight: bold;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+}
