@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import menuIcon from '../../assets/hamburger_menu.svg';
 
-const Settings = ({userInfo, theme}) => {
+const Settings = ({theme, isLoggedIn}) => {
     const [optionsStatus, setOptionsStatus] = useState("hidden")
 
     useEffect(() => {
@@ -25,9 +25,8 @@ const Settings = ({userInfo, theme}) => {
             </div>
             <div className={"settings-dropdown " + optionsStatus + " " + theme}>
                 <ul className="options-list">
-                    {/* Need to conditionally render these options based on login status */}
                     {
-                        userInfo ?
+                        isLoggedIn ?
                             <>
                                 <li className="option-item">
                                     <Link to ="/" onClick={() => setOptionsStatus("hidden")}>Home</Link>
