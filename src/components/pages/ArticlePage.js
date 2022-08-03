@@ -21,6 +21,11 @@ const ArticlePage = () => {
         if (newUser) {setIsLoggedIn(true)}
     }, [])
 
+
+    useEffect(() => {
+        if (author) { document.title = author.blogTitle }  
+    }, [author])
+
     const fetchArticle =  async() => {
         setIsLoading(true)
         try {

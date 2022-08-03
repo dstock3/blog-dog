@@ -6,7 +6,6 @@ import Footer from "../sections/Footer";
 import Spinner from "../basics/Spinner";
 import { parseJwt } from "../../auth/parseToken";
 
-
 const UserPage = () => {
     const { username } = useParams();
     const [thisUser, setThisUser] = useState(false)
@@ -66,6 +65,10 @@ const UserPage = () => {
     useEffect(() => {
         fetchUser()
     }, [])
+
+    useEffect(() => {
+        if (userInfo) { document.title = userInfo.blogTitle }  
+      }, [userInfo])
 
     if (isLoading) {
         return(

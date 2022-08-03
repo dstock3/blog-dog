@@ -54,10 +54,6 @@ const HomePage = () => {
 
   }, [])
 
-  useEffect(() => {
-    if (user) { document.title = user.blogTitle }  
-  }, [user])
-
   useEffect(()=> {
     let deleteUserModal = document.getElementById('user-delete-modal')
     let deleteArticleModal = document.getElementById('user-delete-modal')
