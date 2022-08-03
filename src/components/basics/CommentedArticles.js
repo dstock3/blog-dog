@@ -42,7 +42,7 @@ const CommentedArticles = ({theme, fetchArticle}) => {
                         <ul className={"most-commented-articles " + theme}>
                             {Object.values(articleList).map((listObj, index) =>
                                 <li key={index} className="commented-article-item">
-                                    <Link onClick={()=>fetchArticle(listObj.article.article._id)} to= {{pathname: `/${listObj.user}/${listObj.article._id}`}}>
+                                    <Link onClick={()=>fetchArticle(listObj.article.article._id)} to= {{pathname: `/${listObj.user}/${listObj.article._id}`}} state={{theme: theme}}>
                                         {listObj.article.title}
                                     </Link>
                                 </li>

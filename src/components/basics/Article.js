@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import CommentForm from "../forms/CommentForm";
 import { parseJwt } from '../../auth/parseToken.js'
 import DeleteArticle from "../modals/DeleteArticle";
 import expandComment from "../../assets/expand.svg";
 import CommentSection from "../sections/CommentSection";
 
-const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layout, limit, author, setUpdate, comments, setComments, commentMessage, setCommentMessage, landing }) => {
+const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layout, limit, author, articleUpdate, setUpdate, comments, setComments, commentMessage, setCommentMessage, landing }) => {
     const [abstract, setAbstract] = useState(article["content"])
     const [isAuthorized, setIsAuthorized] = useState(false)
     const [commentUpdate, setCommentUpdate] = useState(false)
     const [showComments, setShowComments] = useState(true)
     const [toDelete, setToDelete] = useState(false)
-    const nav = useNavigate()
 
     const fetchComments = async (articleId) => {
         try {
@@ -30,13 +29,13 @@ const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layou
             setCommentMessage("Some error occured");
         }
     }
-    
+    /*
     useEffect(()=> {
         if (articleId) {
             fetchComments(articleId)
         }
     }, [articleId])
-
+    */
 
     useEffect(()=> {
         let modal = document.getElementById('article-delete-modal')
@@ -52,11 +51,6 @@ const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layou
         }
 
     }, [toDelete])
-
-    const editArticle = () => {
-        setUpdate({"content": article["content"], "title": article["title"], "articleId": article._id})
-        nav('/compose')
-    }
 
     useEffect(()=> {
         /* check if this is an article authored by the user */
@@ -92,7 +86,11 @@ const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layou
                         null :
                             isAuthorized ?
                                 <>
-                                    <div className={"article-edit-btn " + theme + "-accent"} onClick={editArticle}>Edit</div>
+                                    <div className={"article-edit-btn " + theme + "-accent"}>
+                                        <Link to="/compose" state={{"articleUpdate": {"content": article["content"], "title": article["title"], "articleId": article._id}}}>
+                                            Edit
+                                        </Link>
+                                    </div>
                                     <div className={"article-edit-btn " + theme + "-accent"} onClick={() => setToDelete(true)}>Delete</div>
                                 </> : null
                     }

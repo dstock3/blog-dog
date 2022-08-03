@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Profile = ({userInfo, mode, isHome}) => {
+const Profile = ({userInfo, mode, isHome, theme}) => {
     const [thisClass, setThisClass] = useState({picContainer: null, pic: null, profInfo: null})
 
     useEffect(()=> {

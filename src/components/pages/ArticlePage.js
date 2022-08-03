@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import Header from "../sections/Header";
 import Main from "../sections/Main";
 import Footer from "../sections/Footer";
 import { parseJwt } from '../../auth/parseToken.js'
+import Spinner from "../basics/Spinner";
 
 const ArticlePage = () => {
     const { username, articleId } = useParams();
@@ -13,14 +14,12 @@ const ArticlePage = () => {
     const [author, setAuthor] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [user, setUser] = useState(false)
-    const [articleUpdate, setArticleUpdate] = useState(false)
 
     useEffect(()=> {
         let newUser = localStorage.getItem('user');
 
         if (newUser) {setIsLoggedIn(true)}
     }, [])
-
 
     useEffect(() => {
         if (author) { document.title = author.blogTitle }  
@@ -52,17 +51,14 @@ const ArticlePage = () => {
         fetchArticle()
     }, [])
 
+
     if (article && author) {
         return (
             <div className={"App " + author.themePref + "-accent"}>
                 <Header thisUser={user} userInfo={author} profileName={username} theme={author.themePref} title={author.blogTitle} />
-                <Main isLoggedIn={isLoggedIn} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} setUpdate={setArticleUpdate} />
+                <Main isLoggedIn={isLoggedIn} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} />
                 <Footer theme={author.themePref} />
             </div>
-        )
-    } else {
-        return (
-            <div>Loading</div>
         )
     }
 }

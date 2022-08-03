@@ -11,8 +11,8 @@ const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome}) => {
             <div className={"sidebar " + theme}>
                 {isLoggedIn ? 
                     <>
-                        <Profile mode="prof-side" isHome={isHome} userInfo={userInfo} />
-                        <Link className="compose-link" to="/compose">Compose New Article</Link>
+                        <Profile mode="prof-side" isHome={isHome} userInfo={userInfo} theme={theme} />
+                        <Link className="compose-link" to="/compose" state={{articleUpdate: false}}>Compose New Article</Link>
                         <CommentedArticles isHome={isHome} theme={theme} />
                     </> : 
                     <>
@@ -25,8 +25,8 @@ const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome}) => {
     } else {
         return (
             <div className={"sidebar " + theme}>
-                <Profile mode="prof-side" userInfo={userInfo} />
-                <Archive userInfo={userInfo} articles={articles} />
+                <Profile mode="prof-side" userInfo={userInfo} theme={theme} />
+                <Archive userInfo={userInfo} articles={articles} theme={theme} />
                 <CommentedArticles theme={theme} />
             </div>
         );

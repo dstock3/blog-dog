@@ -4,7 +4,7 @@ import '../style/compose.css'
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const Compose = ({getUserData, userInfo, articles, theme, update }) => {
+const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) => {
     const [title, setTitle] = useState("")
     const [img, setImg] = useState("")
     const [imgDesc, setImgDesc] = useState("")
@@ -15,11 +15,11 @@ const Compose = ({getUserData, userInfo, articles, theme, update }) => {
     const nav = useNavigate()
 
     useEffect(()=> {
-        if (update) {
-            setContent(update.content)
-            setTitle(update.title)
+        if (update.articleUpdate) {
+            setContent(update.articleUpdate.content)
+            setTitle(update.articleUpdate.title)
             setMethod("PUT")
-            setRequest(`https://stormy-waters-34046.herokuapp.com/article/${update.articleId}`)
+            setRequest(`https://stormy-waters-34046.herokuapp.com/article/${update.articleUpdate.articleId}`)
         }
     }, [update])
 
@@ -54,6 +54,7 @@ const Compose = ({getUserData, userInfo, articles, theme, update }) => {
             }
             
             let resJson = await res.json();
+            console.log(resJson)
 
             if (res.status === 200) {
                 setTitle("")
@@ -80,7 +81,7 @@ const Compose = ({getUserData, userInfo, articles, theme, update }) => {
         }
     }
 
-    if (userInfo) {
+    if (isLoggedIn) {
         return (
             <main className="compose-page">
                 <Sidebar userInfo={userInfo} articles={articles} theme={theme} />

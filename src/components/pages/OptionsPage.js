@@ -3,8 +3,10 @@ import Header from '../sections/Header'
 import Footer from '../sections/Footer'
 import Options from '../forms/Options'
 
+
 const OptionsPage = () => {
   const [theme, setTheme] = useState(false)
+
   return (
     <div className={"App " + theme + "-accent"}>
       {/*

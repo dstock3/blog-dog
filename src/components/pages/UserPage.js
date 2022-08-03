@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import Header from "../sections/Header";
 import Main from "../sections/Main";
 import Footer from "../sections/Footer";
@@ -13,7 +13,7 @@ const UserPage = () => {
     const [errorMessage, setErrorMessage] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    
+
     const fetchUser =  async() => {
         setIsLoading(true)
         try {
@@ -70,15 +70,7 @@ const UserPage = () => {
         if (userInfo) { document.title = userInfo.blogTitle }  
       }, [userInfo])
 
-    if (isLoading) {
-        return(
-            <div className="App dark-accent">
-                <Header theme="dark" title="BlogDog - Simple CMS" />
-                <Spinner />
-                <Footer theme="dark" />
-            </div> 
-        )
-    } else if (userInfo && thisUser) {
+    if (userInfo && thisUser) {
         return (
             <div className={"App " + userInfo.themePref + "-accent"}>
                 <Header thisUser={thisUser} isLoggedIn={isLoggedIn} userInfo={userInfo} theme={userInfo.themePref} title={userInfo.blogTitle} profileName={userInfo.profileName} />

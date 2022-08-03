@@ -76,6 +76,11 @@ article {
     padding: 7px;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
+}
+
+.article-edit-btn a {
+    text-decoration: none;
 }
 
 .comment-head-container {
@@ -268,7 +273,3 @@ article {
         width: 85%;
     }
 }
-
-
-
-  
