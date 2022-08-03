@@ -4,6 +4,7 @@ import CommentForm from "../forms/CommentForm";
 import { parseJwt } from '../../auth/parseToken.js'
 import DeleteArticle from "../modals/DeleteArticle";
 import expandComment from "../../assets/expand.svg";
+import expandCommentBlack from "../../assets/expand_black.svg";
 import CommentSection from "../sections/CommentSection";
 
 const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layout, limit, author, articleUpdate, setUpdate, comments, setComments, commentMessage, setCommentMessage, landing }) => {
@@ -12,6 +13,25 @@ const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layou
     const [commentUpdate, setCommentUpdate] = useState(false)
     const [showComments, setShowComments] = useState(true)
     const [toDelete, setToDelete] = useState(false)
+    const [expandImg, setExpandImg] = useState(expandComment)
+
+    useEffect(()=> {
+        const whiteSet = ["dark", "forest"]
+        const blackSet = ["light", "artic", "azure"]
+
+        for (let i = 0; i < whiteSet.length; i++) {
+            if (theme === whiteSet[i]) {
+                setExpandImg(expandComment)
+            }
+        }
+
+        for (let i = 0; i < blackSet.length; i++) {
+            if (theme === blackSet[i]) {
+                setExpandImg(expandCommentBlack)
+            }
+        }
+
+    }, [])
 
     const fetchComments = async (articleId) => {
         try {
@@ -140,7 +160,7 @@ const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layou
                                 </div>
                             </div>
                             <div className="message">{commentMessage ? <p>{commentMessage}</p> : null}</div>
-                            <CommentSection showComments={showComments} setShowComments={setShowComments} comments={comments} expandComment={expandComment} theme={theme} userInfo={userInfo} article={article} setCommentUpdate={setCommentUpdate} articleId={articleId} />
+                            <CommentSection showComments={showComments} setShowComments={setShowComments} comments={comments} expandComment={expandImg} theme={theme} userInfo={userInfo} article={article} setCommentUpdate={setCommentUpdate} articleId={articleId} />
                         </ul> : 
                         null
                     }
