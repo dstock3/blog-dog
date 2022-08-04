@@ -7,7 +7,7 @@ import expandComment from "../../assets/expand.svg";
 import expandCommentBlack from "../../assets/expand_black.svg";
 import CommentSection from "../sections/CommentSection";
 
-const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layout, limit, author, articleUpdate, setUpdate, comments, setComments, commentMessage, setCommentMessage, landing }) => {
+const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, author, comments, setComments, commentMessage, setCommentMessage, landing }) => {
     const [abstract, setAbstract] = useState(article["content"])
     const [isAuthorized, setIsAuthorized] = useState(false)
     const [commentUpdate, setCommentUpdate] = useState(false)
@@ -49,14 +49,13 @@ const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layou
             setCommentMessage("Some error occured");
         }
     }
-    /*
+    
     useEffect(()=> {
         if (articleId) {
             fetchComments(articleId)
         }
     }, [articleId])
-    */
-
+    
     useEffect(()=> {
         let modal = document.getElementById('article-delete-modal')
         let rootElement = document.getElementById('root')
@@ -149,7 +148,7 @@ const Article = ({ isLoggedIn, users, article, articleId, userInfo, theme, layou
                         {article["content"]}
                     </div>
                     {isLoggedIn ?
-                        <CommentForm users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
+                        <CommentForm fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
                     }
                     {Object.keys(comments).length !== 0 ?
                         <ul className={"comments-container " + theme + "-accent"}>

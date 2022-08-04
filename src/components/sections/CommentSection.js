@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Comment from '../basics/Comment'
 
 const CommentSection = ({showComments, setShowComments, comments, expandComment, theme, userInfo, article, setCommentUpdate}) => {
+    useEffect(()=> {
+
+    }, [])
+    
     if (showComments) {
         return (
         Object.values(comments).map((comment, thisIndex) =>

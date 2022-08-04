@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Header from "../sections/Header";
 import Main from "../sections/Main";
 import Footer from "../sections/Footer";
@@ -14,11 +14,40 @@ const ArticlePage = () => {
     const [author, setAuthor] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [user, setUser] = useState(false)
+    
+    const findUser = async() => {
+        let newUser = localStorage.getItem('user');
+        try {
+            let response = await fetch(`https://stormy-waters-34046.herokuapp.com/`, {
+              method: "GET"
+              });
+            let resJson = await response.json();
+            
+            if (response.status === 200) {
+              if (newUser) {
+                setIsLoggedIn(true)
+                for (let prop in resJson.users) {
+                    if (resJson.users[prop]._id === parseJwt(newUser)._id) {
+                        setUser(resJson.users[prop])
+                      setIsLoggedIn(true)
+                        
+                    }
+                  }
+                } 
+              setIsLoading(false)
+            } else {
+              setIsLoading(false)
+              setErrorMessage(`Error Code ${response.status} There was a problem loading user data.`) 
+            }
+          } catch(err) {
+            setIsLoading(false)
+            setErrorMessage("There was a problem loading user data: " + err)
+          }
+        }
 
     useEffect(()=> {
-        let newUser = localStorage.getItem('user');
-
-        if (newUser) {setIsLoggedIn(true)}
+        findUser()
+    
     }, [])
 
     useEffect(() => {
@@ -37,8 +66,6 @@ const ArticlePage = () => {
                 setArticle(resJson.article)
                 setAuthor(resJson.author)
                 setIsLoading(false)
-            } else if (res.status === 400) {
-                setErrorMessage("Your session has timed out. Please sign in again.")
             } else {
                 setErrorMessage(`Error Code ${res.status} There was a problem loading user data.`);
             }
@@ -55,8 +82,8 @@ const ArticlePage = () => {
     if (article && author) {
         return (
             <div className={"App " + author.themePref + "-accent"}>
-                <Header thisUser={user} userInfo={author} profileName={username} theme={author.themePref} title={author.blogTitle} />
-                <Main isLoggedIn={isLoggedIn} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} />
+                <Header thisUser={user} isLoggedIn={isLoggedIn} userInfo={author} profileName={username} theme={author.themePref} title={author.blogTitle} />
+                <Main isLoggedIn={isLoggedIn} fetchArticle={fetchArticle} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} />
                 <Footer theme={author.themePref} />
             </div>
         )

@@ -15,11 +15,13 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
     const nav = useNavigate()
 
     useEffect(()=> {
-        if (update.articleUpdate) {
-            setContent(update.articleUpdate.content)
-            setTitle(update.articleUpdate.title)
-            setMethod("PUT")
-            setRequest(`https://stormy-waters-34046.herokuapp.com/article/${update.articleUpdate.articleId}`)
+        if (update) {
+            if (update.articleUpdate) {
+                setContent(update.articleUpdate.content)
+                setTitle(update.articleUpdate.title)
+                setMethod("PUT")
+                setRequest(`https://stormy-waters-34046.herokuapp.com/article/${update.articleUpdate.articleId}`)
+            }
         }
     }, [update])
 

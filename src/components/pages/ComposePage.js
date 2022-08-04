@@ -8,7 +8,7 @@ import { parseJwt } from '../../auth/parseToken'
 const ComposePage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [userInfo, setUserInfo] = useState(false)
+  const [thisUser, setThisUser] = useState(false)
   const [errorMessage, setErrorMessage] = useState(false)
   const loc = useLocation()
 
@@ -30,7 +30,7 @@ const ComposePage = () => {
             setIsLoggedIn(true)
             for (let prop in resJson.users) {
                 if (resJson.users[prop]._id === parseJwt(newUser)._id) {
-                  setUserInfo(resJson.users[prop])
+                  setThisUser(resJson.users[prop])
                     
                 }
               }
@@ -54,14 +54,12 @@ const ComposePage = () => {
   }, [])
 
   return (
-    <div className={`App ${userInfo.themePref}-accent`}>
-      <Header theme={userInfo.themePref} title={userInfo.blogTitle}/>
+    <div className={`App ${thisUser.themePref}-accent`}>
+      <Header thisUser={thisUser} isLoggedIn={isLoggedIn} userInfo={thisUser} theme={thisUser.themePref} title={thisUser.blogTitle} profileName={thisUser.profileName} />
       {!errorMessage ? 
-        <Compose isLoggedIn={isLoggedIn} getUserData={fetchUser} userInfo={userInfo} articles={userInfo.articles} update={articleUpdate} theme={userInfo.themePref}/> :
+        <Compose isLoggedIn={isLoggedIn} getUserData={fetchUser} userInfo={thisUser} articles={thisUser.articles} update={articleUpdate} theme={thisUser.themePref}/> :
         <div className="error-message">{errorMessage}</div>}
-
-
-      <Footer theme="dark" />
+      <Footer theme={thisUser.themePref} />
     </div>  
   )
 }

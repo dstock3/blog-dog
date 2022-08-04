@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import Prompt from "../basics/Prompt";
 import { parseJwt } from "../../auth/parseToken.js"
+import Timeout from "../modals/Timeout";
 
-const CommentForm = ({users, userInfo, articleId, theme, update, fetchComments }) => {
+const CommentForm = ({users, fetchArticle, userInfo, articleId, theme, update, fetchComments}) => {
     const [comment, setComment] = useState("")
-    const [message, setMessage] = useState("")
+    const [message, setMessage] = useState(false)
     const [author, setAuthor] = useState("")
     const [method, setMethod] = useState("POST")
     const [request, setRequest] = useState(`https://stormy-waters-34046.herokuapp.com/article/${articleId}`)
-    const [commentLabel, setCommentLabel] = useState()
+    const [isTimedout, setIsTimedout] = useState(false)
 
     useEffect(()=> {
         setRequest(`https://stormy-waters-34046.herokuapp.com/article/${articleId}`)
@@ -38,6 +39,21 @@ const CommentForm = ({users, userInfo, articleId, theme, update, fetchComments }
         }
     }, [])
 
+    useEffect(()=> {
+        let modal = document.getElementById('timeout-modal')
+        let rootElement = document.getElementById('root')
+        if (isTimedout) {
+            modal.style.zIndex = 1000
+            rootElement.style.filter = 'brightness(65%)'
+            rootElement.style.transition = "all 0.75s ease-out"
+        } else {
+            modal.style.zIndex = 0
+            rootElement.style.filter = "unset"
+            rootElement.style.transition = "unset"
+        }
+
+    }, [isTimedout])
+
     const commentHandler = async(e) => {
         e.preventDefault();
         
@@ -53,11 +69,23 @@ const CommentForm = ({users, userInfo, articleId, theme, update, fetchComments }
                 headers: { 'Content-Type': 'application/json', "login-token" : token }
                 });
             let resJson = await res.json();
+            console.log(res.status)
+
+            if (res.status === 400) {
+                setIsTimedout(true)
+            }
             
             if (res.status === 200) {
-                setComment("");
-                fetchComments(articleId)
-                window.location.reload(false);
+                if (resJson.errors) {
+                    setMessage(console.log(resJson.errors[0].msg))
+                } else {
+                    setComment("");
+                    //fetchComments(articleId)
+                    //fetchArticle(articleId)
+                    
+                    window.location.reload(false);
+                    setMessage("Comment Posted!")
+                }
             } else {
                 setMessage("Some error occured");
             }
@@ -65,11 +93,11 @@ const CommentForm = ({users, userInfo, articleId, theme, update, fetchComments }
             setMessage("Some error occured");
             console.log(err);
         }
-        
     }
     
     if (userInfo) {
         return (
+            <>
             <form className={"comment-form " + theme + "-accent"} action="" method="POST">
                 <div className="comment-subcontainer comment-prompt">
                     <label className="comment-label" htmlFor="comment">
@@ -77,7 +105,7 @@ const CommentForm = ({users, userInfo, articleId, theme, update, fetchComments }
                             "Edit Your Comment" : "Leave a Comment Below"
                         }
                     </label>
-                    <div className="message">{message ? <p>{message}</p> : null}</div>
+                    {message ? <div className="message">{message}</div> : null}
                     <textarea className="comment-input" type="text" value={comment} htmlFor="comment" onChange={(e) => setComment(e.target.value)}></textarea>
                 </div>
                 <div className="comment-btn-subcontainer">
@@ -88,6 +116,8 @@ const CommentForm = ({users, userInfo, articleId, theme, update, fetchComments }
                     </div>
                 </div>
             </form>
+            <Timeout isTimedout={isTimedout} theme={theme}/>
+            </>
         );
     } else {
         return (

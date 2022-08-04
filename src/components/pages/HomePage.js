@@ -55,6 +55,7 @@ const HomePage = () => {
   }, [])
 
   useEffect(()=> {
+    let timeoutModal = document.getElementById('timeout-modal')
     let deleteUserModal = document.getElementById('user-delete-modal')
     let deleteArticleModal = document.getElementById('user-delete-modal')
     let rootElement = document.getElementById('root')
@@ -63,6 +64,7 @@ const HomePage = () => {
     rootElement.style.transition = "unset"
     deleteUserModal.style.zIndex = 0
     deleteArticleModal.style.zIndex = 0
+    timeoutModal.style.zIndex = 0
   }, [])
 
   if (isLoading) {
