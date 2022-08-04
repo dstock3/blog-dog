@@ -148,7 +148,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         {article["content"]}
                     </div>
                     {isLoggedIn ?
-                        <CommentForm fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
+                        <CommentForm setComments={setComments} fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
                     }
                     {Object.keys(comments).length !== 0 ?
                         <ul className={"comments-container " + theme + "-accent"}>

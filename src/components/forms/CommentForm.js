@@ -3,13 +3,13 @@ import Prompt from "../basics/Prompt";
 import { parseJwt } from "../../auth/parseToken.js"
 import Timeout from "../modals/Timeout";
 
-const CommentForm = ({users, fetchArticle, userInfo, articleId, theme, update, fetchComments}) => {
+const CommentForm = ({setComments, users, fetchArticle, userInfo, articleId, theme, update, fetchComments}) => {
     const [comment, setComment] = useState("")
     const [message, setMessage] = useState(false)
-    const [author, setAuthor] = useState("")
     const [method, setMethod] = useState("POST")
     const [request, setRequest] = useState(`https://stormy-waters-34046.herokuapp.com/article/${articleId}`)
     const [isTimedout, setIsTimedout] = useState(false)
+    const [author, setAuthor] = useState(false)
 
     useEffect(()=> {
         setRequest(`https://stormy-waters-34046.herokuapp.com/article/${articleId}`)
@@ -30,6 +30,7 @@ const CommentForm = ({users, fetchArticle, userInfo, articleId, theme, update, f
         
         if (newUser) {
             let parsedUser = parseJwt(newUser)
+            
             for (let prop in users) {
                 if (users[prop]._id === parsedUser._id) {
                     let thisUser = users[prop]
@@ -57,6 +58,7 @@ const CommentForm = ({users, fetchArticle, userInfo, articleId, theme, update, f
     const commentHandler = async(e) => {
         e.preventDefault();
         
+        
         try {
             let token = localStorage.getItem('user');
             
@@ -77,11 +79,9 @@ const CommentForm = ({users, fetchArticle, userInfo, articleId, theme, update, f
                     setMessage(console.log(resJson.errors[0].msg))
                 } else {
                     setComment("");
-                    //fetchComments(articleId)
-                    //fetchArticle(articleId)
-                    
-                    window.location.reload(false);
-                    setMessage("Comment Posted!")
+                    setMessage(resJson.message)
+                    setComments(resJson.comments)
+                    if (update) { window.location.reload(false) }
                 }
             }
         } catch(err) {

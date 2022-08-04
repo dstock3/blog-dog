@@ -50,11 +50,9 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
             if (res.status === 200) {
                 window.location.reload();
             } else {
-
                 setMessage("Some error occurred")
             }
         } catch(err) {
-            console.log(err);
             setMessage("Some error occurred")
         }
     }

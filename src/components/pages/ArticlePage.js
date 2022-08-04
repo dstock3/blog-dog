@@ -14,6 +14,7 @@ const ArticlePage = () => {
     const [author, setAuthor] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [user, setUser] = useState(false)
+    const [users, setUsers] = useState(false)
     
     const findUser = async() => {
         let newUser = localStorage.getItem('user');
@@ -26,9 +27,10 @@ const ArticlePage = () => {
             if (response.status === 200) {
               if (newUser) {
                 setIsLoggedIn(true)
+                setUsers(resJson.users)
                 for (let prop in resJson.users) {
                     if (resJson.users[prop]._id === parseJwt(newUser)._id) {
-                        setUser(resJson.users[prop])
+                      setUser(resJson.users[prop])
                       setIsLoggedIn(true)
                         
                     }
@@ -83,7 +85,7 @@ const ArticlePage = () => {
         return (
             <div className={"App " + author.themePref + "-accent"}>
                 <Header thisUser={user} isLoggedIn={isLoggedIn} userInfo={author} profileName={username} theme={author.themePref} title={author.blogTitle} />
-                <Main isLoggedIn={isLoggedIn} fetchArticle={fetchArticle} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} />
+                <Main users={users} isLoggedIn={isLoggedIn} fetchArticle={fetchArticle} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} />
                 <Footer theme={author.themePref} />
             </div>
         )
