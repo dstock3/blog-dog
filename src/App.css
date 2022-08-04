@@ -190,6 +190,16 @@ main {
   height: 125px;
 }
 
+.compose-link {
+  display: flex;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.compose-link img {
+  margin-right: 15px;
+}
+
 /* Footer */
 
 footer {

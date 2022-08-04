@@ -14,11 +14,16 @@
   
 article {
     width: 85%;
-    padding-inline-start: 7.5%;;
+    padding-inline-start: 2.5%;
     padding-bottom: 15px;
     margin-bottom: 15px;
     border-radius: 5px;
     box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
+}
+
+.single-view {
+    padding-inline-start: 7.5%;
+
 }
 
 .article-author {
@@ -26,8 +31,10 @@ article {
 }
   
 .article-head {
-    width: 100%;
+    width: 85%;
     margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .article-head-subcontainer {
@@ -46,7 +53,6 @@ article {
 .img-container {
     height: 200px;
     float: left;
-    margin-left: 25px;
     margin-right: 15px;
     padding-bottom: 25px;
 }
@@ -226,11 +232,19 @@ article {
 }
 
 .timeout-prompt {
+    padding-top: 5px;
     display: flex;
     flex-direction: column;
-    padding: 35px;
-    border-radius: 5px;
+    align-items: center;
     box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
+    border-radius: 5px; 
+}
+
+.timeout-link {
+    width: 50%;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 5px;
 }
 
 .timeout-msg {

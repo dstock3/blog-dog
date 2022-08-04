@@ -14,6 +14,15 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
     const [showComments, setShowComments] = useState(true)
     const [toDelete, setToDelete] = useState(false)
     const [expandImg, setExpandImg] = useState(expandComment)
+    const [articleClass, setArticleClass] = useState("")
+
+    useEffect(()=> {
+        if (!landing) {
+            setArticleClass("single-view")
+        }
+
+
+    }, [landing])
 
     useEffect(()=> {
         const whiteSet = ["dark", "forest"]
@@ -88,7 +97,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
     }, [])
 
     return (
-        <article className={theme + " " + layout + "-child"}>
+        <article className={articleClass + " " + theme + " " + layout + "-child"}>
             <div className="article-head">
                 <div className="article-head-subcontainer">
                     <h1 className="article-name">{article["title"]}</h1>
@@ -100,20 +109,18 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         </div> : null}
                     <div className="date-posted">{article["date"]}</div>
                 </div>
-                <div className="article-dashboard">
                     {limit ? 
                         null :
                             isAuthorized ?
-                                <>
+                                <div className="article-dashboard">
                                     <div className={"article-edit-btn " + theme + "-accent"}>
                                         <Link to="/compose" state={{"articleUpdate": {"content": article["content"], "title": article["title"], "articleId": article._id}}}>
                                             Edit
                                         </Link>
                                     </div>
                                     <div className={"article-edit-btn " + theme + "-accent"} onClick={() => setToDelete(true)}>Delete</div>
-                                </> : null
+                                </div> : null
                     }
-                </div>
             </div>
 
             {article["img"] ?

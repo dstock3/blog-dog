@@ -79,9 +79,9 @@ const Register = () => {
                     <input type="password" value={confirmPassword} name="confirmPassword" onChange={(e) => setConfirmPassword(e.target.value)}></input>
                 </div>
 
-                <div className="user-register-container">
+                <div className="user-register-container" id="reg-blogtitle">
                     <label className="reg-label" htmlFor="blogTitle">Blog Title: </label>
-                    <input type="text" value={blogTitle} name="blogTitle" onChange={(e) => setBlogTitle(e.target.value)}></input>
+                    <input className="blogtitle-input" type="text" value={blogTitle} name="blogTitle" onChange={(e) => setBlogTitle(e.target.value)}></input>
                 </div>
 
                 <div className="profile-desc-container">
