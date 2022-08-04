@@ -69,7 +69,6 @@ const CommentForm = ({users, fetchArticle, userInfo, articleId, theme, update, f
                 headers: { 'Content-Type': 'application/json', "login-token" : token }
                 });
             let resJson = await res.json();
-            console.log(res.status)
 
             if (res.status === 400) {
                 setIsTimedout(true)

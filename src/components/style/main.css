@@ -207,6 +207,14 @@ article {
     z-index: 0;
 }
 
+.delete-prompt {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
+}
+
 #timeout-modal {
     position: fixed;
     top: 50%;
@@ -215,15 +223,30 @@ article {
     padding: 65px;
     width: 20vw;
     z-index: 0;
-
 }
 
-.delete-prompt {
+.timeout-prompt {
     display: flex;
     flex-direction: column;
-    padding: 25px;
+    padding: 35px;
     border-radius: 5px;
     box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
+}
+
+.timeout-msg {
+    text-align: center;
+    padding-block: 7px;
+    padding-inline: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.timeout-prompt a {
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.25em;
 }
 
 .logout-page {
