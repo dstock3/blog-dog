@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../style/options.css'
 import '../style/register.css'
 import DeleteUser from '../modals/DeleteUser'
+import Timeout from '../modals/Timeout'
 
 const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
     const [profileName, setProfileName] = useState("");
@@ -14,23 +15,28 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
     const [profilePic, setProfilePic] = useState("");
     const [message, setMessage] = useState("")
     const [toDelete, setToDelete] = useState(false)
+    const [isTimedout, setIsTimedout] = useState(false)
 
     useEffect(()=> {
-        let modal = document.getElementById('user-delete-modal')
+        let timeoutModal = document.getElementById('timeout-modal')
+        let userDeleteModal = document.getElementById('user-delete-modal')
         let rootElement = document.getElementById('root')
 
         if (toDelete) {
-            modal.style.zIndex = 1000
+            userDeleteModal.style.zIndex = 1000
             rootElement.style.filter = 'brightness(55%)'
             rootElement.style.transition = "all 0.75s ease-out"
-            
+        } else if (isTimedout) {
+            timeoutModal.style.zIndex = 1000
+            rootElement.style.filter = 'brightness(55%)'
+            rootElement.style.transition = "all 0.75s ease-out"
         } else {
-            modal.style.zIndex = 0
+            userDeleteModal.style.zIndex = 0
+            timeoutModal.style.zIndex = 0
             rootElement.style.filter = "unset"
             rootElement.style.transform = "unset"
         }
-
-    }, [toDelete])
+    }, [toDelete, isTimedout])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -68,7 +74,9 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
 
             let resJson = await res.json();
 
-            if (res.status === 200) {
+            if (res.status === 400) {
+                setIsTimedout(true)
+            } else if (res.status === 200) {
                 setTheme(themePref)
                 setProfileName("");
                 setPassword("");
@@ -79,8 +87,6 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
                 setLayoutPref("");
                 setProfilePic("");
                 setMessage("User updated successfully");
-            } else if (res.status === 400) {
-                setMessage("Your session has timed out."); 
             } else {
                 setMessage("Some error occured");
             }
@@ -162,6 +168,8 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
                 {toDelete ?
                     <DeleteUser setIsLoggedIn={setIsLoggedIn} theme={theme} userInfo={userInfo} toDelete={toDelete} setToDelete={setToDelete} />
                     : null}
+                {isTimedout ? 
+                    <Timeout isTimedout={isTimedout} theme={theme}/> : null}
             </>
         </>
     )

@@ -72,9 +72,7 @@ const CommentForm = ({users, fetchArticle, userInfo, articleId, theme, update, f
 
             if (res.status === 400) {
                 setIsTimedout(true)
-            }
-            
-            if (res.status === 200) {
+            } else if (res.status === 200) {
                 if (resJson.errors) {
                     setMessage(console.log(resJson.errors[0].msg))
                 } else {
@@ -85,8 +83,6 @@ const CommentForm = ({users, fetchArticle, userInfo, articleId, theme, update, f
                     window.location.reload(false);
                     setMessage("Comment Posted!")
                 }
-            } else {
-                setMessage("Some error occured");
             }
         } catch(err) {
             setMessage("Some error occured");
