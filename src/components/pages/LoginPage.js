@@ -4,6 +4,10 @@ import Login from '../forms/Login'
 import Footer from '../sections/Footer'
 
 const LoginPage = () => {
+  useEffect(() => {
+    document.title = "BlogDog CMS"  
+  }, [])
+  
   useEffect(()=> {
     let timeoutModal = document.getElementById('timeout-modal')
     let rootElement = document.getElementById('root')

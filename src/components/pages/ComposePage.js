@@ -53,6 +53,10 @@ const ComposePage = () => {
     fetchUser()
   }, [])
 
+  useEffect(() => {
+    document.title = "BlogDog CMS"  
+  }, [])
+
   return (
     <div className={`App ${thisUser.themePref}-accent`}>
       <Header thisUser={thisUser} isLoggedIn={isLoggedIn} userInfo={thisUser} theme={thisUser.themePref} title={thisUser.blogTitle} profileName={thisUser.profileName} />

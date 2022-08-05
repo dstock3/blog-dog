@@ -51,7 +51,10 @@ const HomePage = () => {
     
   useEffect(()=> {
     fetchUsers()
+  }, [])
 
+  useEffect(() => {
+    document.title = "BlogDog CMS"  
   }, [])
 
   useEffect(()=> {

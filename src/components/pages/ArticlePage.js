@@ -5,6 +5,7 @@ import Main from "../sections/Main";
 import Footer from "../sections/Footer";
 import { parseJwt } from '../../auth/parseToken.js'
 import Spinner from "../basics/Spinner";
+import CommentPrompt from "../modals/CommentPrompt";
 
 const ArticlePage = () => {
     const { username, articleId } = useParams();
@@ -15,6 +16,18 @@ const ArticlePage = () => {
     const [errorMessage, setErrorMessage] = useState("")
     const [user, setUser] = useState(false)
     const [users, setUsers] = useState(false)
+    const [prompt, setPrompt] = useState(false)
+
+    useEffect(()=> {
+      let commentPromptModal = document.getElementById("comment-prompt-modal")
+      if (!isLoggedIn) {
+        setPrompt(true)
+        commentPromptModal.style.zIndex = 1000
+      } else {
+        setPrompt(false)
+        commentPromptModal.style.zIndex = 0
+      }
+    }, [isLoggedIn])
     
     const findUser = async() => {
         let newUser = localStorage.getItem('user');
@@ -83,11 +96,14 @@ const ArticlePage = () => {
 
     if (article && author) {
         return (
+          <>
             <div className={"App " + author.themePref + "-accent"}>
                 <Header thisUser={user} isLoggedIn={isLoggedIn} userInfo={author} profileName={username} theme={author.themePref} title={author.blogTitle} />
                 <Main users={users} isLoggedIn={isLoggedIn} fetchArticle={fetchArticle} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} />
                 <Footer theme={author.themePref} />
             </div>
+            <CommentPrompt prompt={prompt} setPrompt={setPrompt} theme={author.themePref} />
+          </>
         )
     }
 }

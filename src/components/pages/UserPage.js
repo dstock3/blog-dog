@@ -31,11 +31,11 @@ const UserPage = () => {
             if (res.status === 200) {
                 setUserInfo(resJson.user[0])
             } else {
-                setIsLoading(false)
+                
                 setErrorMessage(`Error Code ${res.status} There was a problem loading user data.`) 
             }
         } catch(err) {
-            setIsLoading(false)
+            
             setErrorMessage("There was a problem loading user data: " + err)
         }
 
@@ -74,9 +74,17 @@ const UserPage = () => {
 
     useEffect(() => {
         if (userInfo) { document.title = userInfo.blogTitle }  
-      }, [userInfo])
+    }, [userInfo])
 
-    if (userInfo && thisUser) {
+    if (isLoading) {
+      <div className="App dark-accent">
+        <Header theme="dark" title="BlogDog - Simple CMS" />
+        <main className="blog dark-accent">
+            <Spinner />
+        </main>
+        <Footer theme="dark" />
+      </div> 
+    } else if (userInfo && thisUser) {
         return (
             <div className={"App " + userInfo.themePref + "-accent"}>
                 <Header thisUser={thisUser} isLoggedIn={isLoggedIn} userInfo={userInfo} theme={userInfo.themePref} title={userInfo.blogTitle} profileName={userInfo.profileName} />

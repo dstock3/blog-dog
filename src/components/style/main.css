@@ -330,6 +330,48 @@ article {
     z-index: 0;
 }
 
+#comment-prompt-modal {
+    position: fixed;
+    top: 95%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    padding: 65px;
+    width: 20vw;
+    z-index: 0;
+}
+
+.comment-prompt {
+    padding: 15px;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-weight: bold;
+    height: 150px;
+}
+
+.close-comment-prompt {
+    margin-left: 95%;
+    font-weight: bold;
+    font-size: .75em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.comment-prompt-link-container {
+    margin-top: 15px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-prompt-link {
+    font-weight: bold;
+    text-decoration: none;
+}
+
 .logout-page {
     display: flex;
     justify-content: center;
