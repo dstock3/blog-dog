@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
+
 const Timeout = ({isTimedout, theme}) => {
     if (!isTimedout) return null
     return ReactDOM.createPortal(

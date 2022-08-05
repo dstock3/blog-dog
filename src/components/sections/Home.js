@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import Article from '../basics/Article';
 import Sidebar from '../basics/Sidebar';
+import ThemePrompt from '../modals/ThemePrompt';
 
 const Home = ({isLoggedIn, userInfo, theme, users, layout}) => {
     const [articleList, setArticleList] = useState(false)
+    const [themeCheck, setThemeCheck] = useState(false)
+
+    useEffect(()=> {
+        let themeModal = document.getElementById("theme-modal")
+        if (theme === "dark") {
+            setThemeCheck(true)   
+            themeModal.style.zIndex = 1000
+        } else {
+            themeModal.style.zIndex = 0
+        }
+    }, [])
 
     function randomizeList(articleList) {
         for (let i = articleList.length - 1; i > 0; i--) {
@@ -26,6 +38,7 @@ const Home = ({isLoggedIn, userInfo, theme, users, layout}) => {
 
     if (articleList) {
         return (
+            <>
             <main className={"home " + theme + "-accent"}>
                 <Sidebar isLoggedIn={isLoggedIn} userInfo={userInfo} theme={theme} isHome={true} />
                 <div className={"articles-container " + layout}>
@@ -34,6 +47,9 @@ const Home = ({isLoggedIn, userInfo, theme, users, layout}) => {
                     ))}
                 </div>
             </main>
+            {themeCheck ? 
+                <ThemePrompt themeCheck={themeCheck} setThemeCheck={setThemeCheck} theme={theme}/> : null}
+            </>
         )
     }
 }

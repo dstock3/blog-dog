@@ -263,6 +263,55 @@ article {
     font-size: 1.25em;
 }
 
+#theme-modal {
+    position: fixed;
+    top: 95%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    padding: 65px;
+    width: 20vw;
+    z-index: 0;
+}
+
+.close-theme-modal {
+    margin-left: 95%;
+    font-weight: bold;
+    font-size: .75em;
+    cursor: pointer;
+}
+
+.theme-prompt {
+    padding: 15px;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-weight: bold;
+    height: 150px;
+}
+
+.theme-msg {
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.theme-link-container {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.theme-link-container a {
+    font-weight: bold;
+    font-size: 1.1em;
+
+}
+
+
+
 .logout-page {
     display: flex;
     justify-content: center;
