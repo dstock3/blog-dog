@@ -9,7 +9,7 @@ const Home = ({isLoggedIn, userInfo, theme, users, layout}) => {
 
     useEffect(()=> {
         let themeModal = document.getElementById("theme-modal")
-        if (theme === "dark") {
+        if ((isLoggedIn) && (theme === "dark")) {
             setThemeCheck(true)   
             themeModal.style.zIndex = 1000
         } else {
