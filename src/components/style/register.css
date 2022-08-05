@@ -60,14 +60,23 @@
     cursor: pointer;
 }
 
-#drop-one, #pw-one, #drop-two {
+#drop-one, #drop-two {
     width: 75px;
     margin-left: 5px;
     margin-right: 15px;
 }
 
+#pw-one {
+    margin-left: 5px;
+    margin-right: 15px;
+
+}
+
+.user-pw-container input {
+    width: 75px;
+}
+
 textarea {
-    width: 95%;
     height: unset;
     padding-bottom: 15px;
 }

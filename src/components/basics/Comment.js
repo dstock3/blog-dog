@@ -1,11 +1,28 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { parseJwt } from '../../auth/parseToken.js';
+import DeleteComment from "../modals/DeleteComment.js";
 
 const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
     const [message, setMessage] = useState("")
     const [authorizedToDelete, setAuthorizedToDelete] = useState(false)
     const [fullyAuthorized, setFullyAuthorized] = useState(false)
+    const [toDelete, setToDelete] = useState(false)
+
+    useEffect(()=> {
+        let rootElement = document.getElementById('root')
+        let deleteCommentModal = document.getElementById("comment-delete-modal")
+        if (toDelete) {
+            deleteCommentModal.style.zIndex = 1000
+            rootElement.style.filter = 'brightness(65%)'
+            rootElement.style.transition = "all 0.75s ease-out"
+        } else {
+            deleteCommentModal.style.zIndex = 0
+            rootElement.style.filter = 'unset'
+            rootElement.style.transition = "unset"
+        }
+
+    }, [toDelete])
 
     const authorizeComment = () => {
         let thisUser = localStorage.getItem('user')
@@ -73,11 +90,13 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
                     {fullyAuthorized ?
                         <>
                             <div className={"comment-edit-btn " + theme + "-accent"} onClick={editComment}>Edit</div>
-                            <div className={"comment-edit-btn " + theme + "-accent"} onClick={deleteComment}>Delete</div>
+                            <div className={"comment-edit-btn " + theme + "-accent"} onClick={()=>setToDelete(true)}>Delete</div>
                         </> : null
                     }
                 </div>
             </li>
+            {toDelete ?
+                <DeleteComment theme={theme} message={message} toDelete={toDelete} deleteComment={deleteComment} setToDelete={setToDelete} /> : null}
         </>
 
     );
