@@ -194,13 +194,24 @@ article {
     box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
 }
 
-.compose-prompt > p {
-    font-size: 1.25em;
+.compose-prompt-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
 }
 
-.compose-prompt > a {
-    font-size: 1.33em;
-    font-weight: bold;
+.compose-prompt-container p {
+    padding-bottom: 25px;
+}
+
+.compose-prompt-container img {
+    width: 35px;
+}
+
+.compose-prompt p {
+    margin-top: 20%;
+    font-size: 1.25em;
 }
 
 #article-delete-modal {
@@ -318,8 +329,6 @@ article {
     width: 20vw;
     z-index: 0;
 }
-
-
 
 .logout-page {
     display: flex;

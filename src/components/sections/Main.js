@@ -4,11 +4,31 @@ import Sidebar from '../basics/Sidebar';
 import '../style/main.css'
 import { Link } from 'react-router-dom';
 import {parseJwt} from '../../auth/parseToken.js'
+import composeIcon from '../../assets/write.svg'
+import composeIconBlack from '../../assets/write_black.svg'
 
 const Main = ({errorMessage, fetchArticle, isLoggedIn, getUserData, users, landing, article, articles, userInfo, theme, layout, articleUpdate}) => {
     const [commentMessage, setCommentMessage] = useState("")
     const [comments, setComments] = useState(false)
     const [isAuthorized, setIsAuthorized] = useState(false)
+    const [composeImg, setComposeImg] = useState(composeIcon)
+
+    useEffect(()=> {
+        const whiteSet = ["dark", "forest"]
+        const blackSet = ["light", "artic", "azure"]
+
+        for (let i = 0; i < whiteSet.length; i++) {
+            if (theme === whiteSet[i]) {
+                setComposeImg(composeIcon)
+            }
+        }
+
+        for (let i = 0; i < blackSet.length; i++) {
+            if (theme === blackSet[i]) {
+                setComposeImg(composeIconBlack)
+            }
+        }
+    }, [])
     
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -21,6 +41,8 @@ const Main = ({errorMessage, fetchArticle, isLoggedIn, getUserData, users, landi
             }
         }
     }, [article])
+
+
 
     useEffect(()=> {
         /* check if this is the user's own landing page */
@@ -49,7 +71,10 @@ const Main = ({errorMessage, fetchArticle, isLoggedIn, getUserData, users, landi
                         isAuthorized ?
                             <div className={"compose-prompt " + theme}>
                                 <p>You haven't written any articles. Would you like to compose a new one?</p>
-                                <Link className="compose-link" to="/compose">Compose Article</Link>
+                                <Link className="compose-link compose-prompt-container" to="/compose">
+                                    <img src={composeImg} alt="compose-article-icon"></img>
+                                    <p>Compose Article</p>
+                                </Link>
                             </div> :   
                             <div className={"compose-prompt user-message " + theme}>
                                 <p>This user hasn't written any articles.</p>

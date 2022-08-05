@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Header from "../sections/Header";
 import Main from "../sections/Main";
 import Footer from "../sections/Footer";
@@ -13,6 +13,12 @@ const UserPage = () => {
     const [errorMessage, setErrorMessage] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    useEffect(()=> {
+      let rootElement = document.getElementById("root")
+      rootElement.style.filter = 'unset'
+      rootElement.style.transition = "unset"
+    }, [])
 
     const fetchUser =  async() => {
         setIsLoading(true)
