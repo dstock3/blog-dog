@@ -3,6 +3,8 @@ import '../style/options.css'
 import '../style/register.css'
 import DeleteUser from '../modals/DeleteUser'
 import Timeout from '../modals/Timeout'
+import themeIcon from '../../assets/drop.svg'
+import themeIconBlack from '../../assets/drop_black.svg'
 
 const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
     const [profileName, setProfileName] = useState("");
@@ -16,6 +18,56 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
     const [message, setMessage] = useState("")
     const [toDelete, setToDelete] = useState(false)
     const [isTimedout, setIsTimedout] = useState(false)
+    const [themeDrop, setThemeDrop] = useState(themeIcon)
+    const [isHidden, setIsHidden] = useState(true)
+    const [themeClass, setThemeClass] = useState("theme-hidden")
+    const [dropClass, setDropClass] = useState("compact")
+    const [hoverClassOne, setHoverClassOne] = useState("")
+    const [hoverClassTwo, setHoverClassTwo] = useState("")
+    const [hoverClassThree, setHoverClassThree] = useState("")
+    const [hoverClassFour, setHoverClassFour] = useState("")
+    const [hoverClassFive, setHoverClassFive] = useState("")
+
+    useEffect(()=>{
+        if (isHidden) {
+            setThemeClass("theme-hidden")
+            setDropClass("compact")
+        } else {
+            setThemeClass("")
+            setDropClass("")     
+        }
+    }, [isHidden])
+
+    useEffect(()=> {
+        const whiteSet = ["dark", "forest"]
+        const blackSet = ["light", "artic", "azure"]
+
+        for (let i = 0; i < whiteSet.length; i++) {
+            if (theme === whiteSet[i]) {
+                setThemeDrop(themeIcon)
+            }
+        }
+
+        for (let i = 0; i < blackSet.length; i++) {
+            if (theme === blackSet[i]) {
+                setThemeDrop(themeIconBlack)
+            }
+        }
+    }, [])
+
+    const selectTheme = (pref, elementIndex) => {
+        setThemePref(pref)
+        let themeOptionElements = document.getElementsByClassName("theme-option-container")
+        let optionElements = Array.from(themeOptionElements);
+        
+        for (let i = 0; i < optionElements.length; i++) {
+            if (i === elementIndex) {
+                optionElements[i].id = theme + "-selected"
+            } else {
+                optionElements[i].removeAttribute('id');
+            }
+        }
+    }
 
     useEffect(()=> {
         let timeoutModal = document.getElementById('timeout-modal')
@@ -130,25 +182,34 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
                     </div>
 
                     <div className="user-register-dropdowns">
-                        <label className="reg-label-drop" htmlFor="themePref">Theme Preference: 
-                            <select id="drop-one" name="themePref" value={themePref} onChange={(e) => setThemePref(e.target.value)}>
-                                <option defaultValue className="theme-option light-option" value="light">
-                                    Light
-                                </option>
-                                <option className="theme-option dark-option" value="dark">
-                                    Dark
-                                </option>
-                                <option className="theme-option artic-option" value="artic">
-                                    Artic
-                                </option>
-                                <option className="theme-option forest-option" value="forest">
-                                    Forest
-                                </option>
-                                <option className="theme-option azure-option" value="azure">
-                                    Azure
-                                </option>
-                            </select>
-                        </label>
+                        <div className={"theme-dropdown " + theme + "-accent " + dropClass}>
+                            <div className="theme-head-container" onClick={()=>setIsHidden(!isHidden)}>
+                                <div className="theme-head">Theme Options</div>
+                                <img className="theme-drop-indicator" alt="theme dropdown indicator" src={themeDrop}></img>
+                            </div>
+                            <div className={"theme-options " + theme + " " + themeClass}>
+                                <div className={"theme-option-container " + themeClass + " " + hoverClassOne} onMouseEnter={()=>{setHoverClassOne(theme + "-accent")}} onMouseLeave={()=>{setHoverClassOne("")}} onClick={()=>selectTheme("light", 0)}>
+                                    <div className="theme-square" id="light-option"></div>
+                                    <div className="theme-option">Light</div>
+                                </div>
+                                <div className={"theme-option-container " + themeClass + " " + hoverClassTwo} onMouseEnter={()=>{setHoverClassTwo(theme + "-accent")}} onMouseLeave={()=>{setHoverClassTwo("")}} onClick={()=>selectTheme("dark", 1)}>
+                                    <div className="theme-square" id="dark-option"></div>
+                                    <div className="theme-option">Dark</div>
+                                </div>
+                                <div className={"theme-option-container " + themeClass + " " + hoverClassThree} onMouseEnter={()=>{setHoverClassThree(theme + "-accent")}} onMouseLeave={()=>{setHoverClassThree("")}} onClick={()=>selectTheme("artic", 2)}>
+                                    <div className="theme-square" id="artic-option"></div>
+                                    <div className="theme-option">Artic</div>
+                                </div>
+                                <div className={"theme-option-container " + themeClass + " " + hoverClassFour} onMouseEnter={()=>{setHoverClassFour(theme + "-accent")}} onMouseLeave={()=>{setHoverClassFour("")}} onClick={()=>selectTheme("forest", 3)}>
+                                    <div className="theme-square" id="forest-option"></div>
+                                    <div className="theme-option">Forest</div>
+                                </div>
+                                <div className={"theme-option-container " + themeClass + " " + hoverClassFive} onMouseEnter={()=>{setHoverClassFive(theme + "-accent")}} onMouseLeave={()=>{setHoverClassFive("")}} onClick={()=>selectTheme("azure", 4)}>
+                                    <div className="theme-square" id="azure-option"></div>
+                                    <div className="theme-option">Azure</div>
+                                </div>
+                            </div>
+                        </div>
 
                         <label className="reg-label-drop" htmlFor="layoutPref">Layout Preference: 
                             <select id="drop-two" name="layoutPref" value={layoutPref} onChange={(e) => setLayoutPref(e.target.value)}>
