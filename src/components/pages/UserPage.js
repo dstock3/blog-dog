@@ -84,7 +84,7 @@ const UserPage = () => {
         </main>
         <Footer theme="dark" />
       </div> 
-    } else if (userInfo && thisUser) {
+    } else if (userInfo) {
         return (
             <div className={"App " + userInfo.themePref + "-accent"}>
                 <Header thisUser={thisUser} isLoggedIn={isLoggedIn} userInfo={userInfo} theme={userInfo.themePref} title={userInfo.blogTitle} profileName={userInfo.profileName} />

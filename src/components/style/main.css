@@ -340,7 +340,7 @@ article {
     z-index: 0;
 }
 
-.comment-prompt {
+.comment-prompt-container {
     padding: 15px;
     box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
     border-radius: 5px;
