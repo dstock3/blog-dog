@@ -22,7 +22,10 @@ const Settings = ({theme, isLoggedIn}) => {
                 setMenuImg(menuIconBlack)
             }
         }
+    }, [])
 
+    useEffect(()=> {
+        console.log(theme)
     }, [])
 
     useEffect(() => {

@@ -199,6 +199,7 @@ article {
     justify-content: space-between;
     align-items: center;
     width: 250px;
+    cursor: pointer;
 }
 
 .compose-prompt-container p {

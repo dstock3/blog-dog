@@ -78,13 +78,6 @@
     box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
 }
 
-.theme-hidden {
-    visibility: hidden;
-    height: 0;
-    width: 0;
-    padding: 0;
-}
-
 #dark-option {
     background-color: black;
     border: 3px solid white;
@@ -159,4 +152,65 @@
     padding: 7px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.layout-selection {
+    display: flex;
+    flex-direction: column;
+    margin-inline: 15px;
+    position: absolute;
+    left: 52%;
+    border-radius: 5px;
+    padding-bottom: 5px;
+}
+
+.layout-prompt-container {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding-block: 5px;
+    padding-inline: 10px;
+    border-radius: 5px;
+    width: 165px;
+    cursor: pointer;
+}
+
+.layout-options {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    height: fit-content;
+    margin-inline: 15px;
+}
+
+.layout-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    padding-inline: 5px;
+    border-radius: 5px;
+}
+
+.layout-option img {
+    height: 35px;
+    width: 35px;
+    margin-right: 7px;
+}
+
+.option-hidden {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    padding: 0;
+}
+
+.options-button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+    margin-top: 85px;
 }

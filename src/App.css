@@ -218,6 +218,7 @@ main {
   display: flex;
   text-decoration: none;
   font-weight: bold;
+  margin-top: 15px;
 }
 
 .compose-link img {

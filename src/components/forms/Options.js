@@ -5,6 +5,10 @@ import DeleteUser from '../modals/DeleteUser'
 import Timeout from '../modals/Timeout'
 import themeIcon from '../../assets/drop.svg'
 import themeIconBlack from '../../assets/drop_black.svg'
+import basicIcon from '../../assets/basic.svg'
+import basicIconBlack from '../../assets/basic_black.svg'
+import cardIcon from '../../assets/card.svg'
+import cardIconBlack from '../../assets/card_black.svg'
 
 const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
     const [profileName, setProfileName] = useState("");
@@ -27,10 +31,16 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
     const [hoverClassThree, setHoverClassThree] = useState("")
     const [hoverClassFour, setHoverClassFour] = useState("")
     const [hoverClassFive, setHoverClassFive] = useState("")
+    const [basicImg, setBasicImg] = useState(basicIcon)
+    const [cardImg, setCardImg] = useState(cardIcon)
+    const [layoutIsHidden, setLayoutIsHidden] = useState(true)
+    const [layoutClass, setLayoutClass] = useState("")
+    const [hoverClassSix, setHoverClassSix] = useState("")
+    const [hoverClassSeven, setHoverClassSeven] = useState("")
 
     useEffect(()=>{
         if (isHidden) {
-            setThemeClass("theme-hidden")
+            setThemeClass("option-hidden")
             setDropClass("compact")
         } else {
             setThemeClass("")
@@ -39,18 +49,32 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
     }, [isHidden])
 
     useEffect(()=> {
+        if (layoutIsHidden) {
+            setLayoutClass("option-hidden")
+
+        } else {
+            setLayoutClass("")
+        }
+    }, [layoutIsHidden])
+
+    useEffect(()=> {
         const whiteSet = ["dark", "forest"]
         const blackSet = ["light", "artic", "azure"]
 
         for (let i = 0; i < whiteSet.length; i++) {
             if (theme === whiteSet[i]) {
                 setThemeDrop(themeIcon)
+                setBasicImg(basicImg)
+                setCardImg(cardImg)
+
             }
         }
 
         for (let i = 0; i < blackSet.length; i++) {
             if (theme === blackSet[i]) {
                 setThemeDrop(themeIconBlack)
+                setBasicImg(basicIconBlack)
+                setCardImg(cardIconBlack)
             }
         }
     }, [])
@@ -60,6 +84,19 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
         let themeOptionElements = document.getElementsByClassName("theme-option-container")
         let optionElements = Array.from(themeOptionElements);
         
+        for (let i = 0; i < optionElements.length; i++) {
+            if (i === elementIndex) {
+                optionElements[i].id = theme + "-selected"
+            } else {
+                optionElements[i].removeAttribute('id');
+            }
+        }
+    }
+
+    const selectLayout = (pref, elementIndex) => {
+        setLayoutPref(pref)
+        let layoutOptionElements = document.getElementsByClassName("layout-option")
+        let optionElements = Array.from(layoutOptionElements);
         for (let i = 0; i < optionElements.length; i++) {
             if (i === elementIndex) {
                 optionElements[i].id = theme + "-selected"
@@ -210,18 +247,26 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
                                 </div>
                             </div>
                         </div>
-
-                        <label className="reg-label-drop" htmlFor="layoutPref">Layout Preference: 
-                            <select id="drop-two" name="layoutPref" value={layoutPref} onChange={(e) => setLayoutPref(e.target.value)}>
-                                <option value="basic">Basic</option>
-                                <option value="card">Card</option>
-                            </select>
-                        </label>
+                        <div className={"layout-selection " + theme + "-accent"}>
+                            <div className={"layout-prompt-container"} onClick={()=>setLayoutIsHidden(!layoutIsHidden)}>
+                                <div className="layout-prompt">Page Layout</div>
+                                <img className="layout-drop-indicator" alt="layout dropdown indicator" src={themeDrop}></img>
+                            </div>
+                            <div className={"layout-options " + theme + "-accent " + layoutClass}>
+                                <div className={"layout-option basic-layout " + hoverClassSix} onClick={() => selectLayout("basic", 0)} onMouseEnter={()=>{setHoverClassSix(theme)}} onMouseLeave={()=>{setHoverClassSix("")}}>
+                                    <img src={basicImg} alt="basic layout icon"></img>
+                                    <div className="layout-label">Basic</div>
+                                </div>
+                                <div className={"layout-option basic-layout " + hoverClassSeven} onClick={() => selectLayout("card", 1)} onMouseEnter={()=>{setHoverClassSeven(theme)}} onMouseLeave={()=>{setHoverClassSeven("")}}>
+                                    <img src={cardImg} alt="card layout icon"></img>
+                                    <div className="layout-label">Card</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div onClick={handleSubmit} className={"options-btn " + theme + "-accent"}>Update Profile</div>
                 </form>
-                <div className="deleteForm">
+                <div className="options-button-container">
+                    <div onClick={handleSubmit} className={"options-btn " + theme + "-accent"}>Update Profile</div>
                     <div className={"submit-btn " + theme + "-accent"} onClick={()=> setToDelete(true)}>Delete Profile</div>
                 </div>
             </main>

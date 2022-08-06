@@ -6,7 +6,6 @@ import { parseJwt } from '../../auth/parseToken'
 
 const OptionsPage = () => {
   const [thisUser, setThisUser] = useState(false)
-
   const [errorMessage, setErrorMessage] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)

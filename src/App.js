@@ -37,7 +37,6 @@ const App = () => {
 
         {/* Article Page */}
         <Route path="/:username/:articleId" element={<ArticlePage/>} />
-        
       </Routes>
     </Router>
   )
