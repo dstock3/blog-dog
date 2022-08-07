@@ -66,7 +66,6 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
                 setThemeDrop(themeIcon)
                 setBasicImg(basicImg)
                 setCardImg(cardImg)
-
             }
         }
 
