@@ -24,10 +24,6 @@ const Settings = ({theme, isLoggedIn}) => {
         }
     }, [])
 
-    useEffect(()=> {
-        console.log(theme)
-    }, [])
-
     useEffect(() => {
 
     }, [optionsStatus])

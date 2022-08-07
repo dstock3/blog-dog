@@ -18,6 +18,10 @@
     width: 90%;
 }
 
+label {
+    font-weight: bold;
+}
+
 .compose-options {
     margin-top: 15px;
     align-items: flex-end;
@@ -26,11 +30,13 @@
 .compose-title {
     margin-top: 15px;
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
 }
 
 .compose-label {
-    font-size: 1.25em;
     margin-bottom: 15px;
+    margin-right: 15px;
 }
 
 .submit-btn {
@@ -38,6 +44,20 @@
     cursor: pointer;
     padding: 10px;
     border-radius: 5px;
+}
+
+.compose-img {
+    display: flex;
+    flex-direction: row;
+}
+
+.upload-img-label {
+    margin-inline: unset;
+    margin-right: 15px;
+}
+
+.compose-title-input {
+    height: 1em;
 }
 
 textarea {

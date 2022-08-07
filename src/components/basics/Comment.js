@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { parseJwt } from '../../auth/parseToken.js';
 import DeleteComment from "../modals/DeleteComment.js";
+import Timeout from "../modals/Timeout.js";
 
 const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
     const [message, setMessage] = useState("")
     const [authorizedToDelete, setAuthorizedToDelete] = useState(false)
     const [fullyAuthorized, setFullyAuthorized] = useState(false)
     const [toDelete, setToDelete] = useState(false)
+    const [isTimedOut, setIsTimedOut] = useState(false)
 
     useEffect(()=> {
         let rootElement = document.getElementById('root')
@@ -23,6 +25,8 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
         }
 
     }, [toDelete])
+
+
 
     const authorizeComment = () => {
         let thisUser = localStorage.getItem('user')
@@ -63,8 +67,15 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
                 headers: { 'Content-Type': 'application/json', "login-token" : token }
                 });
             let resJson = await res.json();
-            
-            if (res.status === 200) {
+
+            if (res.status === 400) {
+                setIsTimedOut(true)
+                let deleteCommentModal = document.getElementById("comment-delete-modal")
+                deleteCommentModal.style.zIndex = 0
+                let timedOutModal = document.getElementById("timeout-modal");
+                timedOutModal.style.zIndex = 1000
+
+            } else if (res.status === 200) {
                 window.location.reload();
             } else {
                 setMessage("Some error occurred")
@@ -97,6 +108,8 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
             </li>
             {toDelete ?
                 <DeleteComment theme={theme} message={message} toDelete={toDelete} deleteComment={deleteComment} setToDelete={setToDelete} /> : null}
+            {isTimedOut ?
+                <Timeout isTimedout={isTimedOut} theme={theme} /> : null}
         </>
 
     );
