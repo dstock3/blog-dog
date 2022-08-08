@@ -58,7 +58,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                         imgDesc: imgDesc,
                         content: content
                     }),
-                    headers: { 'Content-Type': 'application/json', "login-token" : token }
+                    headers: { 'Content-Type': "application/json; charset=utf-8", "login-token" : token }
                 })
 
             } else {
@@ -68,12 +68,11 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                         title: title,
                         content: content
                     }),
-                    headers: { 'Content-Type': 'application/json', "login-token" : token }
+                    headers: { 'Content-Type': "application/json; charset=utf-8", "login-token" : token }
                 })
             }
             
             let resJson = await res.json();
-            console.log(resJson)
 
             if (res.status === 400) {
                 setIsTimedout(true)

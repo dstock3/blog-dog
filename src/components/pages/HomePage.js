@@ -16,24 +16,37 @@ const HomePage = () => {
     
   const fetchUsers = async() => {
     setIsLoading(true)
-    let newUser = localStorage.getItem('user');
+    let token = localStorage.getItem('user');
 
-    try {
-      let response = await fetch(`https://stormy-waters-34046.herokuapp.com/`, {
+    let response 
+
+    if (token) {
+      response = await fetch(`https://stormy-waters-34046.herokuapp.com/`, {
+        headers: { 'Content-Type': 'application/json', 'login-token' : token },
         method: "GET"
-        });
+      });
+
+    } else {
+      response = await fetch(`https://stormy-waters-34046.herokuapp.com/`, {
+        method: "GET"
+      });
+    }
+    
+    try {
       let resJson = await response.json();
-      
+
       if (response.status === 200) {
-        if (newUser) {
+        if (resJson.user) {
           setIsLoggedIn(true)
           for (let prop in resJson.users) {
-              if (resJson.users[prop]._id === parseJwt(newUser)._id) {
-                  setUser(resJson.users[prop])
-                  setLayout(resJson.users[prop]["layoutPref"])
-              }
+            if (resJson.users[prop]._id === resJson.user._id) {
+                setUser(resJson.users[prop])
+                setLayout(resJson.users[prop]["layoutPref"])
             }
-          } 
+          }
+        } else {
+          setIsLoggedIn(false)
+        }
         setUsers(resJson.users)
         setIsLoading(false)
       } else {

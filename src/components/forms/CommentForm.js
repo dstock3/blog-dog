@@ -67,7 +67,7 @@ const CommentForm = ({setComments, users, fetchArticle, userInfo, articleId, the
                     profileName: author.profileName,
                     content: comment
                     }),
-                headers: { 'Content-Type': 'application/json', "login-token" : token }
+                headers: { 'Content-Type': "application/json; charset=utf-8", "login-token" : token }
                 });
             let resJson = await res.json();
 
