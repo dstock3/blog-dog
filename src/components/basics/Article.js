@@ -117,8 +117,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                                 </Link>
                             </div>
                             <div className={"article-edit-btn " + theme + "-accent"} onClick={() => setToDelete(true)}>Delete</div>
-                        </div> : null
-                    }
+                        </div> : null}
             </div>
 
             {article["img"] ?
