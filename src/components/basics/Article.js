@@ -21,7 +21,6 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
             setArticleClass("single-view")
         }
 
-
     }, [landing])
 
     useEffect(()=> {
@@ -100,7 +99,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
         <article className={articleClass + " " + theme + " " + layout + "-child"}>
             <div className="article-head">
                 <div className="article-head-subcontainer">
-                    <h1 className="article-name">{article["title"]}</h1>
+                    <h1 className={"article-name " + layout + "-article-name"}>{article["title"]}</h1>
                     {author ?
                         <div className="article-author">
                             <Link to ={"/" + userInfo["profileName"]}>
@@ -110,7 +109,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     <div className="date-posted">{article["date"]}</div>
                 </div>
                     {isAuthorized ?
-                        <div className="article-dashboard">
+                        <div className={"article-dashboard " + layout + "-buttons"}>
                             <div className={"article-edit-btn " + theme + "-accent"}>
                                 <Link to="/compose" state={{"articleUpdate": {"content": article["content"], "title": article["title"], "articleId": article._id}}}>
                                     Edit
@@ -132,10 +131,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                 </div> :
                 null
             }
-            <>
-                {toDelete ?
-                    <DeleteArticle theme={theme} toDelete={toDelete} userInfo={userInfo} articleId={articleId} setToDelete={setToDelete} /> : null}
-            </>
+
             {limit ?
                 article.content.length < 400 ?
                     <div className="article-content">{article["content"]}</div> :
@@ -152,6 +148,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         {article["content"]}
                     </div>
                     {isLoggedIn ?
+                        /* Commenting privileges are only enabled if the user is logged in */
                         <CommentForm setComments={setComments} fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
                     }
                     {Object.keys(comments).length !== 0 ?
@@ -166,9 +163,11 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                             <CommentSection showComments={showComments} setShowComments={setShowComments} comments={comments} expandComment={expandImg} theme={theme} userInfo={userInfo} article={article} setCommentUpdate={setCommentUpdate} articleId={articleId} />
                         </ul> : 
                         null
-                    }
+                    } 
                 </>
             }
+            {toDelete ?
+                <DeleteArticle theme={theme} toDelete={toDelete} userInfo={userInfo} articleId={articleId} setToDelete={setToDelete} /> : null}
         </article>
     );
 }

@@ -61,8 +61,9 @@ const Main = ({errorMessage, fetchArticle, isLoggedIn, getUserData, users, landi
             {errorMessage ? <div className="error-message">{errorMessage}</div> : null}
             <Sidebar isLoggedIn={isLoggedIn} userInfo={userInfo} articles={articles} theme={theme} articleUpdate={articleUpdate} />
             {!landing && article ?
-                <div className={"articles-container " + layout}>
-                    <Article getUserData={getUserData} fetchArticle={fetchArticle} isLoggedIn={isLoggedIn} users={users} userInfo={userInfo} articleId={article._id} article={article} theme={theme} layout={layout}comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments}/>
+                /* For single articles, the basic layout is enabled */
+                <div className="articles-container basic">
+                    <Article getUserData={getUserData} fetchArticle={fetchArticle} isLoggedIn={isLoggedIn} users={users} userInfo={userInfo} articleId={article._id} article={article} theme={theme} layout={"basic"} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments}/>
                 </div> :
                 <div className={"articles-container " + layout}>
                     {articles.length !== 0 ?

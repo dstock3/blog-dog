@@ -3,7 +3,6 @@ import Header from '../sections/Header';
 import Home from '../sections/Home';
 import Footer from '../sections/Footer';
 import Spinner from '../basics/Spinner';
-import { parseJwt } from '../../auth/parseToken.js';
 
 const HomePage = () => {
   const [users, setUsers] = useState(false)

@@ -10,7 +10,7 @@ import basicIconBlack from '../../assets/basic_black.svg'
 import cardIcon from '../../assets/card.svg'
 import cardIconBlack from '../../assets/card_black.svg'
 
-const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
+const Options = ({userInfo, theme, setIsLoggedIn}) => {
     const [profileName, setProfileName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -138,7 +138,8 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
                 blogTitle: blogTitle,
                 profileDesc: profileDesc,
                 profilePic: profilePic,
-                themePref: themePref
+                themePref: themePref,
+                layoutPref: layoutPref
             });
         } else {
             body = JSON.stringify({
@@ -147,7 +148,8 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
                 confirmPassword: confirmPassword,
                 blogTitle: blogTitle,
                 profileDesc: profileDesc,
-                themePref: themePref
+                themePref: themePref,
+                layoutPref: layoutPref
             });
         }
          
@@ -165,7 +167,6 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
             if (res.status === 400) {
                 setIsTimedout(true)
             } else if (res.status === 200) {
-                setTheme(themePref)
                 setProfileName("");
                 setPassword("");
                 setConfirmPassword("");
@@ -218,6 +219,7 @@ const Options = ({userInfo, theme, setTheme, setIsLoggedIn}) => {
                     </div>
 
                     <div className="user-register-dropdowns">
+                        <div className="customize-page-desc">Choose how your page will be presented to other users.</div>
                         <div className={"theme-dropdown " + theme + "-accent " + dropClass}>
                             <div className="theme-head-container" onClick={()=>setIsHidden(!isHidden)}>
                                 <div className="theme-head">Theme Options</div>

@@ -42,6 +42,11 @@ article {
     flex-direction: column;
 }
 
+.card-article-name {
+    width: 200px;
+}
+
+
 .date-posted {
     font-size: .75em;
 }
@@ -408,6 +413,26 @@ article {
     box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.349);
     cursor: pointer;
 }
+
+.card-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 10%;
+}
+
+.card-buttons div {
+    margin-block: 5px;
+}
+
+.card-buttons > div {
+    margin-block: 5px;
+    width: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 @media only screen and (max-width: 900px) {        
     article {
