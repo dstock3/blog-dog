@@ -26,8 +26,6 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
 
     }, [toDelete])
 
-
-
     const authorizeComment = () => {
         let thisUser = localStorage.getItem('user')
 

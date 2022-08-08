@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom';
+import Timeout from './Timeout';
 
 const DeleteUser = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete}) => {
     const [message, setMessage] = useState("")
+    const [isTimedout, setIsTimedout] = useState(false)
     const nav = useNavigate()
 
     const handleDelete = async (e) => {
@@ -19,8 +21,14 @@ const DeleteUser = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete}) => 
                 });
 
             let resJson = await res.json();
-
-            if (res.status === 200) {
+            
+            if (res.status === 400) {
+                let deleteUserModal = document.getElementById("user-delete-modal")
+                deleteUserModal.style.zIndex = 0
+                let timedOutModal = document.getElementById("timeout-modal");
+                timedOutModal.style.zIndex = 1000
+                setIsTimedout(true)
+            } else if (res.status === 200) {
                 localStorage.clear();
                 setIsLoggedIn(false)
                 nav('/');
@@ -44,6 +52,8 @@ const DeleteUser = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete}) => 
                 <div className={"delete-btn " + theme} onClick={handleDelete}>Confirm</div>
                 <div className={"delete-btn " + theme} onClick={() => setToDelete(false)}>Cancel</div>
             </div>
+            {isTimedout ?
+                <Timeout isTimedout={isTimedout} theme={theme} /> : null}
         </div>,
         document.getElementById('user-delete-modal')
     )

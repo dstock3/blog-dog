@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom'
+import Timeout from './Timeout'
 
 const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete}) => {
     const [message, setMessage] = useState("")
@@ -16,7 +17,7 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete}) => {
                     });
                 
                 let resJson = await res.json();
-                
+
                 if (res.status === 200) {
                     nav(`/${userInfo.profileName}`, { replace: true })
                 } else { setMessage("Some error occured") };

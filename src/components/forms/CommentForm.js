@@ -58,7 +58,6 @@ const CommentForm = ({setComments, users, fetchArticle, userInfo, articleId, the
     const commentHandler = async(e) => {
         e.preventDefault();
         
-        
         try {
             let token = localStorage.getItem('user');
             
