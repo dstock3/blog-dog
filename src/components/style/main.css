@@ -139,6 +139,11 @@ article {
     margin-right: 5px;
 }
 
+.comment-date {
+    font-style: italic;
+    margin-top: 15px;
+}
+
 .comment-dashboard {
     display: flex;
     justify-content: space-between;

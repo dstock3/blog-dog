@@ -145,7 +145,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     </div> :
                 <>
                     <div className="article-content">
-                        {article["content"]}
+                        {decodeURIComponent(escape(article["content"]))}
                     </div>
                     {isLoggedIn ?
                         /* Commenting privileges are only enabled if the user is logged in */

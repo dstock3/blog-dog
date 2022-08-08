@@ -92,6 +92,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
                     <span className="comment-username">
                         <Link to={`/${comment.profileName}`}>{comment.profileName}</Link>: </span>
                     <span className="comment-content">{comment.content}</span> 
+                    <div className="comment-date">Posted on {comment.date}</div>
                 </div>
                 <div className="comment-dashboard">
                     {authorizedToDelete ?

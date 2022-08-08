@@ -26,7 +26,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
             }
         }
     }, [update])
-    
+
     useEffect(()=> {
         let modal = document.getElementById('timeout-modal')
         let rootElement = document.getElementById('root')
@@ -47,6 +47,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
 
         try {
             let token = localStorage.getItem('user');
+            
 
             let res
             if (img) {
@@ -58,7 +59,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                         imgDesc: imgDesc,
                         content: content
                     }),
-                    headers: { 'Content-Type': "application/json; charset=utf-8", "login-token" : token }
+                    headers: { 'Content-Type': "application/json", "login-token" : token }
                 })
 
             } else {
@@ -68,7 +69,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                         title: title,
                         content: content
                     }),
-                    headers: { 'Content-Type': "application/json; charset=utf-8", "login-token" : token }
+                    headers: { 'Content-Type': "application/json", "login-token" : token }
                 })
             }
             
