@@ -214,3 +214,8 @@
     width: 25%;
     margin-top: 85px;
 }
+
+.customize-page-desc {
+    margin-block: 15px;
+    text-align: center;
+}

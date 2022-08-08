@@ -112,7 +112,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                         </div>
 
                         <div className="compose-subcontainer compose-img">
-                            <label className="upload-img-label" htmlFor="img">Image:</label>
+                            <label className="upload-img-label compose-img-label" htmlFor="img">Image:</label>
                             <input className="upload-img-input" type="file" value={img} htmlFor="img" name="img" onChange={(e) => setImg(e.target.files[0])}></input>
 
                             <label className="compose-label" htmlFor="imgDesc">Image Caption (if applicable):</label>

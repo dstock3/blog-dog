@@ -218,8 +218,9 @@ const Options = ({userInfo, theme, setIsLoggedIn}) => {
                         <textarea type="text" value={profileDesc} name="profileDesc" onChange={(e) => setProfileDesc(e.target.value)}></textarea>
                     </div>
 
+                    <div className="customize-page-desc">Choose how your page will be presented to other users.</div>
                     <div className="user-register-dropdowns">
-                        <div className="customize-page-desc">Choose how your page will be presented to other users.</div>
+
                         <div className={"theme-dropdown " + theme + "-accent " + dropClass}>
                             <div className="theme-head-container" onClick={()=>setIsHidden(!isHidden)}>
                                 <div className="theme-head">Theme Options</div>
