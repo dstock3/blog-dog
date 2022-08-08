@@ -43,7 +43,7 @@ const HomePage = () => {
           setIsLoading(false)
         } catch(err) {
           setIsLoading(false)
-          setErrorMessage("There was a problem loading user data: " + "fart")
+          setErrorMessage("There was a problem loading user data: " + err)
         }
       } else {
         let resJson = await response.json();
