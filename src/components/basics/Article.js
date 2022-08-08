@@ -109,17 +109,15 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         </div> : null}
                     <div className="date-posted">{article["date"]}</div>
                 </div>
-                    {limit ? 
-                        null :
-                            isAuthorized ?
-                                <div className="article-dashboard">
-                                    <div className={"article-edit-btn " + theme + "-accent"}>
-                                        <Link to="/compose" state={{"articleUpdate": {"content": article["content"], "title": article["title"], "articleId": article._id}}}>
-                                            Edit
-                                        </Link>
-                                    </div>
-                                    <div className={"article-edit-btn " + theme + "-accent"} onClick={() => setToDelete(true)}>Delete</div>
-                                </div> : null
+                    {isAuthorized ?
+                        <div className="article-dashboard">
+                            <div className={"article-edit-btn " + theme + "-accent"}>
+                                <Link to="/compose" state={{"articleUpdate": {"content": article["content"], "title": article["title"], "articleId": article._id}}}>
+                                    Edit
+                                </Link>
+                            </div>
+                            <div className={"article-edit-btn " + theme + "-accent"} onClick={() => setToDelete(true)}>Delete</div>
+                        </div> : null
                     }
             </div>
 
