@@ -25,7 +25,6 @@ const HomePage = () => {
         headers: { 'Content-Type': 'application/json', 'login-token' : token },
         method: "GET"
       });
-
     } else {
       response = await fetch(`https://stormy-waters-34046.herokuapp.com/`, {
         method: "GET"
@@ -33,25 +32,40 @@ const HomePage = () => {
     }
     
     try {
-      let resJson = await response.json();
-
-      if (response.status === 200) {
-        if (resJson.user) {
-          setIsLoggedIn(true)
-          for (let prop in resJson.users) {
-            if (resJson.users[prop]._id === resJson.user._id) {
-                setUser(resJson.users[prop])
-                setLayout(resJson.users[prop]["layoutPref"])
-            }
-          }
-        } else {
+      if (response.status === 500) {
+        try {
+          let newRes = await fetch(`https://stormy-waters-34046.herokuapp.com/`, {
+            method: "GET"
+          });
           setIsLoggedIn(false)
+          let newResJson = await newRes.json();
+          setUsers(newResJson.users)
+          setIsLoading(false)
+        } catch(err) {
+          setIsLoading(false)
+          setErrorMessage("There was a problem loading user data: " + "fart")
         }
-        setUsers(resJson.users)
-        setIsLoading(false)
       } else {
-        setIsLoading(false)
-        setErrorMessage(`Error Code ${response.status} There was a problem loading user data.`) 
+        let resJson = await response.json();
+
+        if (response.status === 200) {
+          if (resJson.user) {
+            setIsLoggedIn(true)
+            for (let prop in resJson.users) {
+              if (resJson.users[prop]._id === resJson.user._id) {
+                  setUser(resJson.users[prop])
+                  setLayout(resJson.users[prop]["layoutPref"])
+              }
+            }
+          } else {
+            setIsLoggedIn(false)
+          }
+          setUsers(resJson.users)
+          setIsLoading(false)
+        } else {
+          setIsLoading(false)
+          setErrorMessage(`Error Code ${response.status} There was a problem loading user data.`) 
+        }
       }
     } catch(err) {
       setIsLoading(false)
