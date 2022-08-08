@@ -3,13 +3,14 @@ import Prompt from "../basics/Prompt";
 import { parseJwt } from "../../auth/parseToken.js"
 import Timeout from "../modals/Timeout";
 
-const CommentForm = ({setComments, users, fetchArticle, userInfo, articleId, theme, update, fetchComments}) => {
+const CommentForm = ({setComments, users, userInfo, articleId, theme, update}) => {
     const [comment, setComment] = useState("")
     const [message, setMessage] = useState(false)
     const [method, setMethod] = useState("POST")
     const [request, setRequest] = useState(`https://stormy-waters-34046.herokuapp.com/article/${articleId}`)
     const [isTimedout, setIsTimedout] = useState(false)
     const [author, setAuthor] = useState(false)
+    const [isEdited, setIsEdited] = useState(false)
 
     useEffect(()=> {
         setRequest(`https://stormy-waters-34046.herokuapp.com/article/${articleId}`)
@@ -22,6 +23,7 @@ const CommentForm = ({setComments, users, fetchArticle, userInfo, articleId, the
             setComment(update.content)
             setMethod("PUT")
             setRequest(`https://stormy-waters-34046.herokuapp.com/article/${articleId}/${update.commentId}`)
+            setIsEdited(true)
         }
     }, [update, articleId])
 
@@ -65,7 +67,8 @@ const CommentForm = ({setComments, users, fetchArticle, userInfo, articleId, the
                 method: method,
                 body: JSON.stringify({
                     profileName: author.profileName,
-                    content: comment
+                    content: comment,
+                    isEdited: isEdited
                     }),
                 headers: { 'Content-Type': "application/json; charset=utf-8", "login-token" : token }
                 });
