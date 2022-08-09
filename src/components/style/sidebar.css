@@ -17,6 +17,7 @@
     border: 1px solid black;
     border-radius: 5px;
     align-items: center;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
 }
 
 .compose-option {
@@ -31,8 +32,14 @@
     flex-direction: column;
     border: 1px solid black;
     border-radius: 5px;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
 }
   
+.archive-list {
+    margin-block: 15px;
+    padding-inline: 20px;
+}
+
 .archive-link-item {
     list-style-type: none;
     margin-bottom: 10px;
@@ -74,6 +81,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.317);
 }
 
 .intro-container {
@@ -109,6 +117,7 @@
     width: 90%;
     margin-top: 15px;
     border-radius: 15px;
+    box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
 }
 
 .most-commented-header {
