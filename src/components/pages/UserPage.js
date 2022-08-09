@@ -69,16 +69,12 @@ const UserPage = () => {
     }
 
     useEffect(() => {
-      
         fetchUser()
     }, [])
-
-
 
     useEffect(() => {
         if (userInfo) { 
           document.title = userInfo.blogTitle 
-          console.log(userInfo.layoutPref)
         }  
     }, [userInfo])
 

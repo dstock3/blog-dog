@@ -15,10 +15,12 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
     const [request, setRequest] = useState('https://stormy-waters-34046.herokuapp.com/article/compose')
     const nav = useNavigate()
     const [isTimedout, setIsTimedout] = useState(false)
+    const [isEdited, setIsEdited] = useState(false)
 
     useEffect(()=> {
         if (update) {
             if (update.articleUpdate) {
+                setIsEdited(true)
                 setContent(update.articleUpdate.content)
                 setTitle(update.articleUpdate.title)
                 setMethod("PUT")
@@ -48,7 +50,6 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
         try {
             let token = localStorage.getItem('user');
             
-
             let res
             if (img) {
                 res = await fetch(request, {
@@ -57,7 +58,8 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                         title: title,
                         img: img,
                         imgDesc: imgDesc,
-                        content: content
+                        content: content,
+                        isEdited: isEdited
                     }),
                     headers: { 'Content-Type': "application/json", "login-token" : token }
                 })
@@ -67,7 +69,8 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                     method: method,
                     body: JSON.stringify({
                         title: title,
-                        content: content
+                        content: content,
+                        isEdited: isEdited
                     }),
                     headers: { 'Content-Type': "application/json", "login-token" : token }
                 })

@@ -76,7 +76,6 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
             rootElement.style.filter = "unset"
             rootElement.style.transition = "unset"
         }
-
     }, [toDelete])
 
     useEffect(()=> {
@@ -99,14 +98,18 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
         <article className={articleClass + " " + theme + " " + layout + "-child"}>
             <div className="article-head">
                 <div className="article-head-subcontainer">
-                    <h1 className={"article-name " + layout + "-article-name"}>{article["title"]}</h1>
+                    <h1 className={"article-name " + layout + "-article-name"}>
+                        <Link to={"/" + userInfo["profileName"] + `/${article._id}`}>{article["title"]}</Link>
+                    </h1>
                     {author ?
                         <div className="article-author">
                             <Link to ={"/" + userInfo["profileName"]}>
                                 {author}
                             </Link>
                         </div> : null}
-                    <div className="date-posted">{article["date"]}</div>
+                    {article.isEdited ? 
+                        <div className="date-posted">Edited on {article["date"]}</div> :
+                        <div className="date-posted">Posted on {article["date"]}</div>}
                 </div>
                     {isAuthorized ?
                         <div className={"article-dashboard " + layout + "-buttons"}>
@@ -145,7 +148,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     </div> :
                 <>
                     <div className="article-content">
-                        {decodeURIComponent(escape(article["content"]))}
+                        {article["content"]}
                     </div>
                     {isLoggedIn ?
                         /* Commenting privileges are only enabled if the user is logged in */
