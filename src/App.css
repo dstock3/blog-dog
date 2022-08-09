@@ -208,6 +208,7 @@ main {
   max-width: 25%;
   height: fit-content;
   box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
+  height: 425px;
 }
 
 .img-card-view {
