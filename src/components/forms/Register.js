@@ -52,10 +52,10 @@ const Register = () => {
                     setProfilePic("");
                     setMessage("User created successfully");
                 } else {
-                    setMessage("Some error occured");
+                    setMessage(`An error occured: ${res.status}`);
                 }
         } catch(err) {
-            setMessage("Some error occured");
+            setMessage(`An error occured: ${err}`);
         }
     }
 

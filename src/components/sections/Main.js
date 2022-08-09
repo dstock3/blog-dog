@@ -7,7 +7,7 @@ import composeIcon from '../../assets/write.svg'
 import composeIconBlack from '../../assets/write_black.svg'
 import ComposePrompt from '../basics/ComposePrompt';
 
-const Main = ({errorMessage, fetchArticle, isLoggedIn, getUserData, users, landing, article, articles, userInfo, theme, layout, articleUpdate, userPage}) => {
+const Main = ({errorMessage, fetchArticle, isLoggedIn, getUserData, users, landing, article, articles, userInfo, theme, layout, articleUpdate, userPage, isAdmin}) => {
     const [commentMessage, setCommentMessage] = useState("")
     const [comments, setComments] = useState(false)
     const [isAuthorized, setIsAuthorized] = useState(false)
@@ -56,16 +56,16 @@ const Main = ({errorMessage, fetchArticle, isLoggedIn, getUserData, users, landi
     return (
         <main className="blog">
             {errorMessage ? <div className="error-message">{errorMessage}</div> : null}
-            <Sidebar isLoggedIn={isLoggedIn} userInfo={userInfo} articles={articles} theme={theme} articleUpdate={articleUpdate} />
+            <Sidebar isLoggedIn={isLoggedIn} userInfo={userInfo} articles={articles} theme={theme} articleUpdate={articleUpdate} isAdmin={isAdmin} />
             {!landing && article ?
                 /* For single articles, the basic layout is enabled */
                 <div className="articles-container basic">
-                    <Article getUserData={getUserData} fetchArticle={fetchArticle} isLoggedIn={isLoggedIn} users={users} userInfo={userInfo} articleId={article._id} article={article} theme={theme} layout={"basic"} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} />
+                    <Article getUserData={getUserData} fetchArticle={fetchArticle} isLoggedIn={isLoggedIn} users={users} userInfo={userInfo} articleId={article._id} article={article} theme={theme} layout={"basic"} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} isAdmin={isAdmin} />
                 </div> :
                 articles.length !== 0 ?
                     <div className={"articles-container " + layout}>
                         {Object.values(articles).map((articleItem, artIndex) =>
-                            <Article key={artIndex} getUserData={getUserData} fetchArticle={fetchArticle} users={users} articleId={articleItem._id} userInfo={userInfo} article={articles[artIndex]} theme={theme} layout={layout} limit={true} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} landing={landing} userPage={userPage} /> )}
+                            <Article key={artIndex} getUserData={getUserData} fetchArticle={fetchArticle} users={users} articleId={articleItem._id} userInfo={userInfo} article={articles[artIndex]} theme={theme} layout={layout} limit={true} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} landing={landing} userPage={userPage} isAdmin={isAdmin} /> )}
                     </div> :
                     <div className={"articles-container basic"}>
                         <ComposePrompt isAuthorized={isAuthorized} theme={theme} composeImg={composeImg} />

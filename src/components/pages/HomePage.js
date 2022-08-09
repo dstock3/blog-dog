@@ -12,6 +12,7 @@ const HomePage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
     
   const fetchUsers = async() => {
     setIsLoading(true)
@@ -50,9 +51,13 @@ const HomePage = () => {
         if (response.status === 200) {
           if (resJson.user) {
             setIsLoggedIn(true)
+            
             for (let prop in resJson.users) {
               if (resJson.users[prop]._id === resJson.user._id) {
                   setUser(resJson.users[prop])
+                  if (resJson.users[prop].admin) {
+                    setIsAdmin(true)
+                  }
                   setLayout(resJson.users[prop]["layoutPref"])
               }
             }
@@ -98,7 +103,7 @@ const HomePage = () => {
     return (
       <div className={"App " + user.themePref + "-accent"}>
         <Header isLoggedIn={isLoggedIn} userInfo={user} theme={user.themePref} title={user.blogTitle} />
-        <Home isLoggedIn={isLoggedIn} theme={user.themePref} userInfo={user} layout={user.layoutPref} users={users} />
+        <Home isLoggedIn={isLoggedIn} theme={user.themePref} userInfo={user} layout={user.layoutPref} users={users} isAdmin={isAdmin} />
         <Footer theme={user.themePref} />
       </div>
       ) 

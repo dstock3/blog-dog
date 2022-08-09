@@ -16,6 +16,7 @@ const ArticlePage = () => {
     const [user, setUser] = useState(false)
     const [users, setUsers] = useState(false)
     const [prompt, setPrompt] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
 
     useEffect(()=> {
       let commentPromptModal = document.getElementById("comment-prompt-modal")
@@ -43,6 +44,9 @@ const ArticlePage = () => {
                 for (let prop in resJson.users) {
                     if (resJson.users[prop]._id === parseJwt(newUser)._id) {
                       setUser(resJson.users[prop])
+                      if (resJson.users[prop].admin) {
+                        setIsAdmin(true)
+                      }
                       setIsLoggedIn(true)
                         
                     }
@@ -92,13 +96,12 @@ const ArticlePage = () => {
         fetchArticle()
     }, [])
 
-
     if (article && author) {
         return (
           <>
             <div className={"App " + author.themePref + "-accent"}>
                 <Header thisUser={user} isLoggedIn={isLoggedIn} userInfo={author} profileName={username} theme={author.themePref} title={author.blogTitle} />
-                <Main users={users} isLoggedIn={isLoggedIn} fetchArticle={fetchArticle} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} />
+                <Main users={users} isLoggedIn={isLoggedIn} fetchArticle={fetchArticle} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} isAdmin={isAdmin} />
                 <Footer theme={author.themePref} />
             </div>
             <CommentPrompt prompt={prompt} setPrompt={setPrompt} theme={author.themePref} />

@@ -1,11 +1,11 @@
 import React from 'react'
 import Comment from '../basics/Comment'
 
-const CommentSection = ({showComments, setShowComments, comments, expandComment, theme, userInfo, article, setCommentUpdate}) => {
+const CommentSection = ({showComments, setShowComments, comments, expandComment, theme, userInfo, article, setCommentUpdate, isAdmin }) => {
     if (showComments) {
         return (
         Object.values(comments).map((comment, thisIndex) =>
-            <Comment key={thisIndex} articleAuthor={userInfo} comment={comment} articleId={article._id} setUpdate={setCommentUpdate} theme={theme} />
+            <Comment key={thisIndex} articleAuthor={userInfo} comment={comment} articleId={article._id} setUpdate={setCommentUpdate} theme={theme} isAdmin={isAdmin} />
             )
         )
     } else {

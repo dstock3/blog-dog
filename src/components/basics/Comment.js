@@ -4,7 +4,7 @@ import { parseJwt } from '../../auth/parseToken.js';
 import DeleteComment from "../modals/DeleteComment.js";
 import Timeout from "../modals/Timeout.js";
 
-const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
+const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin }) => {
     const [message, setMessage] = useState("")
     const [authorizedToDelete, setAuthorizedToDelete] = useState(false)
     const [fullyAuthorized, setFullyAuthorized] = useState(false)
@@ -23,7 +23,6 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
             rootElement.style.filter = 'unset'
             rootElement.style.transition = "unset"
         }
-
     }, [toDelete])
 
     const authorizeComment = () => {
@@ -100,7 +99,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme }) => {
                 <div className="comment-dashboard">
                     {authorizedToDelete ?
                         <div className={"comment-edit-btn " + theme + "-accent"} onClick={deleteComment}>Delete</div> : null}
-                    {fullyAuthorized ?
+                    {fullyAuthorized || isAdmin ?
                         <>
                             <div className={"comment-edit-btn " + theme + "-accent"} onClick={editComment}>Edit</div>
                             <div className={"comment-edit-btn " + theme + "-accent"} onClick={()=>setToDelete(true)}>Delete</div>

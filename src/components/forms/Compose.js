@@ -47,34 +47,31 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
     let handleSubmit = async (e) => {
         e.preventDefault();
 
+        let body
+        if (img) {
+            body = JSON.stringify({
+                title: title,
+                img: img,
+                imgDesc: imgDesc,
+                content: content,
+                isEdited: isEdited
+            })
+        } else {
+            body = JSON.stringify({
+                title: title,
+                content: content,
+                isEdited: isEdited
+            })
+        }
+        
         try {
             let token = localStorage.getItem('user');
-            
-            let res
-            if (img) {
-                res = await fetch(request, {
-                    method: method,
-                    body: JSON.stringify({
-                        title: title,
-                        img: img,
-                        imgDesc: imgDesc,
-                        content: content,
-                        isEdited: isEdited
-                    }),
-                    headers: { 'Content-Type': "application/json", "login-token" : token }
-                })
 
-            } else {
-                res = await fetch(request, {
+            let res = await fetch(request, {
                     method: method,
-                    body: JSON.stringify({
-                        title: title,
-                        content: content,
-                        isEdited: isEdited
-                    }),
-                    headers: { 'Content-Type': "application/json", "login-token" : token }
+                    body: body,
+                    headers: { 'Content-Type': 'application/json', "login-token" : token }
                 })
-            }
             
             let resJson = await res.json();
 
@@ -94,11 +91,10 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                 getUserData()
                 nav(`/${userInfo.profileName}/${resJson.articleId}`)
             } else {
-                setMessage("Some error occurred")
+                setMessage(`Some error occurred: ${res.status}`)
             }
         } catch(err) {
-            setMessage("Some error occured");
-            console.log(err);
+            setMessage(`An error occured: ${err}`);
         }
     }
 

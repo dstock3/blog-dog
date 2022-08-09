@@ -69,8 +69,8 @@ const CommentForm = ({setComments, users, userInfo, articleId, theme, update}) =
                     profileName: author.profileName,
                     content: comment,
                     isEdited: isEdited
-                    }),
-                headers: { 'Content-Type': "application/json; charset=utf-8", "login-token" : token }
+                    }), 
+                headers: { 'Content-Type': 'application/json' , "login-token" : token }
                 });
             let resJson = await res.json();
 

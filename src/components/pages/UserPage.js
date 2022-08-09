@@ -13,6 +13,7 @@ const UserPage = () => {
     const [errorMessage, setErrorMessage] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
 
     useEffect(()=> {
       let rootElement = document.getElementById("root")
@@ -53,7 +54,9 @@ const UserPage = () => {
                 for (let prop in resJson.users) {
                     if (resJson.users[prop]._id === parseJwt(newUser)._id) {
                       setThisUser(resJson.users[prop])
-                        
+                      if (resJson.users[prop].admin) {
+                        setIsAdmin(true)
+                      }    
                     }
                   }
                 } 
@@ -90,7 +93,7 @@ const UserPage = () => {
         return (
             <div className={"App " + userInfo.themePref + "-accent"}>
                 <Header thisUser={thisUser} isLoggedIn={isLoggedIn} userInfo={userInfo} theme={userInfo.themePref} title={userInfo.blogTitle} profileName={userInfo.profileName} />
-                <Main errorMessage={errorMessage} getUserData={fetchUser} landing={true} userInfo={userInfo} index={false} articles={userInfo.articles} theme={userInfo.themePref} layout={userInfo.layoutPref} userPage={true}/>
+                <Main errorMessage={errorMessage} getUserData={fetchUser} landing={true} userInfo={userInfo} index={false} articles={userInfo.articles} theme={userInfo.themePref} layout={userInfo.layoutPref} userPage={true} isAdmin={isAdmin} />
                 <Footer theme={userInfo.themePref} />
             </div>
         )

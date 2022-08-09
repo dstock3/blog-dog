@@ -3,7 +3,7 @@ import Article from '../basics/Article';
 import Sidebar from '../basics/Sidebar';
 import ThemePrompt from '../modals/ThemePrompt';
 
-const Home = ({isLoggedIn, userInfo, theme, users, layout}) => {
+const Home = ({isLoggedIn, userInfo, theme, users, layout, isAdmin}) => {
     const [articleList, setArticleList] = useState(false)
     const [themeCheck, setThemeCheck] = useState(false)
 
@@ -40,10 +40,10 @@ const Home = ({isLoggedIn, userInfo, theme, users, layout}) => {
         return (
             <>
             <main className={"home " + theme + "-accent"}>
-                <Sidebar isLoggedIn={isLoggedIn} userInfo={userInfo} theme={theme} isHome={true} />
+                <Sidebar isLoggedIn={isLoggedIn} userInfo={userInfo} theme={theme} isHome={true} isAdmin={isAdmin} />
                 <div className={"articles-container " + layout}>
                     {articleList.map((thisArticle, artIndex) => (
-                         <Article key={artIndex} index={thisArticle["ind"]} author={thisArticle["author"]["profileName"]} userInfo={thisArticle["author"]} article={thisArticle["article"]} theme={theme} layout="basic" limit={true} isHome={true} />
+                         <Article key={artIndex} index={thisArticle["ind"]} author={thisArticle["author"]["profileName"]} userInfo={thisArticle["author"]} article={thisArticle["article"]} theme={theme} layout="basic" limit={true} isHome={true} isAdmin={isAdmin} />
                     ))}
                 </div>
             </main>
