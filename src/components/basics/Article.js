@@ -7,7 +7,7 @@ import expandComment from "../../assets/expand.svg";
 import expandCommentBlack from "../../assets/expand_black.svg";
 import CommentSection from "../sections/CommentSection";
 
-const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, author, comments, setComments, commentMessage, setCommentMessage, landing }) => {
+const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing }) => {
     const [abstract, setAbstract] = useState(article["content"])
     const [isAuthorized, setIsAuthorized] = useState(false)
     const [commentUpdate, setCommentUpdate] = useState(false)
@@ -101,12 +101,11 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     <h1 className={"article-name " + layout + "-article-name"}>
                         <Link to={"/" + userInfo["profileName"] + `/${article._id}`}>{article["title"]}</Link>
                     </h1>
-                    {author ?
-                        <div className="article-author">
-                            <Link to ={"/" + userInfo["profileName"]}>
-                                {author}
-                            </Link>
-                        </div> : null}
+                    <div className="article-author">
+                        <Link to ={"/" + userInfo["profileName"]}>
+                            {userInfo["profileName"]}
+                        </Link>
+                    </div>
                     {article.isEdited ? 
                         <div className="date-posted">Edited on {article["date"]}</div> :
                         <div className="date-posted">Posted on {article["date"]}</div>}
