@@ -7,7 +7,7 @@ import expandComment from "../../assets/expand.svg";
 import expandCommentBlack from "../../assets/expand_black.svg";
 import CommentSection from "../sections/CommentSection";
 
-const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage }) => {
+const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome }) => {
     const [abstract, setAbstract] = useState(article["content"])
     const [isAuthorized, setIsAuthorized] = useState(false)
     const [commentUpdate, setCommentUpdate] = useState(false)
@@ -40,7 +40,6 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                 setExpandImg(expandCommentBlack)
             }
         }
-
     }, [])
 
     const fetchComments = async (articleId) => {
@@ -113,7 +112,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         <div className="date-posted">Edited on {article["date"]}</div> :
                         <div className="date-posted">Posted on {article["date"]}</div>}
                 </div>
-                    {isAuthorized ?
+                    {isAuthorized && !isHome ?
                         <div className={"article-dashboard " + layout + "-buttons"}>
                             <div className={"article-edit-btn " + theme + "-accent"}>
                                 <Link to="/compose" state={{"articleUpdate": {"content": article["content"], "title": article["title"], "articleId": article._id}}}>

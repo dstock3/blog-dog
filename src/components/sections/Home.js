@@ -43,7 +43,7 @@ const Home = ({isLoggedIn, userInfo, theme, users, layout}) => {
                 <Sidebar isLoggedIn={isLoggedIn} userInfo={userInfo} theme={theme} isHome={true} />
                 <div className={"articles-container " + layout}>
                     {articleList.map((thisArticle, artIndex) => (
-                         <Article key={artIndex} index={thisArticle["ind"]} author={thisArticle["author"]["profileName"]} userInfo={thisArticle["author"]} article={thisArticle["article"]} theme={theme} layout="basic" limit={true} />
+                         <Article key={artIndex} index={thisArticle["ind"]} author={thisArticle["author"]["profileName"]} userInfo={thisArticle["author"]} article={thisArticle["article"]} theme={theme} layout="basic" limit={true} isHome={true} />
                     ))}
                 </div>
             </main>
