@@ -15,12 +15,15 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
     const [toDelete, setToDelete] = useState(false)
     const [expandImg, setExpandImg] = useState(expandComment)
     const [articleClass, setArticleClass] = useState("")
+    const [headClass, setHeadClass] = useState("")
 
     useEffect(()=> {
         if (!landing) {
             setArticleClass("single-view")
+            setHeadClass("")
         } else {
             setArticleClass("landing-view")
+            setHeadClass("landing-head")
         }
 
     }, [landing])
@@ -97,7 +100,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
 
     return (
         <article className={articleClass + " " + theme + " " + layout + "-child"}>
-            <div className="article-head">
+            <div className={"article-head " + headClass}>
                 <div className="article-head-subcontainer">
                     <h1 className={"article-name " + layout + "-article-name"}>
                         <Link to={"/" + userInfo["profileName"] + `/${article._id}`}>{article["title"]}</Link>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Article from '../basics/Article';
 import Sidebar from '../basics/Sidebar';
 import '../style/main.css'
-import { Link } from 'react-router-dom';
 import {parseJwt} from '../../auth/parseToken.js'
 import composeIcon from '../../assets/write.svg'
 import composeIconBlack from '../../assets/write_black.svg'
@@ -43,8 +42,6 @@ const Main = ({errorMessage, fetchArticle, isLoggedIn, getUserData, users, landi
         }
     }, [article])
 
-
-
     useEffect(()=> {
         /* check if this is the user's own landing page */
         let token = localStorage.getItem('user');
@@ -54,7 +51,6 @@ const Main = ({errorMessage, fetchArticle, isLoggedIn, getUserData, users, landi
                 setIsAuthorized(true)
             }
         }
-
     }, [])
 
     return (

@@ -189,9 +189,11 @@ const Options = ({userInfo, theme, setIsLoggedIn}) => {
             <main className={"options-page " + theme}>
                 <form className="optionsForm" action="" method="PUT">
                     <h2 className="form-head">Options</h2>
+                    
                     {message ? 
-                        <div className="message">{message}</div> :
-                        <div className="options-desc">Update your profile information and preferences</div>}
+                        <div className="message">{message}</div> : null}
+                    
+                    <div className="options-desc">Update your profile information and preferences</div>
                     
                     <div className="user-register-container" id="primary-reg">
                         <label className="reg-label" htmlFor="profileName">Username: </label>

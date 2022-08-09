@@ -26,7 +26,7 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
                         userInfo["profile-name"]
                     }
                 </h2>
-                <div className="profile-desc">{userInfo["profile-desc"]}</div>
+                <div className="profile-desc">{userInfo["profileDesc"]}</div>
                 {(mode === "prof-main") || (isHome) ?
                     <div className="date-joined">Member since {userInfo["dateJoined"]}</div> :
                     null

@@ -23,7 +23,6 @@ article {
 
 .single-view {
     padding-inline-start: 7.5%;
-
 }
 
 .article-author {
@@ -35,6 +34,10 @@ article {
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
+}
+
+.landing-head {
+    width: 95%;
 }
 
 .article-head-subcontainer {

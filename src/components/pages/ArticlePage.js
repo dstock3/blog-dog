@@ -4,7 +4,6 @@ import Header from "../sections/Header";
 import Main from "../sections/Main";
 import Footer from "../sections/Footer";
 import { parseJwt } from '../../auth/parseToken.js'
-import Spinner from "../basics/Spinner";
 import CommentPrompt from "../modals/CommentPrompt";
 
 const ArticlePage = () => {
