@@ -90,7 +90,7 @@ const UserPage = () => {
         return (
             <div className={"App " + userInfo.themePref + "-accent"}>
                 <Header thisUser={thisUser} isLoggedIn={isLoggedIn} userInfo={userInfo} theme={userInfo.themePref} title={userInfo.blogTitle} profileName={userInfo.profileName} />
-                <Main errorMessage={errorMessage} getUserData={fetchUser} landing={true} userInfo={userInfo} index={false} articles={userInfo.articles} theme={userInfo.themePref} layout={userInfo.layoutPref} />
+                <Main errorMessage={errorMessage} getUserData={fetchUser} landing={true} userInfo={userInfo} index={false} articles={userInfo.articles} theme={userInfo.themePref} layout={userInfo.layoutPref} userPage={true}/>
                 <Footer theme={userInfo.themePref} />
             </div>
         )
