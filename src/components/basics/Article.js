@@ -152,7 +152,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         </div>
                     </div> :
                 <>
-                    <div className="article-content" style={{"white-space": "pre-wrap"}}>
+                    <div className="article-content" style={{whiteSpace: "pre-wrap"}}>
                         {decodeEntities(article["content"])}
                     </div>
                     {isLoggedIn ?
