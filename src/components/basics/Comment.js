@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { parseJwt } from '../../auth/parseToken.js';
+import { decodeEntities } from "../../formatting/decodeEntities.js";
 import DeleteComment from "../modals/DeleteComment.js";
 import Timeout from "../modals/Timeout.js";
 
@@ -87,10 +88,9 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
             {message ? <div className="message">{message}</div> : null }
             <li className={"comment " + theme}>
                 <div className="comment-primary-container">
-                    
                     <span className="comment-username">
                         <Link to={`/${comment.profileName}`}>{comment.profileName}</Link>: </span>
-                    <span className="comment-content">{comment.content}</span>
+                    <span className="comment-content" style={{"white-space": "pre-wrap"}}>{decodeEntities(comment.content)}</span>
                     {comment.isEdited ? 
                         <div className="comment-date">Edited on {comment.date}</div> :
                         <div className="comment-date">Posted on {comment.date}</div>

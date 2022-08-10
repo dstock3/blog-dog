@@ -187,7 +187,7 @@ const Options = ({userInfo, theme, setIsLoggedIn}) => {
     return (
         <>
             <main className={"options-page " + theme}>
-                <form className="optionsForm" action="" method="PUT">
+                <form className="optionsForm" action="" method="PUT" encType="multipart/form-data">
                     <h2 className="form-head">Options</h2>
                     
                     {message ? 

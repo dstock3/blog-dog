@@ -6,6 +6,7 @@ import DeleteArticle from "../modals/DeleteArticle";
 import expandComment from "../../assets/expand.svg";
 import expandCommentBlack from "../../assets/expand_black.svg";
 import CommentSection from "../sections/CommentSection";
+import { decodeEntities } from "../../formatting/decodeEntities";
 
 const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome, isAdmin }) => {
     const [abstract, setAbstract] = useState(article["content"])
@@ -103,7 +104,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
             <div className={"article-head " + headClass}>
                 <div className="article-head-subcontainer">
                     <h1 className={"article-name " + layout + "-article-name"}>
-                        <Link to={"/" + userInfo["profileName"] + `/${article._id}`}>{article["title"]}</Link>
+                        <Link to={"/" + userInfo["profileName"] + `/${article._id}`}>{decodeEntities(article["title"])}</Link>
                     </h1>
                     {!userPage ?
                         <div className="article-author">
@@ -151,8 +152,8 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         </div>
                     </div> :
                 <>
-                    <div className="article-content">
-                        {article["content"]}
+                    <div className="article-content" style={{"white-space": "pre-wrap"}}>
+                        {decodeEntities(article["content"])}
                     </div>
                     {isLoggedIn ?
                         /* Commenting privileges are only enabled if the user is logged in */

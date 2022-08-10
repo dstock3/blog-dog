@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { decodeEntities } from "../../formatting/decodeEntities";
 
 const Profile = ({userInfo, mode, isHome, theme}) => {
     const [thisClass, setThisClass] = useState({picContainer: null, pic: null, profInfo: null})
@@ -26,7 +27,7 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
                         userInfo["profile-name"]
                     }
                 </h2>
-                <div className="profile-desc">{userInfo["profileDesc"]}</div>
+                <div className="profile-desc">{decodeEntities(userInfo["profileDesc"])}</div>
                 {(mode === "prof-main") || (isHome) ?
                     <div className="date-joined">Member since {userInfo["dateJoined"]}</div> :
                     null
