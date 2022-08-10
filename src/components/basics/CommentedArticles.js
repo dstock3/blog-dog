@@ -40,13 +40,17 @@ const CommentedArticles = ({theme, fetchArticle}) => {
                     <>
                         <h3 className="most-commented-header">Most Commented</h3>
                         <ul className={"most-commented-articles " + theme}>
-                            {Object.values(articleList).map((listObj, index) =>
-                                <li key={index} className="commented-article-item">
-                                    <Link onClick={()=>fetchArticle(listObj.article.article._id)} to= {{pathname: `/${listObj.user}/${listObj.article._id}`}} state={{theme: theme}}>
-                                        {listObj.article.title}
-                                    </Link>
-                                </li>
-                            )}
+                            {articleList.length > 0 ?
+                                Object.values(articleList).map((listObj, index) =>
+                                    <li key={index} className="commented-article-item">
+                                        {listObj ?
+                                        <Link onClick={()=>fetchArticle(listObj.article.article._id)} to= {{pathname: `/${listObj.user}/${listObj.article._id}`}} state={{theme: theme}}>
+                                            {listObj.article.title}
+                                        </Link> : null
+                                        }
+                                    </li>
+                                ) : null
+                            }
                         </ul>
                     </>
                 }

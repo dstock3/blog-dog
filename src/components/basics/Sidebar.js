@@ -7,10 +7,29 @@ import Profile from './Profile';
 import composeIcon from '../../assets/write.svg'
 import composeIconBlack from '../../assets/write_black.svg'
 import { useEffect, useState } from 'react';
+import DeleteUser from '../modals/DeleteUser';
 
-const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome}) => {
+const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome, isAdmin}) => {
     const [composeImg, setComposeImg] = useState(composeIcon)
+    const [toDelete, setToDelete] = useState(false)
 
+    useEffect(()=> {
+        let timeoutModal = document.getElementById('timeout-modal')
+        let userDeleteModal = document.getElementById('user-delete-modal')
+        let rootElement = document.getElementById('root')
+
+        if (toDelete) {
+            userDeleteModal.style.zIndex = 1000
+            rootElement.style.filter = 'brightness(55%)'
+            rootElement.style.transition = "all 0.75s ease-out"
+        }  else {
+            userDeleteModal.style.zIndex = 0
+            timeoutModal.style.zIndex = 0
+            rootElement.style.filter = "unset"
+            rootElement.style.transform = "unset"
+        }
+        
+    }, [toDelete])
 
     useEffect(()=> {
         const whiteSet = ["dark", "forest"]
@@ -27,10 +46,7 @@ const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome}) => {
                 setComposeImg(composeIconBlack)
             }
         }
-
     }, [])
-
-
 
     if (isHome) {
         return (
@@ -53,11 +69,17 @@ const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome}) => {
         );
     } else {
         return (
-            <div className={"sidebar " + theme}>
-                <Profile mode="prof-side" userInfo={userInfo} theme={theme} />
-                <Archive userInfo={userInfo} articles={articles} theme={theme} />
-                <CommentedArticles theme={theme} />
-            </div>
+            <>
+                <div className={"sidebar " + theme}>
+                    <Profile mode="prof-side" userInfo={userInfo} theme={theme} />
+                    <Archive userInfo={userInfo} articles={articles} theme={theme} />
+                    {isAdmin ? 
+                        <div className={"user-delete-btn " + theme + "-accent"} onClick={() => setToDelete(true)}>Delete User</div> : null
+                    }
+                    <CommentedArticles theme={theme} />
+                </div>
+                <DeleteUser isAdmin={isAdmin} theme={theme} userInfo={userInfo} toDelete={toDelete} setToDelete={setToDelete} />
+            </>
         );
     }
 

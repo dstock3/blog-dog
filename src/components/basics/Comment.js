@@ -98,7 +98,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
                 </div>
                 <div className="comment-dashboard">
                     {authorizedToDelete ?
-                        <div className={"comment-edit-btn " + theme + "-accent"} onClick={deleteComment}>Delete</div> : null}
+                        <div className={"comment-edit-btn " + theme + "-accent"} onClick={()=>setToDelete(true)}>Delete</div> : null}
                     {fullyAuthorized || isAdmin ?
                         <>
                             <div className={"comment-edit-btn " + theme + "-accent"} onClick={editComment}>Edit</div>

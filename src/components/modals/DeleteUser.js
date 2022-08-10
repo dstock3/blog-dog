@@ -3,23 +3,29 @@ import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom';
 import Timeout from './Timeout';
 
-const DeleteUser = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete}) => {
+const DeleteUser = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete, isAdmin}) => {
     const [message, setMessage] = useState("")
     const [isTimedout, setIsTimedout] = useState(false)
     const nav = useNavigate()
 
     const handleDelete = async (e) => {
         e.preventDefault();
+        let res
+        let token = localStorage.getItem('user')
 
-        try {
-            let token = localStorage.getItem('user')
-
-            let res = await fetch("https://stormy-waters-34046.herokuapp.com/" + userInfo["profileName"] + "/delete", {
-                
+        if (isAdmin) {
+            res = await fetch("https://stormy-waters-34046.herokuapp.com/" + userInfo["profileName"], {
                 method: "DELETE",
                 headers: { 'Content-Type': 'application/json', "login-token" : token }
                 });
+        } else {
+            res = await fetch("https://stormy-waters-34046.herokuapp.com/" + userInfo["profileName"] + "/delete", {
+                method: "DELETE",
+                headers: { 'Content-Type': 'application/json', "login-token" : token }
+                });
+        }
 
+        try {
             let resJson = await res.json();
             
             if (res.status === 400) {
@@ -29,8 +35,11 @@ const DeleteUser = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete}) => 
                 timedOutModal.style.zIndex = 1000
                 setIsTimedout(true)
             } else if (res.status === 200) {
-                localStorage.clear();
-                setIsLoggedIn(false)
+                if (!isAdmin) {
+                    localStorage.clear();
+                    setIsLoggedIn(false)
+                }
+
                 nav('/');
             } else {
                 console.log(res)
@@ -45,9 +54,15 @@ const DeleteUser = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete}) => 
     return ReactDOM.createPortal(
         <div className={"delete-prompt " + theme + "-accent"}>
             <div className="message">{message ? <p>{message}</p> : null}</div>
-            <div className="delete-user-prompt">
+            {isAdmin ?
+                <div className="delete-user-prompt">    
+                    Are you sure you want to delete this account? This will result in the permanent deletion of this user's data.
+                </div> :
+                <div className="delete-user-prompt">    
                 We're sorry to see you go. Are you sure you want to delete your account? This will result in the permanent deletion of all your data.
-            </div>
+                </div>            
+            }
+
             <div className="delete-options">
                 <div className={"delete-btn " + theme} onClick={handleDelete}>Confirm</div>
                 <div className={"delete-btn " + theme} onClick={() => setToDelete(false)}>Cancel</div>
