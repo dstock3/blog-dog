@@ -50,4 +50,8 @@
         width: 95%;
     }
 
+    .log-btn {
+        margin-inline: 15px;
+    }
+
 }

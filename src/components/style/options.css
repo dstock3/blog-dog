@@ -219,3 +219,72 @@
     margin-block: 15px;
     text-align: center;
 }
+
+@media only screen and (max-width: 900px) {
+    .options-page {
+        width: 95%;
+    }
+
+    .optionsForm {
+        width: 100%;
+    }
+
+    .form-head {
+        font-size: 1.25em;
+    }
+
+    label {
+        margin-left: 15px;
+
+    }
+    input {
+        margin-inline: 15px;
+    }
+
+    .upload-img-label {
+        margin-bottom: 15px;
+    }
+
+    #pw-one {
+        margin-inline: 15px;
+    }
+
+    .options-button-container {
+        width: 95%;
+        padding-bottom: 15px;
+    }
+
+    #primary-reg {
+        flex-direction: column;
+    }
+
+    textarea {
+        margin-inline: 15px;
+    }
+
+    .user-register-dropdowns div {
+        font-size: .85rem;
+    }
+
+    .theme-dropdown {
+        margin-left: 15px;
+        padding: 5px;
+    }
+
+    .layout-selection {
+        margin-inline: 5px;
+    }
+
+    .layout-prompt-container {
+        padding-inline: 5px;
+    }
+
+    .layout-prompt-container img {
+        margin-right: 5px;
+    }
+
+    .theme-options {
+        padding: 5px;
+    }
+
+}

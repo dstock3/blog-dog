@@ -96,9 +96,8 @@ textarea {
         width: 85%;
     }
 
-    #pw-one {
-        margin-left: unset;
-        margin-right: unset;
+    #primary-reg {
+        flex-direction: column;
     }
 
     label {
@@ -112,7 +111,15 @@ textarea {
     }
 
     .user-pw-container input {
-        width: 100%;
+        width: 87%;
+    }
+
+    #pw-one {
+        margin-left: 15px;
+    }
+
+    #reg-blogtitle {
+        align-items: center;
     }
 
     .user-register-dropdowns {
@@ -126,7 +133,7 @@ textarea {
 
     .reg-btn {
         margin-top: 15px;
-        margin-left: 70%;
+        margin-inline: 15px;
     }
 
 }

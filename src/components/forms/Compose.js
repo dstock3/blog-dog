@@ -16,7 +16,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
     const nav = useNavigate()
     const [isTimedout, setIsTimedout] = useState(false)
     const [isEdited, setIsEdited] = useState(false)
-
+    /*
     useEffect(()=> {
         if (update) {
             if (update.articleUpdate) {
@@ -47,11 +47,12 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
     let handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log(img)
+
         let body
         if (img) {
             body = JSON.stringify({
                 title: title,
-                img: img,
                 imgDesc: imgDesc,
                 content: content,
                 isEdited: isEdited
@@ -70,7 +71,10 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
             let res = await fetch(request, {
                     method: method,
                     body: body,
-                    headers: { 'Content-Type': 'application/json', "login-token" : token }
+                    headers: { 
+                        'Content-Type': 'application/json', 
+                        "login-token" : token
+                    }
                 })
             
             let resJson = await res.json();
@@ -96,6 +100,52 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
         } catch(err) {
             setMessage(`An error occured: ${err}`);
         }
+    } */
+
+    const newSubmitHandler = async(e) => {
+        
+        let formData = new FormData();
+
+        formData.append("title", title)
+        formData.append("imgDesc", imgDesc)
+        formData.append("content", content)
+        formData.append("isEdited", isEdited)
+        if (img) { formData.append("img", img) };
+
+        let token = localStorage.getItem('user');
+        try {
+            let res = await fetch('https://stormy-waters-34046.herokuapp.com/article/compose', {
+                method: 'POST',
+                body: formData,
+                headers: { 
+                    "login-token" : token
+                }
+            })
+            let resJson = await res.json();
+
+            if (res.status === 400) {
+                setIsTimedout(true)
+            } else if (res.status === 200) {
+                setTitle("")
+                setImg("")
+                setImgDesc("")
+                setContent("")
+                /*
+                if (update) { 
+                    setMessage("Article updated successfully") 
+                } else {
+                    setMessage("Article created successfully")
+                }
+                */
+
+                getUserData()
+                nav(`/${userInfo.profileName}/${resJson.articleId}`)
+            } else {
+                setMessage(`Some error occurred: ${res.status}`)
+            }
+        } catch(err) {
+            setMessage(`An error occured: ${err}`);
+        }
     }
 
     if (isLoggedIn) {
@@ -104,7 +154,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                 <main className="compose-page">
                     <Sidebar userInfo={userInfo} articles={articles} theme={theme} />
 
-                    <form className={"composeForm " + theme} action="" method="POST" encType="multipart/form-data">
+                    <form className={"composeForm " + theme} action="#">
                         <div className="message">{message ? <p>{message}</p> : null}</div>
                         <div className="compose-subcontainer compose-title">
                             <label className="compose-label" htmlFor="title">Title:</label>
@@ -113,7 +163,10 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
 
                         <div className="compose-subcontainer compose-img">
                             <label className="upload-img-label compose-img-label" htmlFor="img">Image:</label>
-                            <input className="upload-img-input" type="file" value={img} htmlFor="img" name="img" onChange={(e) => setImg(e.target.files[0])}></input>
+                            <input className="upload-img-input" id="img" type="file" htmlFor="img" name="img" onChange={e => {
+                                const file = e.target.files[0];
+                                setImg(file)
+                            }}></input>
 
                             <label className="compose-label" htmlFor="imgDesc">Image Caption (if applicable):</label>
                             <input className="compose-title-input" value={imgDesc} type="text" htmlFor="imgDesc" name="imgDesc" onChange={(e) => setImgDesc(e.target.value)}></input>
@@ -125,7 +178,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                         </div>
 
                         <div className="compose-subcontainer compose-options">
-                            <div onClick={handleSubmit} className={"submit-btn " + theme + "-accent"}>Submit</div>
+                            <div onClick={newSubmitHandler}  className={"submit-btn " + theme + "-accent"}>Submit</div>
                         </div>
                     </form>
                 </main>

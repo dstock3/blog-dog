@@ -142,9 +142,9 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
 
             {limit ?
                 article.content.length < 400 ?
-                    <div className="article-content">{article["content"]}</div> :
+                    <div className="article-content">{decodeEntities(article["content"])}</div> :
                     <div className="article-content">
-                        {abstract}...
+                        {decodeEntities(abstract)}...
                         <div className="read-more"> 
                             <Link to ={"/" + userInfo["profileName"] + "/" + article._id}>
                                 Read More
