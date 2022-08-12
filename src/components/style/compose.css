@@ -70,4 +70,25 @@ textarea {
         width: 95%;
     }
 
+    .compose-img {
+        flex-direction: column;
+    }
+
+    .compose-img-label {
+        margin-inline: 15px;
+    }
+
+    .compose-title {
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    .compose-title-input {
+        height: 1.25em;
+    }
+
+    .compose-options {
+        width: 80%;
+        align-items: unset;
+    }
 }
