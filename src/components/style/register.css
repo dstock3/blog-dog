@@ -19,6 +19,16 @@
     flex-direction: column;
 }
 
+#email-reg {
+    display: flex;
+    flex-direction: row;
+}
+
+#email-reg input {
+    margin-left: 15px;
+    height: 1em;
+}
+
 .blogtitle-input {
     margin-left: 10px;
     height: 1em;
@@ -97,6 +107,10 @@ textarea {
     }
 
     #primary-reg {
+        flex-direction: column;
+    }
+
+    #email-reg {
         flex-direction: column;
     }
 

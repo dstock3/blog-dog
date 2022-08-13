@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import '../style/register.css'
 
 const Register = () => {
+    const [email, setEmail] = useState("")
     const [profileName, setProfileName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -17,6 +18,7 @@ const Register = () => {
         let body
         if (profilePic) {
             body = JSON.stringify({
+                email: email,
                 profileName: profileName,
                 password: password,
                 confirmPassword: confirmPassword,
@@ -26,6 +28,7 @@ const Register = () => {
             });
         } else {
             body = JSON.stringify({
+                email: email,
                 profileName: profileName,
                 password: password,
                 confirmPassword: confirmPassword,
@@ -44,6 +47,7 @@ const Register = () => {
                 let resJson = await res.json();
                 
                 if (res.status === 200) {
+                    setEmail("");
                     setProfileName("");
                     setPassword("");
                     setConfirmPassword("");
@@ -64,6 +68,10 @@ const Register = () => {
             <div className="message">{message ? <p>{message}</p> : null}</div>
             <form className="registerForm" action="" method="POST" encType="multipart/form-data">
                 <h2 className="form-head">Register</h2>
+                <div className="user-register-container" id="email-reg">
+                    <label className="reg-label" htmlFor="email">E-mail: </label>
+                    <input className="reg-email-input" type="email" value={email} name="email" onChange={(e) => setEmail(e.target.value)}></input>
+                </div>
                 <div className="user-register-container" id="primary-reg">
                     <label className="reg-label" htmlFor="profileName">Username: </label>
                     <input className="reg-user-input" type="text" value={profileName} name="profileName" onChange={(e) => setProfileName(e.target.value)}></input>

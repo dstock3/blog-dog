@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../style/login.css'
 
 const Login = () => {
-    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPw] = useState("")
     const [message, setMessage] = useState("")
     const nav = useNavigate()
@@ -13,10 +13,10 @@ const Login = () => {
         e.preventDefault();
 
         axios
-            .post('https://stormy-waters-34046.herokuapp.com/login', { username, password })
+            .post('https://stormy-waters-34046.herokuapp.com/login', { email, password })
             .then((res) => {
                 if (res.status === 200) {
-                    setUsername("")
+                    setEmail("")
                     setPw("")
                     
                     localStorage.setItem('user', res.data);
@@ -40,12 +40,12 @@ const Login = () => {
                 <h2 className="form-head">Login</h2>
                 <div className="message">{message ? <p>{message}</p> : null}</div>
                 <div className="user-login-container">
-                    <label className="log-label" htmlFor="username">Username: </label>
+                    <label className="log-label" htmlFor="email">E-mail: </label>
                     <input
                         autoFocus
                         type="text" 
-                        name="username" 
-                        onChange={(e) => setUsername(e.target.value)}
+                        name="email" 
+                        onChange={(e) => setEmail(e.target.value)}
                         required>
                     </input>
                 </div>
