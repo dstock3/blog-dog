@@ -11,6 +11,7 @@ import cardIcon from '../../assets/card.svg'
 import cardIconBlack from '../../assets/card_black.svg'
 
 const Options = ({userInfo, theme, setIsLoggedIn}) => {
+    const [email, setEmail] = useState("");
     const [profileName, setProfileName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -132,6 +133,7 @@ const Options = ({userInfo, theme, setIsLoggedIn}) => {
         let body
         if (profilePic) {
             body = JSON.stringify({
+                email: email,
                 profileName: profileName,
                 password: password,
                 confirmPassword: confirmPassword,
@@ -143,6 +145,7 @@ const Options = ({userInfo, theme, setIsLoggedIn}) => {
             });
         } else {
             body = JSON.stringify({
+                email: email,
                 profileName: profileName,
                 password: password,
                 confirmPassword: confirmPassword,
@@ -167,6 +170,7 @@ const Options = ({userInfo, theme, setIsLoggedIn}) => {
             if (res.status === 400) {
                 setIsTimedout(true)
             } else if (res.status === 200) {
+                setEmail("");
                 setProfileName("");
                 setPassword("");
                 setConfirmPassword("");
@@ -194,6 +198,11 @@ const Options = ({userInfo, theme, setIsLoggedIn}) => {
                         <div className="message">{message}</div> : null}
                     
                     <div className="options-desc">Update your profile information and preferences</div>
+                    
+                    <div className="user-register-container" id="email-reg">
+                        <label className="reg-label" htmlFor="email">E-mail: </label>
+                        <input className="reg-email-input" type="email" value={email} name="email" onChange={(e) => setEmail(e.target.value)}></input>
+                    </div>
                     
                     <div className="user-register-container" id="primary-reg">
                         <label className="reg-label" htmlFor="profileName">Username: </label>
