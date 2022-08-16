@@ -13,35 +13,19 @@ const Register = () => {
     const [message, setMessage] = useState("")
 
     let handleSubmit = async (e) => {
-        e.preventDefault();
-
-        let body
-        if (profilePic) {
-            body = JSON.stringify({
-                email: email,
-                profileName: profileName,
-                password: password,
-                confirmPassword: confirmPassword,
-                blogTitle: blogTitle,
-                profileDesc: profileDesc,
-                profilePic: profilePic
-            });
-        } else {
-            body = JSON.stringify({
-                email: email,
-                profileName: profileName,
-                password: password,
-                confirmPassword: confirmPassword,
-                blogTitle: blogTitle,
-                profileDesc: profileDesc
-            });
-        }
+        let formData = new FormData();
+        formData.append("email", email);
+        formData.append("profileName", profileName);
+        formData.append("password", password);
+        formData.append("confirmPassword", confirmPassword);
+        formData.append("blogTitle", blogTitle)
+        formData.append("profileDesc", profileDesc);
+        if (profilePic) { formData.append("profilePic", profilePic) }; 
         
         try {
             let res = await fetch('https://stormy-waters-34046.herokuapp.com/register', {
                 method: "POST",
-                body: body,
-                headers: { 'Content-Type': 'application/json' }
+                body: formData
                 });
 
                 let resJson = await res.json();

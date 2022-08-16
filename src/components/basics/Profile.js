@@ -4,6 +4,29 @@ import { decodeEntities } from "../../formatting/decodeEntities";
 
 const Profile = ({userInfo, mode, isHome, theme}) => {
     const [thisClass, setThisClass] = useState({picContainer: null, pic: null, profInfo: null})
+    const [profilePic, setProfilePic] = useState(null)
+
+    useEffect(()=> {
+        (async() => {
+            if (userInfo.profilePic !== undefined) {
+                try {
+                    let imgRes = await fetch(`https://stormy-waters-34046.herokuapp.com/images/${userInfo.profilePic}`, {
+                        method: "GET"
+                    });
+
+                    if (imgRes.status === 200) {
+                        let imgResBlob = await imgRes.blob();
+                        let imgSrc = URL.createObjectURL(imgResBlob)
+                        setProfilePic(imgSrc)
+                    }
+                } catch(err) {
+                    console.log(err)
+                };
+    
+            };
+
+        })();
+    }, [])
 
     useEffect(()=> {
         if (mode === "prof-main") {
@@ -16,7 +39,7 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
     return (
         <div className="profile" id={mode}> 
             <div className={"profile-pic-container " + thisClass.picContainer}>
-                <img className={"profile-pic " + thisClass.pic} src={userInfo["profilePic"]} alt={"profile-pic for " + userInfo["profileName"]}></img>
+                <img className={"profile-pic " + thisClass.pic} src={profilePic} alt={"profile-pic for " + userInfo["profileName"]}></img>
             </div>
             <div className={"profile-info " + thisClass.profInfo}>
                 <h2 className="profile-name">

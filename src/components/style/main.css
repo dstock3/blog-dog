@@ -169,6 +169,10 @@ article {
     margin-top: 2%;
 }
 
+.short-article {
+    margin-top: 125px;
+}
+
 .comment-subcontainer {
     display: flex;
     flex-direction: column;

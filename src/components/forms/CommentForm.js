@@ -3,7 +3,7 @@ import Prompt from "../basics/Prompt";
 import { parseJwt } from "../../auth/parseToken.js"
 import Timeout from "../modals/Timeout";
 
-const CommentForm = ({setComments, users, userInfo, articleId, theme, update}) => {
+const CommentForm = ({commentFormClass, setComments, users, userInfo, articleId, theme, update}) => {
     const [comment, setComment] = useState("")
     const [message, setMessage] = useState(false)
     const [method, setMethod] = useState("POST")
@@ -95,7 +95,7 @@ const CommentForm = ({setComments, users, userInfo, articleId, theme, update}) =
     if (userInfo) {
         return (
             <>
-            <form className={"comment-form " + theme + "-accent"} action="" method="POST">
+            <form className={"comment-form " + theme + "-accent " + commentFormClass} action="" method="POST">
                 <div className="comment-subcontainer comment-prompt">
                     <label className="comment-label" htmlFor="comment">
                         {update ?

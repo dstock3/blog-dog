@@ -18,6 +18,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
     const [articleClass, setArticleClass] = useState("")
     const [headClass, setHeadClass] = useState("")
     const [thisImg, setThisImg] = useState(false)
+    const [commentFormClass, setCommentFormClass] = useState("")
 
     useEffect(()=> {
         (async () => {
@@ -40,6 +41,13 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                 setThisImg(null)
             }
         })();
+    }, [])
+
+    useEffect(()=> {
+        if (article.content.length < 750) {
+            setCommentFormClass("short-article")
+        }
+
     }, [])
 
     useEffect(()=> {
@@ -181,7 +189,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     </div>
                     {isLoggedIn ?
                         /* Commenting privileges are only enabled if the user is logged in */
-                        <CommentForm setComments={setComments} fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
+                        <CommentForm commentFormClass={commentFormClass} setComments={setComments} fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
                     }
                     {Object.keys(comments).length !== 0 ?
                         <ul className={"comments-container " + theme + "-accent"}>
