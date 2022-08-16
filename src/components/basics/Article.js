@@ -20,15 +20,12 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
     const [thisImg, setThisImg] = useState(false)
 
     useEffect(()=> {
-        const fetchImg = (async () => {
+        (async () => {
             if (article.img !== undefined) {
-                console.log(article.img)
                 try {
                     let imgRes = await fetch(`https://stormy-waters-34046.herokuapp.com/images/${article.img}`, {
                         method: "GET"
                     });
-    
-                    console.log(imgRes)
     
                     if (imgRes.status === 200) {
                         let imgResBlob = await imgRes.blob();
@@ -146,7 +143,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     {(isAuthorized && !isHome) || (isAdmin && !isHome) ?
                         <div className={"article-dashboard " + layout + "-buttons"}>
                             <div className={"article-edit-btn " + theme + "-accent"}>
-                                <Link to="/compose" state={{"articleUpdate": {"content": article["content"], "title": article["title"], "articleId": article._id}}}>
+                                <Link to="/compose" state={{"articleUpdate": {"content": article["content"], "title": article["title"], "imgDesc": article["imgDesc"], "articleId": article._id}}}>
                                     Edit
                                 </Link>
                             </div>

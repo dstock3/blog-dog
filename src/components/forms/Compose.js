@@ -16,13 +16,14 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
     const nav = useNavigate()
     const [isTimedout, setIsTimedout] = useState(false)
     const [isEdited, setIsEdited] = useState(false)
-    /*
+
     useEffect(()=> {
         if (update) {
             if (update.articleUpdate) {
                 setIsEdited(true)
                 setContent(update.articleUpdate.content)
                 setTitle(update.articleUpdate.title)
+                setImgDesc(update.articleUpdate.imgDesc)
                 setMethod("PUT")
                 setRequest(`https://stormy-waters-34046.herokuapp.com/article/${update.articleUpdate.articleId}`)
             }
@@ -44,65 +45,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
 
     }, [isTimedout])
 
-    let handleSubmit = async (e) => {
-        e.preventDefault();
-
-        console.log(img)
-
-        let body
-        if (img) {
-            body = JSON.stringify({
-                title: title,
-                imgDesc: imgDesc,
-                content: content,
-                isEdited: isEdited
-            })
-        } else {
-            body = JSON.stringify({
-                title: title,
-                content: content,
-                isEdited: isEdited
-            })
-        }
-        
-        try {
-            let token = localStorage.getItem('user');
-
-            let res = await fetch(request, {
-                    method: method,
-                    body: body,
-                    headers: { 
-                        'Content-Type': 'application/json', 
-                        "login-token" : token
-                    }
-                })
-            
-            let resJson = await res.json();
-
-            if (res.status === 400) {
-                setIsTimedout(true)
-            } else if (res.status === 200) {
-                setTitle("")
-                setImg("")
-                setImgDesc("")
-                setContent("")
-
-                if (update) { 
-                    setMessage("Article updated successfully") 
-                } else {
-                    setMessage("Article created successfully")
-                }
-                getUserData()
-                nav(`/${userInfo.profileName}/${resJson.articleId}`)
-            } else {
-                setMessage(`Some error occurred: ${res.status}`)
-            }
-        } catch(err) {
-            setMessage(`An error occured: ${err}`);
-        }
-    } */
-
-    const newSubmitHandler = async(e) => {
+    const handleSubmit = async(e) => {
         
         let formData = new FormData();
 
@@ -114,8 +57,8 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
 
         let token = localStorage.getItem('user');
         try {
-            let res = await fetch('https://stormy-waters-34046.herokuapp.com/article/compose', {
-                method: 'POST',
+            let res = await fetch(request, {
+                method: method,
                 body: formData,
                 headers: { 
                     "login-token" : token
@@ -130,13 +73,13 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                 setImg("")
                 setImgDesc("")
                 setContent("")
-                /*
+                
                 if (update) { 
                     setMessage("Article updated successfully") 
                 } else {
                     setMessage("Article created successfully")
                 }
-                */
+                
 
                 getUserData()
                 nav(`/${userInfo.profileName}/${resJson.articleId}`)
@@ -178,7 +121,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                         </div>
 
                         <div className="compose-subcontainer compose-options">
-                            <div onClick={newSubmitHandler}  className={"submit-btn " + theme + "-accent"}>Submit</div>
+                            <div onClick={handleSubmit}  className={"submit-btn " + theme + "-accent"}>Submit</div>
                         </div>
                     </form>
                 </main>

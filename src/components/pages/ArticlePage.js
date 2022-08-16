@@ -29,13 +29,6 @@ const ArticlePage = () => {
       }
     }, [isLoggedIn])
 
-    useEffect(()=> {
-      (async() => {
-
-
-      })();
-    }, [article])
-    
     const findUser = async() => {
         let newUser = localStorage.getItem('user');
         try {
