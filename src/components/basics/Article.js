@@ -8,7 +8,7 @@ import expandCommentBlack from "../../assets/expand_black.svg";
 import CommentSection from "../sections/CommentSection";
 import { decodeEntities } from "../../formatting/decodeEntities";
 
-const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome, isAdmin }) => {
+const Article = ({ isLoggedIn, fetchArticle, img, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome, isAdmin }) => {
     const [abstract, setAbstract] = useState(article["content"])
     const [isAuthorized, setIsAuthorized] = useState(false)
     const [commentUpdate, setCommentUpdate] = useState(false)
@@ -127,14 +127,14 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         </div> : null}
             </div>
 
-            {article["img"] ?
+            {img ?
                 layout === "card" ?
                     <div className="img-container img-card-view">
-                        <img className="article-img" src={article["img"]} alt={article["img-desc"]}></img>
+                        <img className="article-img" src={img} alt={article["img-desc"]}></img>
                         <div className="article-img-caption">{article["img-desc"]}</div>
                     </div> :
                 <div className="img-container">
-                    <img className="article-img" src={article["img"]} alt={article["img-desc"]}></img>
+                    <img className="article-img" src={img} alt={article["img-desc"]}></img>
                     <div className="article-img-caption">{article["img-desc"]}</div>
                 </div> :
                 null

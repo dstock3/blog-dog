@@ -36,6 +36,10 @@ article {
     justify-content: space-between;
 }
 
+.login-prompt {
+    margin-inline: 15px;
+}
+
 .landing-head {
     width: 95%;
 }
