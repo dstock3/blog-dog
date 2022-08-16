@@ -65,7 +65,7 @@ const Main = ({errorMessage, fetchArticle, img, isLoggedIn, getUserData, users, 
                 articles.length !== 0 ?
                     <div className={"articles-container " + layout}>
                         {Object.values(articles).map((articleItem, artIndex) =>
-                            <Article key={artIndex} img={img} getUserData={getUserData} fetchArticle={fetchArticle} users={users} articleId={articleItem._id} userInfo={userInfo} article={articles[artIndex]} theme={theme} layout={layout} limit={true} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} landing={landing} userPage={userPage} isAdmin={isAdmin} /> )}
+                            <Article key={artIndex} getUserData={getUserData} fetchArticle={fetchArticle} users={users} articleId={articleItem._id} userInfo={userInfo} article={articles[artIndex]} theme={theme} layout={layout} limit={true} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} landing={landing} userPage={userPage} isAdmin={isAdmin} /> )}
                     </div> :
                     <div className={"articles-container basic"}>
                         <ComposePrompt isAuthorized={isAuthorized} theme={theme} composeImg={composeImg} />

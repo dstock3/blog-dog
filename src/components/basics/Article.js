@@ -8,7 +8,7 @@ import expandCommentBlack from "../../assets/expand_black.svg";
 import CommentSection from "../sections/CommentSection";
 import { decodeEntities } from "../../formatting/decodeEntities";
 
-const Article = ({ isLoggedIn, fetchArticle, img, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome, isAdmin }) => {
+const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome, isAdmin }) => {
     const [abstract, setAbstract] = useState(article["content"])
     const [isAuthorized, setIsAuthorized] = useState(false)
     const [commentUpdate, setCommentUpdate] = useState(false)
@@ -17,6 +17,33 @@ const Article = ({ isLoggedIn, fetchArticle, img, users, article, articleId, use
     const [expandImg, setExpandImg] = useState(expandComment)
     const [articleClass, setArticleClass] = useState("")
     const [headClass, setHeadClass] = useState("")
+    const [thisImg, setThisImg] = useState(false)
+
+    useEffect(()=> {
+        const fetchImg = (async () => {
+            if (article.img !== undefined) {
+                console.log(article.img)
+                try {
+                    let imgRes = await fetch(`https://stormy-waters-34046.herokuapp.com/images/${article.img}`, {
+                        method: "GET"
+                    });
+    
+                    console.log(imgRes)
+    
+                    if (imgRes.status === 200) {
+                        let imgResBlob = await imgRes.blob();
+                        let imgSrc = URL.createObjectURL(imgResBlob)
+                        setThisImg(imgSrc)
+                        
+                    }
+                } catch(err) {
+                    console.log(err)
+                }
+            } else {
+                setThisImg(null)
+            }
+        })();
+    }, [])
 
     useEffect(()=> {
         if (!landing) {
@@ -127,14 +154,14 @@ const Article = ({ isLoggedIn, fetchArticle, img, users, article, articleId, use
                         </div> : null}
             </div>
 
-            {img ?
+            {thisImg ?
                 layout === "card" ?
                     <div className="img-container img-card-view">
-                        <img className="article-img" src={img} alt={article.imgDesc}></img>
+                        <img className="article-img" src={thisImg} alt={article.imgDesc}></img>
                         <div className="article-img-caption">{article.imgDesc}</div>
                     </div> :
                 <div className="img-container">
-                    <img className="article-img" src={img} alt={article.imgDesc}></img>
+                    <img className="article-img" src={thisImg} alt={article.imgDesc}></img>
                     <div className="article-img-caption">{article.imgDesc}</div>
                 </div> :
                 null

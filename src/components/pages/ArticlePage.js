@@ -9,7 +9,6 @@ import CommentPrompt from "../modals/CommentPrompt";
 const ArticlePage = () => {
     const { username, articleId } = useParams();
     const [article, setArticle] = useState(false);
-    const [image, setImage] = useState(null)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [author, setAuthor] = useState(false)
@@ -81,9 +80,6 @@ const ArticlePage = () => {
     }, [author])
 
     const fetchArticle =  async() => {
-
-
-
         setIsLoading(true)
         try {
             let res = await fetch(`https://stormy-waters-34046.herokuapp.com/article/${articleId}`, {
@@ -92,27 +88,6 @@ const ArticlePage = () => {
             let resJson = await res.json();
             
             if (res.status === 200) {
-              if (resJson.article.img !== undefined) {
-                try {
-                  let imgRes = await fetch(`https://stormy-waters-34046.herokuapp.com/images/${resJson.article.img}`, {
-                    method: "GET"
-                  });
-
-                  if (imgRes.status === 200) {
-
-                    let imgResBlob = await imgRes.blob();
-    
-                    setImage(URL.createObjectURL(imgResBlob))
-                  }
-                } catch(err) {
-                  console.log(err)
-      
-                }
-        
-              } else {
-                setImage(false)
-              }
-
               setArticle(resJson.article)
               setAuthor(resJson.author)
               setIsLoading(false)
@@ -133,7 +108,7 @@ const ArticlePage = () => {
           <>
             <div className={"App " + author.themePref + "-accent"}>
                 <Header thisUser={user} isLoggedIn={isLoggedIn} userInfo={author} profileName={username} theme={author.themePref} title={author.blogTitle} />
-                <Main users={users} img={image} isLoggedIn={isLoggedIn} fetchArticle={fetchArticle} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} isAdmin={isAdmin} />
+                <Main users={users} isLoggedIn={isLoggedIn} fetchArticle={fetchArticle} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} isAdmin={isAdmin} />
                 <Footer theme={author.themePref} />
             </div>
             <CommentPrompt prompt={prompt} setPrompt={setPrompt} theme={author.themePref} />
