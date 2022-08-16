@@ -130,12 +130,12 @@ const Article = ({ isLoggedIn, fetchArticle, img, users, article, articleId, use
             {img ?
                 layout === "card" ?
                     <div className="img-container img-card-view">
-                        <img className="article-img" src={img} alt={article["img-desc"]}></img>
-                        <div className="article-img-caption">{article["img-desc"]}</div>
+                        <img className="article-img" src={img} alt={article.imgDesc}></img>
+                        <div className="article-img-caption">{article.imgDesc}</div>
                     </div> :
                 <div className="img-container">
-                    <img className="article-img" src={img} alt={article["img-desc"]}></img>
-                    <div className="article-img-caption">{article["img-desc"]}</div>
+                    <img className="article-img" src={img} alt={article.imgDesc}></img>
+                    <div className="article-img-caption">{article.imgDesc}</div>
                 </div> :
                 null
             }
