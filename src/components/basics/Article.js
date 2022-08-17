@@ -19,7 +19,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
     const [headClass, setHeadClass] = useState("")
     const [thisImg, setThisImg] = useState(false)
     const [commentFormClass, setCommentFormClass] = useState("")
-
+    
     useEffect(()=> {
         (async () => {
             if (article.img !== undefined) {
@@ -42,6 +42,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
             }
         })();
     }, [])
+    
 
     useEffect(()=> {
         if (article.content.length < 750) {

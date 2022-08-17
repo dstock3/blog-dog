@@ -74,8 +74,8 @@
   
 .profile-pic-container {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    min-width: 100px;
+    min-height: 100px;
     margin-left: 10px;
     overflow: hidden;
     display: flex;
@@ -83,6 +83,13 @@
     justify-content: center;
     box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.317);
 }
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+
+}
+
 
 .intro-container {
     width: 85%;

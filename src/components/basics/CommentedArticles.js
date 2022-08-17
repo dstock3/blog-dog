@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Spinner from './Spinner';
+import { decodeEntities } from "../../formatting/decodeEntities.js"
 
 const CommentedArticles = ({theme, fetchArticle}) => {
     const [articleList, setArticleList] = useState([])
@@ -45,7 +46,7 @@ const CommentedArticles = ({theme, fetchArticle}) => {
                                     <li key={index} className="commented-article-item">
                                         {listObj ?
                                         <Link onClick={()=>fetchArticle(listObj.article.article._id)} to= {{pathname: `/${listObj.user}/${listObj.article._id}`}} state={{theme: theme}}>
-                                            {listObj.article.title}
+                                            {decodeEntities(listObj.article.title)}
                                         </Link> : null
                                         }
                                     </li>
