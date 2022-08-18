@@ -6,6 +6,7 @@ import ThemePrompt from '../modals/ThemePrompt';
 const Home = ({isLoggedIn, userInfo, theme, users, layout, isAdmin}) => {
     const [articleList, setArticleList] = useState(false)
     const [themeCheck, setThemeCheck] = useState(false)
+    const [thisLayout, setThisLayout] = useState("")
 
     useEffect(()=> {
         let themeModal = document.getElementById("theme-modal")
@@ -14,6 +15,12 @@ const Home = ({isLoggedIn, userInfo, theme, users, layout, isAdmin}) => {
             themeModal.style.zIndex = 1000
         } else {
             themeModal.style.zIndex = 0
+        }
+
+        if (!layout) {
+            setThisLayout("basic") 
+        } else {
+            setThisLayout(layout)
         }
     }, [])
 
@@ -41,7 +48,7 @@ const Home = ({isLoggedIn, userInfo, theme, users, layout, isAdmin}) => {
             <>
             <main className={"home " + theme + "-accent"}>
                 <Sidebar isLoggedIn={isLoggedIn} userInfo={userInfo} theme={theme} isHome={true} isAdmin={isAdmin} />
-                <div className={"articles-container " + layout}>
+                <div className={"articles-container " + thisLayout}>
                     {articleList.map((thisArticle, artIndex) => (
                          <Article key={artIndex} index={thisArticle["ind"]} author={thisArticle["author"]["profileName"]} userInfo={thisArticle["author"]} article={thisArticle["article"]} theme={theme} layout="basic" limit={true} isHome={true} isAdmin={isAdmin} />
                     ))}

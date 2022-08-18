@@ -121,7 +121,7 @@ const HomePage = () => {
     return (
       <div className="App dark-accent">
         <Header theme="dark" title="BlogDog - Simple CMS" />
-        <main className={"home dark-accent"}>
+        <main className="home dark-accent">
           <div>{errorMessage}</div>
         </main>
         <Footer theme="dark" />
