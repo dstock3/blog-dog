@@ -128,41 +128,24 @@ const Options = ({userInfo, theme, setIsLoggedIn}) => {
     }, [toDelete, isTimedout])
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        let body
-        if (profilePic) {
-            body = JSON.stringify({
-                email: email,
-                profileName: profileName,
-                password: password,
-                confirmPassword: confirmPassword,
-                blogTitle: blogTitle,
-                profileDesc: profileDesc,
-                profilePic: profilePic,
-                themePref: themePref,
-                layoutPref: layoutPref
-            });
-        } else {
-            body = JSON.stringify({
-                email: email,
-                profileName: profileName,
-                password: password,
-                confirmPassword: confirmPassword,
-                blogTitle: blogTitle,
-                profileDesc: profileDesc,
-                themePref: themePref,
-                layoutPref: layoutPref
-            });
-        }
+        let formData = new FormData();
+        formData.append("email", email);
+        formData.append("profileName", profileName);
+        formData.append("password", password);
+        formData.append("confirmPassword", confirmPassword);
+        formData.append("blogTitle", blogTitle)
+        formData.append("profileDesc", profileDesc);
+        formData.append("themePref", themePref);
+        formData.append("layoutPref", layoutPref);
+        if (profilePic) { formData.append("profilePic", profilePic) };
          
         try {
             let token = localStorage.getItem('user');
 
             let res = await fetch("https://stormy-waters-34046.herokuapp.com/" + userInfo["profileName"] + "/update", {
                 method: "PUT",
-                body: body,
-                headers: { 'Content-Type': 'application/json', "login-token" : token }
+                body: formData,
+                headers: { "login-token" : token }
                 });
 
             let resJson = await res.json();

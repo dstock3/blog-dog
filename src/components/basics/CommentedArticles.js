@@ -7,7 +7,7 @@ const CommentedArticles = ({theme, fetchArticle}) => {
     const [articleList, setArticleList] = useState([])
     const [message, setMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false)
-    
+
     const getArticles = async () => {
         setIsLoading(true)
         try {
@@ -65,5 +65,6 @@ const CommentedArticles = ({theme, fetchArticle}) => {
         )
     };
 }
+
 
 export default CommentedArticles
