@@ -208,7 +208,7 @@ main {
   max-width: 25%;
   height: fit-content;
   box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
-  height: 425px;
+  height: 600px;
 }
 
 .img-card-view {
@@ -305,18 +305,32 @@ footer {
     margin-top: 15px;
   }
 
+  .card-child {
+    height: fit-content;
+  }
+
   .social-links {
     margin-bottom: 15px;
     width: 50%;
   }
 
+  .article-content {
+    height: fit-content;
+  }
+
   .img-container {
-    width: 85%;
-    margin-bottom: 15px;
+    width: 97%;
+    height: fit-content;
+  }
+
+  .article-name {
+    text-align: center;
+    width: 100%;
   }
 
   .article-img {
     width: 100%;
+    height: fit-content;
   }
 
   .options-list {
