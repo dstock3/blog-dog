@@ -37,10 +37,13 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
     }, [mode])
 
     return (
-        <div className="profile" id={mode}> 
-            <div className={"profile-pic-container " + thisClass.picContainer}>
-                <img className={"profile-pic " + thisClass.pic} src={profilePic} alt={"profile-pic for " + userInfo["profileName"]}></img>
-            </div>
+        <div className="profile" id={mode}>
+            <Link to = {{pathname: '/' + userInfo["profileName"]}}>
+                <div className={"profile-pic-container " + thisClass.picContainer}>
+                    <img className={"profile-pic " + thisClass.pic} src={profilePic} alt={"profile-pic for " + userInfo["profileName"]}></img>
+                </div>
+            </Link> 
+
             <div className={"profile-info " + thisClass.profInfo}>
                 <h2 className="profile-name">
                     {mode === "prof-side" ?
