@@ -11,14 +11,14 @@ import cardIcon from '../../assets/card.svg'
 import cardIconBlack from '../../assets/card_black.svg'
 
 const Options = ({userInfo, theme, setIsLoggedIn}) => {
-    const [email, setEmail] = useState("");
-    const [profileName, setProfileName] = useState("");
+    const [email, setEmail] = useState(userInfo.email);
+    const [profileName, setProfileName] = useState(userInfo.profileName);
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [blogTitle, setBlogTitle] = useState("");
-    const [profileDesc, setProfileDesc] = useState("");
-    const [themePref, setThemePref] = useState("");
-    const [layoutPref, setLayoutPref] = useState("");
+    const [blogTitle, setBlogTitle] = useState(userInfo.blogTitle);
+    const [profileDesc, setProfileDesc] = useState(userInfo.profileDesc);
+    const [themePref, setThemePref] = useState(userInfo.themePref);
+    const [layoutPref, setLayoutPref] = useState(userInfo.layoutPref);
     const [profilePic, setProfilePic] = useState("");
     const [message, setMessage] = useState("")
     const [toDelete, setToDelete] = useState(false)

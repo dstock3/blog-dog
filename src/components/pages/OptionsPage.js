@@ -3,6 +3,7 @@ import Header from '../sections/Header'
 import Footer from '../sections/Footer'
 import Options from '../forms/Options'
 import { parseJwt } from '../../auth/parseToken'
+import OptionsForm from '../forms/options/OptionsForm'
 
 const OptionsPage = () => {
   const [thisUser, setThisUser] = useState(false)
@@ -48,7 +49,8 @@ const OptionsPage = () => {
   return (
     <div className={"App " + thisUser.themePref + "-accent"}>
       <Header isLoggedIn={isLoggedIn} thisUser={thisUser} userInfo={thisUser} theme={thisUser.themePref} title={thisUser.blogTitle} profileName={thisUser.profileName} />
-      <Options userInfo={thisUser} theme={thisUser.themePref} setIsLoggedIn={setIsLoggedIn} />
+      <OptionsForm userInfo={thisUser} theme={thisUser.themePref} setIsLoggedIn={setIsLoggedIn} />
+      {/*<Options userInfo={thisUser} theme={thisUser.themePref} setIsLoggedIn={setIsLoggedIn} />*/}
       <Footer theme={thisUser.themePref} />
     </div>
   )
