@@ -93,7 +93,7 @@ const DisplaySettings = ({isSelected, theme, setThemePref, setLayoutPref}) => {
     if (isSelected) {
         return (
             <div className="display-settings">
-                <div className="customize-page-desc">Choose how your page will be presented to other users.</div>
+                <div className="options-desc">Choose how your page will be presented to other users.</div>
                 <div className="user-register-dropdowns">
                     <div className={"theme-dropdown " + theme + "-accent " + dropClass}>
                         <div className="theme-head-container" onClick={()=>setIsHidden(!isHidden)}>

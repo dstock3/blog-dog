@@ -4,6 +4,7 @@ const BlogInfo = ({isSelected, profileName, setProfileName, blogTitle, setBlogTi
   if (isSelected) {
     return (
       <>
+        <div className="options-desc">Update your blog page information</div>
         <div className="user-register-container" id="primary-reg">
             <label className="reg-label" htmlFor="profileName">Username: </label>
             <input className="reg-user-input" type="text" value={profileName} name="profileName" onChange={(e) => setProfileName(e.target.value)}></input>
