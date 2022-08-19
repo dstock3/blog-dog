@@ -5,6 +5,7 @@ import DeleteUser from '../../modals/DeleteUser'
 import Timeout from '../../modals/Timeout'
 import BlogInfo from './BlogInfo'
 import AccountInfo from './AccountInfo'
+import ProfilePic from './ProfilePic'
 
 const OptionsForm = ({userInfo, theme, setIsLoggedIn}) => {
     const [email, setEmail] = useState(userInfo.email);
@@ -82,6 +83,8 @@ const OptionsForm = ({userInfo, theme, setIsLoggedIn}) => {
                     {message ? <div className="message">{message}</div> : null}
 
                     <AccountInfo isSelected={accountInfoSelect} email={email} setEmail={setEmail} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} theme={theme} setToDelete={setToDelete} />
+
+                    <ProfilePic isSelected={picSelect} setProfilePic={setProfilePic} />
 
                     <BlogInfo isSelected={blogInfoSelect} profileName={profileName} setProfileName={setProfileName} blogTitle={blogTitle} setBlogTitle={setBlogTitle} profileDesc={profileDesc} setProfileDesc ={setProfileDesc}/>
 
