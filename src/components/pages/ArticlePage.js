@@ -46,9 +46,7 @@ const ArticlePage = () => {
                       setUser(resJson.users[prop])
                       if (resJson.users[prop].admin) {
                         setIsAdmin(true)
-                      }
-                      setIsLoggedIn(true)
-                        
+                      } 
                     }
                   }
                 } 
@@ -62,11 +60,6 @@ const ArticlePage = () => {
             setErrorMessage("There was a problem loading user data: " + err)
           }
         }
-
-    useEffect(()=> {
-        findUser()
-    
-    }, [])
 
     useEffect(() => {
         if (author) { document.title = author.blogTitle }  
@@ -94,6 +87,7 @@ const ArticlePage = () => {
 
     useEffect(()=> {
         fetchArticle()
+        findUser()
     }, [])
 
     if (article && author) {

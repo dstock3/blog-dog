@@ -8,7 +8,6 @@ const HomePage = () => {
   const [users, setUsers] = useState(false)
   const [errorMessage, setErrorMessage] = useState(false)
   /* Layout is set to basic by default */
-  const [layout, setLayout] = useState("basic")
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -58,7 +57,6 @@ const HomePage = () => {
                   if (resJson.users[prop].admin) {
                     setIsAdmin(true)
                   }
-                  setLayout(resJson.users[prop]["layoutPref"])
               }
             }
           } else {
@@ -82,7 +80,7 @@ const HomePage = () => {
   }, [])
 
   useEffect(() => {
-    document.title = "BlogDog CMS"  
+    document.title = "BlogDog"  
   }, [])
 
   useEffect(()=> {
@@ -127,7 +125,7 @@ const HomePage = () => {
         <Footer theme="dark" />
       </div>
     )
-  }
+  } 
 }
 
 export default HomePage
