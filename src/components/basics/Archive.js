@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { decodeEntities } from "../../formatting/decodeEntities.js"
 
-const Archive = ({userInfo, articles, fetchArticle, theme}) => {
+const Archive = ({userInfo, articles, theme}) => {
     return (
         <div className="archive">
             <ul className="archive-list main-archive-list">
@@ -10,7 +10,7 @@ const Archive = ({userInfo, articles, fetchArticle, theme}) => {
                     Object.values(articles).map((article, index) => {
                         return (
                             <li className="archive-link-item" key={index}>
-                                <Link onClick={()=> fetchArticle()} to={'/blog-dog/' + userInfo["profileName"] + '/' + article._id} state={{theme: theme}}>
+                                <Link to={'/blog-dog/' + userInfo["profileName"] + '/' + article._id} state={{theme: theme}}>
                                         {decodeEntities(article["title"])}
                                 </Link>
                             </li>)

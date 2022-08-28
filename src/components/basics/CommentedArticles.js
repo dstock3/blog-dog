@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import Spinner from './Spinner';
 import { decodeEntities } from "../../formatting/decodeEntities.js"
 
-const CommentedArticles = ({theme, fetchArticle}) => {
+const CommentedArticles = ({theme}) => {
     const [articleList, setArticleList] = useState([])
     const [message, setMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
     const getArticles = async () => {
-        console.log(`GET: https://stormy-waters-34046.herokuapp.com/article/}`)
         setIsLoading(true)
         try {
             let res = await fetch(`https://stormy-waters-34046.herokuapp.com/article/`, {
@@ -45,9 +44,8 @@ const CommentedArticles = ({theme, fetchArticle}) => {
                             {articleList.length > 0 ?
                                 Object.values(articleList).map((listObj, index) =>
                                     <li key={index} className="commented-article-item">
-                                        {console.log(`/blog-dog/${listObj.user}/${listObj.article._id}`)}
                                         {listObj ?
-                                        <Link onClick={()=>fetchArticle(listObj.article.article._id)} to= {{pathname: `/blog-dog/${listObj.user}/${listObj.article._id}`}} state={{theme: theme}}>
+                                        <Link to= {{pathname: `/blog-dog/${listObj.user}/${listObj.article._id}`}} state={{theme: theme}}>
                                             {decodeEntities(listObj.article.title)}
                                         </Link> : null
                                         }

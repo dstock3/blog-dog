@@ -74,7 +74,7 @@ const UserPage = () => {
 
     useEffect(() => {
         fetchUser()
-    }, [])
+    }, [username])
 
     useEffect(() => {
         if (userInfo) { 

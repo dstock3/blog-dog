@@ -26,7 +26,7 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
             };
 
         })();
-    }, [])
+    }, [userInfo])
 
     useEffect(()=> {
         if (mode === "prof-main") {

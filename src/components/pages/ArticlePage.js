@@ -66,7 +66,6 @@ const ArticlePage = () => {
     }, [author])
 
     const fetchArticle =  async() => {
-      console.log(`GET: https://stormy-waters-34046.herokuapp.com/article/${articleId}`)
       setIsLoading(true)
       try {
           let res = await fetch(`https://stormy-waters-34046.herokuapp.com/article/${articleId}`, {
@@ -89,7 +88,7 @@ const ArticlePage = () => {
     useEffect(()=> {
         fetchArticle()
         findUser()
-    }, [])
+    }, [username, articleId])
 
     if (article && author) {
         return (

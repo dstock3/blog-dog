@@ -41,7 +41,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                 setThisImg(null)
             }
         })();
-    }, [])
+    }, [article])
     
 
     useEffect(()=> {
