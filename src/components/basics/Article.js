@@ -100,7 +100,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
         if (articleId) {
             fetchComments(articleId)
         }
-    }, [articleId])
+    }, [articleId, comments])
     
     useEffect(()=> {
         let modal = document.getElementById('article-delete-modal')
