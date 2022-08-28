@@ -20,7 +20,7 @@ const Login = () => {
                     setPw("")
                     
                     localStorage.setItem('user', res.data);
-                    nav('/');
+                    nav('/blog-dog/');
                 } else {
                     setMessage("Some error occurred")
                 }

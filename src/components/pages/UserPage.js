@@ -23,6 +23,7 @@ const UserPage = () => {
 
     const fetchUser =  async() => {
         setIsLoading(true)
+
         try {
             let res = await fetch(`https://stormy-waters-34046.herokuapp.com/${username}`, {
                 method: "GET"

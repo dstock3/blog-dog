@@ -179,7 +179,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     <div className="article-content">
                         {decodeEntities(abstract)}...
                         <div className="read-more"> 
-                            <Link to ={"/" + userInfo["profileName"] + "/" + article._id}>
+                            <Link to ={"/blog-dog/" + userInfo["profileName"] + "/" + article._id}>
                                 Read More
                             </Link>
                         </div>
