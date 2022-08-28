@@ -33,10 +33,10 @@ const App = () => {
         <Route path="/blog-dog/options" element={<OptionsPage/>} />
 
         {/* User Page */}
-        <Route path="/blog-dog/:username" element={<UserPage/>} />
+        <Route exact path="/blog-dog/:username" element={<UserPage/>} />
 
         {/* Article Page */}
-        <Route path="/blog-dog/:username/:articleId" element={<ArticlePage/>} />
+        <Route exact path="/blog-dog/:username/:articleId" element={<ArticlePage/>} />
       </Routes>
     </Router>
   )
