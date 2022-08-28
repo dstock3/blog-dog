@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { parseJwt } from '../../auth/parseToken.js';
 import { decodeEntities } from "../../formatting/decodeEntities.js";
 import DeleteComment from "../modals/DeleteComment.js";
@@ -11,6 +11,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
     const [fullyAuthorized, setFullyAuthorized] = useState(false)
     const [toDelete, setToDelete] = useState(false)
     const [isTimedOut, setIsTimedOut] = useState(false)
+    const nav = useNavigate()
 
     useEffect(()=> {
         let rootElement = document.getElementById('root')
@@ -74,6 +75,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
                 timedOutModal.style.zIndex = 1000
 
             } else if (res.status === 200) {
+                nav(`/blog-dog/${articleAuthor.profileName}/articleId`)
                 window.location.reload();
             } else {
                 setMessage("Some error occurred")

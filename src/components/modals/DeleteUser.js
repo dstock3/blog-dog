@@ -40,7 +40,7 @@ const DeleteUser = ({setIsLoggedIn, theme, userInfo, toDelete, setToDelete, isAd
                     setIsLoggedIn(false)
                 }
 
-                nav('/');
+                nav('/blog-dog/');
             } else {
                 console.log(res)
             }
