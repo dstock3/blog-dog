@@ -66,23 +66,24 @@ const ArticlePage = () => {
     }, [author])
 
     const fetchArticle =  async() => {
-        setIsLoading(true)
-        try {
-            let res = await fetch(`https://stormy-waters-34046.herokuapp.com/article/${articleId}`, {
-                method: "GET"
-                });
-            let resJson = await res.json();
-            
-            if (res.status === 200) {
-              setArticle(resJson.article)
-              setAuthor(resJson.author)
-              setIsLoading(false)
-            } else {
-                setErrorMessage(`Error Code ${res.status} There was a problem loading user data.`);
-            }
-        } catch(err) {
-            setErrorMessage("There was a problem loading user data: " + err);
-        }
+      console.log(`GET: https://stormy-waters-34046.herokuapp.com/article/${articleId}`)
+      setIsLoading(true)
+      try {
+          let res = await fetch(`https://stormy-waters-34046.herokuapp.com/article/${articleId}`, {
+              method: "GET"
+              });
+          let resJson = await res.json();
+          
+          if (res.status === 200) {
+            setArticle(resJson.article)
+            setAuthor(resJson.author)
+            setIsLoading(false)
+          } else {
+              setErrorMessage(`Error Code ${res.status} There was a problem loading user data.`);
+          }
+      } catch(err) {
+          setErrorMessage("There was a problem loading user data: " + err);
+      }
     }
 
     useEffect(()=> {
