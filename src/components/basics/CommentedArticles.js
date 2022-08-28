@@ -45,7 +45,7 @@ const CommentedArticles = ({theme, fetchArticle}) => {
                                 Object.values(articleList).map((listObj, index) =>
                                     <li key={index} className="commented-article-item">
                                         {listObj ?
-                                        <Link onClick={()=>fetchArticle(listObj.article.article._id)} to= {{pathname: `/${listObj.user}/${listObj.article._id}`}} state={{theme: theme}}>
+                                        <Link onClick={()=>fetchArticle(listObj.article.article._id)} to= {{pathname: `/blog-dog/${listObj.user}/${listObj.article._id}`}} state={{theme: theme}}>
                                             {decodeEntities(listObj.article.title)}
                                         </Link> : null
                                         }

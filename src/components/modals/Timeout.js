@@ -7,7 +7,7 @@ const Timeout = ({isTimedout, theme}) => {
     return ReactDOM.createPortal(
         <div className={"timeout-prompt " + theme}>
             <div className="timeout-msg">Your session has timed out.</div>
-            <Link className={"timeout-link " + theme + "-accent"} to='/login'>Login</Link> 
+            <Link className={"timeout-link " + theme + "-accent"} to='/blog-dog/login'>Login</Link> 
         </div>,
         document.getElementById('timeout-modal')
     )

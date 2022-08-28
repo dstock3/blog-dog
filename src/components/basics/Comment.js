@@ -89,7 +89,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
             <li className={"comment " + theme}>
                 <div className="comment-primary-container">
                     <span className="comment-username">
-                        <Link to={`/${comment.profileName}`}>{comment.profileName}</Link>: </span>
+                        <Link to={`/blog-dog/${comment.profileName}`}>{comment.profileName}</Link>: </span>
                     <span className="comment-content" style={{whiteSpace: "pre-wrap"}}>{decodeEntities(comment.content)}</span>
                     {comment.isEdited ? 
                         <div className="comment-date">Edited on {comment.date}</div> :

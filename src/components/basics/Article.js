@@ -137,11 +137,11 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
             <div className={"article-head " + headClass}>
                 <div className="article-head-subcontainer">
                     <h1 className={"article-name " + layout + "-article-name"}>
-                        <Link to={"/" + userInfo["profileName"] + `/${article._id}`}>{decodeEntities(article["title"])}</Link>
+                        <Link to={"/blog-dog/" + userInfo["profileName"] + `/${article._id}`}>{decodeEntities(article["title"])}</Link>
                     </h1>
                     {!userPage ?
                         <div className="article-author">
-                            <Link to ={"/" + userInfo["profileName"]}>
+                            <Link to ={"/blog-dog/" + userInfo["profileName"]}>
                                 {userInfo["profileName"]}
                             </Link>
                         </div> : null}
@@ -152,7 +152,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     {(isAuthorized && !isHome) || (isAdmin && !isHome) ?
                         <div className={"article-dashboard " + layout + "-buttons"}>
                             <div className={"article-edit-btn " + theme + "-accent"}>
-                                <Link to="/compose" state={{"articleUpdate": {"content": article["content"], "title": article["title"], "imgDesc": article["imgDesc"], "articleId": article._id}}}>
+                                <Link to="/blog-dog/compose" state={{"articleUpdate": {"content": article["content"], "title": article["title"], "imgDesc": article["imgDesc"], "articleId": article._id}}}>
                                     Edit
                                 </Link>
                             </div>

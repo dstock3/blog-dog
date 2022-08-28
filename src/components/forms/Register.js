@@ -86,7 +86,7 @@ const Register = () => {
             
             <div className="prompt-container">
                 <div className="login-prompt">Already Have a Profile?</div>
-                <Link className="login-link" to = {{pathname: '/login'}}>Sign In</Link>
+                <Link className="login-link" to = {{pathname: '/blog-dog/login'}}>Sign In</Link>
             </div>
         </div>
     );

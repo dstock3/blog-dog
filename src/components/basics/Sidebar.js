@@ -54,7 +54,7 @@ const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome, isAdmin}) => {
                 {isLoggedIn ? 
                     <>
                         <Profile mode="prof-side" isHome={isHome} userInfo={userInfo} theme={theme} />
-                        <Link className="compose-link" to="/compose" state={{articleUpdate: false}}>
+                        <Link className="compose-link" to="/blog-dog/compose" state={{articleUpdate: false}}>
                             <img src={composeImg} alt="compose-article-icon"></img>
                             <div>Compose New Article</div>
                         </Link>

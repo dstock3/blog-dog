@@ -48,24 +48,24 @@ const Settings = ({theme, isLoggedIn}) => {
                         isLoggedIn ?
                             <>
                                 <li className="option-item">
-                                    <Link to ="/" onClick={() => setOptionsStatus("hidden")}>Home</Link>
+                                    <Link to ="/blog-dog/" onClick={() => setOptionsStatus("hidden")}>Home</Link>
                                 </li>
                                 <li className="option-item">
-                                    <Link to = "/compose" onClick={() => setOptionsStatus("hidden")}>Compose</Link>
+                                    <Link to = "/blog-dog/compose" onClick={() => setOptionsStatus("hidden")}>Compose</Link>
                                 </li>
                                 <li className="option-item">
-                                    <Link to ="/options" onClick={() => setOptionsStatus("hidden")}>Options</Link>
+                                    <Link to ="/blog-dog/options" onClick={() => setOptionsStatus("hidden")}>Options</Link>
                                 </li>
                                 <li className="option-item">
-                                    <Link to ="/logout" onClick={() => setOptionsStatus("hidden")}>Logout</Link>
+                                    <Link to ="/blog-dog/logout" onClick={() => setOptionsStatus("hidden")}>Logout</Link>
                                 </li>
                             </> :
                             <>
                                 <li className="option-item">
-                                    <Link to ="/login" onClick={() => setOptionsStatus("hidden")}>Sign In</Link>
+                                    <Link to ="/blog-dog/login" onClick={() => setOptionsStatus("hidden")}>Sign In</Link>
                                 </li>
                                 <li className="option-item">
-                                    <Link to ="/register" onClick={() => setOptionsStatus("hidden")}>Register</Link>
+                                    <Link to ="/blog-dog/register" onClick={() => setOptionsStatus("hidden")}>Register</Link>
                                 </li>
                             </>
                     }

@@ -8,13 +8,13 @@ const Prompt = () => {
                     You aren't logged in. Would you like to create a profile?
                 </div>
 
-                <Link to = {{pathname: '/register'}}>Register</Link>
+                <Link to = {{pathname: '/blog-dog/register'}}>Register</Link>
             </div>
 
             <div className="login-prompt">
                 <div className="prompt-message">Already have a login?</div>
 
-                <Link to = {{pathname: '/login'}}>Sign In</Link>
+                <Link to = {{pathname: '/blog-dog/login'}}>Sign In</Link>
             </div>
         </main>
     );

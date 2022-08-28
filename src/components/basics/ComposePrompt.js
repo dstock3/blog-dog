@@ -6,7 +6,7 @@ const ComposePrompt = ({isAuthorized, theme, composeImg}) => {
         return (
             <div className={"compose-prompt " + theme}>
                 <p>You haven't written any articles. Would you like to compose a new one?</p>
-                <Link className="compose-link compose-prompt-container" to="/compose">
+                <Link className="compose-link compose-prompt-container" to="/blog-dog/compose">
                     <img src={composeImg} alt="compose-article-icon"></img>
                     <p>Compose Article</p>
                 </Link>

@@ -64,7 +64,7 @@ const Login = () => {
             </form>
             <div className="prompt-container">
                 <div className="reg-prompt">Don't have an Account?</div>
-                <Link to = {{pathname: '/register'}}>Register</Link>
+                <Link to = {{pathname: '/blog-dog/register'}}>Register</Link>
             </div>
         </div>
     );

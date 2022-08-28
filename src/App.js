@@ -15,28 +15,28 @@ const App = () => {
     <Router>
       <Routes>
         {/* Home */}
-        <Route exact path="/" element={<HomePage/>} />
+        <Route exact path="/blog-dog/" element={<HomePage/>} />
 
         {/* Register */}
-        <Route path="/register" element={<RegisterPage/>} />
+        <Route path="/blog-dog/register" element={<RegisterPage/>} />
 
         {/* Login */}
-        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/blog-dog/login" element={<LoginPage/>} />
 
         {/* Logout */}
-        <Route path="/logout" element={<LogoutPage/>} />
+        <Route path="/blog-dog/logout" element={<LogoutPage/>} />
 
         {/* Create Article */}
-        <Route path="/compose" element={<ComposePage/>} />
+        <Route path="/blog-dog/compose" element={<ComposePage/>} />
 
         {/* Profile Options */}
-        <Route path="/options" element={<OptionsPage/>} />
+        <Route path="/blog-dog/options" element={<OptionsPage/>} />
 
         {/* User Page */}
-        <Route path="/:username" element={<UserPage/>} />
+        <Route path="/blog-dog/:username" element={<UserPage/>} />
 
         {/* Article Page */}
-        <Route path="/:username/:articleId" element={<ArticlePage/>} />
+        <Route path="/blog-dog/:username/:articleId" element={<ArticlePage/>} />
       </Routes>
     </Router>
   )
