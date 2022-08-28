@@ -82,7 +82,7 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                 
 
                 getUserData()
-                nav(`blog-dog/${userInfo.profileName}/${resJson.articleId}`)
+                nav(`/blog-dog/${userInfo.profileName}/${resJson.articleId}`)
             } else {
                 setMessage(`Some error occurred: ${res.status}`)
             }
