@@ -80,7 +80,6 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
                     setMessage("Article created successfully")
                 }
                 
-
                 getUserData()
                 nav(`/blog-dog/${userInfo.profileName}/${resJson.articleId}`)
             } else {

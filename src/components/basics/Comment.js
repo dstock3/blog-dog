@@ -50,7 +50,6 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
 
     useEffect(()=> {
         authorizeComment()
-        
     }, [comment, articleAuthor])
 
     const editComment = async () => {

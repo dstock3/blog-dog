@@ -27,8 +27,7 @@ const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome, isAdmin}) => {
             timeoutModal.style.zIndex = 0
             rootElement.style.filter = "unset"
             rootElement.style.transform = "unset"
-        }
-        
+        }    
     }, [toDelete])
 
     useEffect(()=> {
@@ -82,7 +81,6 @@ const Sidebar = ({isLoggedIn, articles, userInfo, theme, isHome, isAdmin}) => {
             </>
         );
     }
-
 }
 
 export default Sidebar;
