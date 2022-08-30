@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 
-const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete}) => {
+const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page}) => {
     const [message, setMessage] = useState("")
     const nav = useNavigate()
 
@@ -18,8 +18,12 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete}) => {
                 let resJson = await res.json();
 
                 if (res.status === 200) {
-                    //window.location.reload()
-                    nav(`/blog-dog/${userInfo.profileName}`)
+                    if (page === "article") {
+                        nav(`/blog-dog/${userInfo.profileName}`)
+                    } else if (page === "user") {
+                        window.location.reload();
+                    }
+                    
                 } else { setMessage("Some error occured") };
 
             } catch(err) {

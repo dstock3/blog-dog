@@ -95,7 +95,7 @@ const ArticlePage = () => {
           <>
             <div className={"App " + author.themePref + "-accent"}>
                 <Header thisUser={user} isLoggedIn={isLoggedIn} userInfo={author} profileName={username} theme={author.themePref} title={author.blogTitle} />
-                <Main users={users} isLoggedIn={isLoggedIn} fetchArticle={fetchArticle} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} isAdmin={isAdmin} />
+                <Main users={users} isLoggedIn={isLoggedIn} fetchArticle={fetchArticle} errorMessage={errorMessage} userInfo={author} landing={false} article={article} articles={author.articles} theme={author.themePref} layout={author.layoutPref} isAdmin={isAdmin} page={"article"}/>
                 <Footer theme={author.themePref} />
             </div>
             <CommentPrompt prompt={prompt} setPrompt={setPrompt} theme={author.themePref} />
