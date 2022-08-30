@@ -18,8 +18,8 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete}) => {
                 let resJson = await res.json();
 
                 if (res.status === 200) {
-                    //nav(`/blog-dog/${userInfo.profileName}`)
-                    window.location.reload()
+                    //window.location.reload()
+                    nav(`/blog-dog/${userInfo.profileName}`)
                 } else { setMessage("Some error occured") };
 
             } catch(err) {
