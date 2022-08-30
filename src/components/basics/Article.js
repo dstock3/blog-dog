@@ -7,6 +7,7 @@ import expandComment from "../../assets/expand.svg";
 import expandCommentBlack from "../../assets/expand_black.svg";
 import CommentSection from "../sections/CommentSection";
 import { decodeEntities } from "../../formatting/decodeEntities";
+import Spinner from "./Spinner";
 
 const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome, isAdmin, page }) => {
     const [abstract, setAbstract] = useState(article["content"])
@@ -22,6 +23,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
     
     useEffect(()=> {
         (async () => {
+
             if (article.img !== undefined) {
                 try {
                     let imgRes = await fetch(`https://stormy-waters-34046.herokuapp.com/images/${article.img}`, {
@@ -32,7 +34,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         let imgResBlob = await imgRes.blob();
                         let imgSrc = URL.createObjectURL(imgResBlob)
                         setThisImg(imgSrc)
-                        
+                          
                     }
                 } catch(err) {
                     console.log(err)
@@ -170,7 +172,9 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     <img className="article-img" src={thisImg} alt={article.imgDesc}></img>
                     <div className="article-img-caption">{article.imgDesc}</div>
                 </div> :
-                null
+                <div className="img-container">
+                    <Spinner theme={theme} isMini={true} imgLoader={true} />
+                </div>
             }
 
             {limit ?

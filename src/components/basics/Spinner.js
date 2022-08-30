@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/spinner.css';
 
-const Spinner = ({isMini, theme}) => {
+const Spinner = ({isMini, theme, imgLoader}) => {
+  const [imgLoaderClass, setImgLoaderClass] = useState("")
+
+  useEffect(()=> {
+
+    if (imgLoader) {
+      setImgLoaderClass("img-loader")
+    }
+  }, [])
+
   if (isMini) {
     return (
-      <div className="mini-spinner-container">
+      <div className={"mini-spinner-container " + imgLoaderClass}>
         <div className={"mini-spinner loading-" + theme}></div>
       </div>
     )

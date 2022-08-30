@@ -39,6 +39,11 @@
     animation: spinner 1.5s linear infinite;
 }
 
+.img-loader {
+    width: 200px;
+    height: 150px;
+}
+
 /* Themes (need to customize) */
 
 .loading-dark {
