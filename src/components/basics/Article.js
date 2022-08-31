@@ -20,12 +20,13 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
     const [headClass, setHeadClass] = useState("")
     const [thisImg, setThisImg] = useState(false)
     const [commentFormClass, setCommentFormClass] = useState("")
+    const [imgIsLoading, setImgIsLoading] = useState(false)
     
     useEffect(()=> {
         (async () => {
-
             if (article.img !== undefined) {
                 try {
+                    setImgIsLoading(true)
                     let imgRes = await fetch(`https://stormy-waters-34046.herokuapp.com/images/${article.img}`, {
                         method: "GET"
                     });
@@ -34,7 +35,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         let imgResBlob = await imgRes.blob();
                         let imgSrc = URL.createObjectURL(imgResBlob)
                         setThisImg(imgSrc)
-                          
+                        setImgIsLoading(false)
                     }
                 } catch(err) {
                     console.log(err)
@@ -45,12 +46,10 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
         })();
     }, [article])
     
-
     useEffect(()=> {
         if (article.content.length < 750) {
             setCommentFormClass("short-article")
         }
-
     }, [])
 
     useEffect(()=> {
@@ -61,7 +60,6 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
             setArticleClass("landing-view")
             setHeadClass("landing-head")
         }
-
     }, [landing])
 
     useEffect(()=> {
@@ -141,15 +139,18 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     <h1 className={"article-name " + layout + "-article-name"}>
                         <Link to={"/blog-dog/" + userInfo["profileName"] + `/${article._id}`}>{decodeEntities(article["title"])}</Link>
                     </h1>
+
                     {!userPage ?
                         <div className="article-author">
                             <Link to ={"/blog-dog/" + userInfo["profileName"]}>
                                 {userInfo["profileName"]}
                             </Link>
                         </div> : null}
+
                     {article.isEdited ? 
                         <div className="date-posted">Edited on {article["date"]}</div> :
                         <div className="date-posted">Posted on {article["date"]}</div>}
+
                 </div>
                     {(isAuthorized && !isHome) || (isAdmin && !isHome) ?
                         <div className={"article-dashboard " + layout + "-buttons"}>
@@ -162,7 +163,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                         </div> : null}
             </div>
 
-            {thisImg ?
+            {!imgIsLoading ?
                 layout === "card" ?
                     <div className="img-container img-card-view">
                         <img className="article-img" src={thisImg} alt={article.imgDesc}></img>
@@ -192,10 +193,12 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                     <div className="article-content" style={{whiteSpace: "pre-wrap"}}>
                         {decodeEntities(article["content"])}
                     </div>
+
                     {isLoggedIn ?
                         /* Commenting privileges are only enabled if the user is logged in */
                         <CommentForm commentFormClass={commentFormClass} setComments={setComments} fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
                     }
+
                     {Object.keys(comments).length !== 0 ?
                         <ul className={"comments-container " + theme + "-accent"}>
                             <div className="comment-head-container">
@@ -208,9 +211,10 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                             <CommentSection showComments={showComments} setShowComments={setShowComments} comments={comments} expandComment={expandImg} theme={theme} userInfo={userInfo} article={article} setCommentUpdate={setCommentUpdate} articleId={articleId} isAdmin={isAdmin} />
                         </ul> : 
                         null
-                    } 
+                    }
                 </>
             }
+
             {toDelete ?
                 <DeleteArticle theme={theme} toDelete={toDelete} userInfo={userInfo} articleId={articleId} setToDelete={setToDelete} page={page} /> : null}
         </article>
