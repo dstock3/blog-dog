@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { decodeEntities } from "../../formatting/decodeEntities";
+import Spinner from "./Spinner";
 
 const Profile = ({userInfo, mode, isHome, theme}) => {
     const [thisClass, setThisClass] = useState({picContainer: null, pic: null, profInfo: null})
     const [profilePic, setProfilePic] = useState(null)
+    const [imgIsLoading, setImgIsLoading] = useState(false)
 
     useEffect(()=> {
         (async() => {
+            setImgIsLoading(true)
             if (userInfo.profilePic !== undefined) {
                 try {
                     let imgRes = await fetch(`https://stormy-waters-34046.herokuapp.com/images/${userInfo.profilePic}`, {
@@ -18,13 +21,12 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
                         let imgResBlob = await imgRes.blob();
                         let imgSrc = URL.createObjectURL(imgResBlob)
                         setProfilePic(imgSrc)
+                        setImgIsLoading(false)
                     }
                 } catch(err) {
                     console.log(err)
                 };
-    
             };
-
         })();
     }, [userInfo])
 
@@ -40,9 +42,12 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
         <div className="profile" id={mode}>
             <Link to = {{pathname: '/' + userInfo["profileName"]}}>
                 <div className={"profile-pic-container " + thisClass.picContainer}>
-                    <img className={"profile-pic " + thisClass.pic} src={profilePic} alt={"profile-pic for " + userInfo["profileName"]}></img>
+                    {imgIsLoading ? 
+                        <Spinner theme={theme} isMini={true} userPic={true} /> :
+                        <img className={"profile-pic " + thisClass.pic} src={profilePic} alt={"profile-pic for " + userInfo["profileName"]}></img>
+                    }
                 </div>
-            </Link> 
+            </Link>
 
             <div className={"profile-info " + thisClass.profInfo}>
                 <h2 className="profile-name">

@@ -44,6 +44,11 @@
     height: 150px;
 }
 
+.user-loader {
+    width: 75px;
+    min-height: 75px;
+}
+
 /* Themes (need to customize) */
 
 .loading-dark {

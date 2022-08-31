@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import '../style/spinner.css';
 
-const Spinner = ({isMini, theme, imgLoader}) => {
+const Spinner = ({isMini, theme, imgLoader, userPic}) => {
   const [imgLoaderClass, setImgLoaderClass] = useState("")
 
   useEffect(()=> {
-
     if (imgLoader) {
       setImgLoaderClass("img-loader")
+    } else if (userPic) {
+      setImgLoaderClass("user-loader")
     }
   }, [])
 
