@@ -97,7 +97,7 @@ const HomePage = () => {
   }, [])
 
   if (isLoading) {
-    <div className={"App dark-accent"}>
+    <div className="App dark-accent">
         <Header theme="dark" title="BlogDog - Simple CMS" />
         <Spinner theme="dark" />
         <Footer theme="dark" />
@@ -105,7 +105,7 @@ const HomePage = () => {
   } else if (users && isLoggedIn) {
     /* If request for users is successful and the user is logged in */
     return (
-      <div className={"App dark-accent"}>
+      <div className={"App " + user.themePref + "-accent"}>
         <Header isLoggedIn={isLoggedIn} userInfo={user} theme={user.themePref} title={user.blogTitle} />
         <Home isLoggedIn={isLoggedIn} theme={user.themePref} userInfo={user} layout={user.layoutPref} users={users} isAdmin={isAdmin} />
         <Footer theme={user.themePref} />

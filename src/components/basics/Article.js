@@ -166,12 +166,12 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
             {!imgIsLoading ?
                 layout === "card" ?
                     <div className="img-container img-card-view">
-                        <img className="article-img" src={thisImg} alt={article.imgDesc}></img>
-                        <div className="article-img-caption">{article.imgDesc}</div>
+                        <img className="article-img" src={thisImg} alt={decodeEntities(article.imgDesc)}></img>
+                        <div className="article-img-caption">{decodeEntities(article.imgDesc)}</div>
                     </div> :
                 <div className="img-container">
-                    <img className="article-img" src={thisImg} alt={article.imgDesc}></img>
-                    <div className="article-img-caption">{article.imgDesc}</div>
+                    <img className="article-img" src={thisImg} alt={decodeEntities(article.imgDesc)}></img>
+                    <div className="article-img-caption">{decodeEntities(article.imgDesc)}</div>
                 </div> :
                 <div className="img-container">
                     <Spinner theme={theme} isMini={true} imgLoader={true} />
