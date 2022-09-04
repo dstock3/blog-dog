@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/blog-dog/static/css/main.15b024d6.css",
-    "main.js": "/blog-dog/static/js/main.e402f8a7.js",
+    "main.js": "/blog-dog/static/js/main.7e6a89b1.js",
     "static/media/paw.png": "/blog-dog/static/media/paw.98de98766e1360490c5e.png",
     "static/media/github.svg": "/blog-dog/static/media/github.4d88ae672dee3dadd09677a5d2ddefce.svg",
     "static/media/github_black.svg": "/blog-dog/static/media/github_black.43d1d59ea7498ece01a9ac5ea966c89f.svg",
@@ -21,10 +21,10 @@
     "static/media/expand.svg": "/blog-dog/static/media/expand.af5969e8f0ad5a3cf8da178e6c234237.svg",
     "static/media/expand_black.svg": "/blog-dog/static/media/expand_black.1afc4c76f18bbba9a02225ab65ae7047.svg",
     "main.15b024d6.css.map": "/blog-dog/static/css/main.15b024d6.css.map",
-    "main.e402f8a7.js.map": "/blog-dog/static/js/main.e402f8a7.js.map"
+    "main.7e6a89b1.js.map": "/blog-dog/static/js/main.7e6a89b1.js.map"
   },
   "entrypoints": [
     "static/css/main.15b024d6.css",
-    "static/js/main.e402f8a7.js"
+    "static/js/main.7e6a89b1.js"
   ]
 }
