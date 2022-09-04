@@ -74,7 +74,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
                 timedOutModal.style.zIndex = 1000
 
             } else if (res.status === 200) {
-                window.location.reload();
+                nav(`/blog-dog/${articleAuthor.profileName}`)
             } else {
                 setMessage("Some error occurred")
             }
