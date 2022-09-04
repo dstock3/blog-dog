@@ -4,6 +4,7 @@ import { parseJwt } from '../../auth/parseToken.js';
 import { decodeEntities } from "../../formatting/decodeEntities.js";
 import DeleteComment from "../modals/DeleteComment.js";
 import Timeout from "../modals/Timeout.js";
+import ArticlePage from "../pages/ArticlePage"
 
 const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin }) => {
     const [message, setMessage] = useState("")
@@ -11,6 +12,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
     const [fullyAuthorized, setFullyAuthorized] = useState(false)
     const [toDelete, setToDelete] = useState(false)
     const [isTimedOut, setIsTimedOut] = useState(false)
+    const [isDeleted, setIsDeleted] = useState(false)
     const nav = useNavigate()
 
     useEffect(()=> {
@@ -74,7 +76,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
                 timedOutModal.style.zIndex = 1000
 
             } else if (res.status === 200) {
-                nav(`/blog-dog/${articleAuthor.profileName}`)
+                setIsDeleted(true)
             } else {
                 setMessage("Some error occurred")
             }
@@ -111,6 +113,8 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
                 <DeleteComment theme={theme} message={message} toDelete={toDelete} deleteComment={deleteComment} setToDelete={setToDelete} /> : null}
             {isTimedOut ?
                 <Timeout isTimedout={isTimedOut} theme={theme} /> : null}
+            {isDeleted ?
+                <ArticlePage />  : null }
         </>
 
     );
