@@ -6,6 +6,7 @@ import Timeout from '../../modals/Timeout'
 import BlogInfo from './BlogInfo'
 import AccountInfo from './AccountInfo'
 import ProfilePic from './ProfilePic'
+import '../../style/options.css'
 
 const OptionsForm = ({userInfo, theme, setIsLoggedIn}) => {
     const [email, setEmail] = useState("");
