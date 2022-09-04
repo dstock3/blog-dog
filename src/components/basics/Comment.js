@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { parseJwt } from '../../auth/parseToken.js';
 import { decodeEntities } from "../../formatting/decodeEntities.js";
 import DeleteComment from "../modals/DeleteComment.js";
 import Timeout from "../modals/Timeout.js";
-import ArticlePage from "../pages/ArticlePage"
 
 const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin, fetchArticle, findUser, fetchComments }) => {
     const [message, setMessage] = useState("")
