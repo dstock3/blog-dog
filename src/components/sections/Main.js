@@ -7,7 +7,7 @@ import composeIcon from '../../assets/write.svg'
 import composeIconBlack from '../../assets/write_black.svg'
 import ComposePrompt from '../basics/ComposePrompt';
 
-const Main = ({errorMessage, fetchArticle, img, isLoggedIn, getUserData, users, landing, article, articles, userInfo, theme, layout, articleUpdate, userPage, isAdmin, page}) => {
+const Main = ({errorMessage, fetchArticle, findUser, img, isLoggedIn, getUserData, users, landing, article, articles, userInfo, theme, layout, articleUpdate, userPage, isAdmin, page}) => {
     const [commentMessage, setCommentMessage] = useState("")
     const [comments, setComments] = useState(false)
     const [isAuthorized, setIsAuthorized] = useState(false)
@@ -67,12 +67,12 @@ const Main = ({errorMessage, fetchArticle, img, isLoggedIn, getUserData, users, 
             {!landing && article ?
                 /* For single articles, the basic layout is enabled */
                 <div className="articles-container basic">
-                    <Article img={img} getUserData={getUserData} fetchArticle={fetchArticle} isLoggedIn={isLoggedIn} users={users} userInfo={userInfo} articleId={article._id} article={article} theme={theme} layout={"basic"} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} isAdmin={isAdmin} page={page} />
+                    <Article img={img} getUserData={getUserData} fetchArticle={fetchArticle} findUser={findUser} isLoggedIn={isLoggedIn} users={users} userInfo={userInfo} articleId={article._id} article={article} theme={theme} layout={"basic"} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} isAdmin={isAdmin} page={page} />
                 </div> :
                 articles.length !== 0 ?
                     <div className={"articles-container " + thisLayout}>
                         {Object.values(articles).map((articleItem, artIndex) =>
-                            <Article key={artIndex} getUserData={getUserData} fetchArticle={fetchArticle} users={users} articleId={articleItem._id} userInfo={userInfo} article={articles[artIndex]} theme={theme} layout={layout} limit={true} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} landing={landing} userPage={userPage} isAdmin={isAdmin} page={page} /> )}
+                            <Article key={artIndex} getUserData={getUserData} fetchArticle={fetchArticle} findUser={findUser} users={users} articleId={articleItem._id} userInfo={userInfo} article={articles[artIndex]} theme={theme} layout={layout} limit={true} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} landing={landing} userPage={userPage} isAdmin={isAdmin} page={page} /> )}
                     </div> :
                     <div className={"articles-container basic"}>
                         <ComposePrompt isAuthorized={isAuthorized} theme={theme} composeImg={composeImg} />

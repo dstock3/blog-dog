@@ -9,7 +9,7 @@ import CommentSection from "../sections/CommentSection";
 import { decodeEntities } from "../../formatting/decodeEntities";
 import Spinner from "./Spinner";
 
-const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome, isAdmin, page }) => {
+const Article = ({ isLoggedIn, fetchArticle, findUser, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome, isAdmin, page }) => {
     const [abstract, setAbstract] = useState(article["content"])
     const [isAuthorized, setIsAuthorized] = useState(false)
     const [commentUpdate, setCommentUpdate] = useState(false)
@@ -208,7 +208,7 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
                                 </div>
                             </div>
                             <div className="message">{commentMessage ? <p>{commentMessage}</p> : null}</div>
-                            <CommentSection showComments={showComments} setShowComments={setShowComments} comments={comments} expandComment={expandImg} theme={theme} userInfo={userInfo} article={article} setCommentUpdate={setCommentUpdate} articleId={articleId} isAdmin={isAdmin} />
+                            <CommentSection showComments={showComments} setShowComments={setShowComments} comments={comments} expandComment={expandImg} theme={theme} userInfo={userInfo} article={article} setCommentUpdate={setCommentUpdate} articleId={articleId} isAdmin={isAdmin} fetchArticle={fetchArticle} findUser={findUser} fetchComments={fetchComments} />
                         </ul> : 
                         null
                     }

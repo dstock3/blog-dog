@@ -6,15 +6,22 @@ import DeleteComment from "../modals/DeleteComment.js";
 import Timeout from "../modals/Timeout.js";
 import ArticlePage from "../pages/ArticlePage"
 
-const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin }) => {
+const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin, fetchArticle, findUser, fetchComments }) => {
     const [message, setMessage] = useState("")
     const [authorizedToDelete, setAuthorizedToDelete] = useState(false)
     const [fullyAuthorized, setFullyAuthorized] = useState(false)
     const [toDelete, setToDelete] = useState(false)
     const [isTimedOut, setIsTimedOut] = useState(false)
     const [isDeleted, setIsDeleted] = useState(false)
-    const nav = useNavigate()
 
+    useEffect(()=> {
+        if (isDeleted) {
+            fetchArticle()
+            findUser()
+            fetchComments(articleId)
+        }
+    }, [isDeleted])
+    
     useEffect(()=> {
         let rootElement = document.getElementById('root')
         let deleteCommentModal = document.getElementById("comment-delete-modal")
@@ -113,8 +120,6 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
                 <DeleteComment theme={theme} message={message} toDelete={toDelete} deleteComment={deleteComment} setToDelete={setToDelete} /> : null}
             {isTimedOut ?
                 <Timeout isTimedout={isTimedOut} theme={theme} /> : null}
-            {isDeleted ?
-                <ArticlePage />  : null }
         </>
 
     );
