@@ -14,10 +14,16 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin,
     const [isDeleted, setIsDeleted] = useState(false)
 
     useEffect(()=> {
+        let rootElement = document.getElementById('root')
+        let deleteCommentModal = document.getElementById("comment-delete-modal")
         if (isDeleted) {
             fetchArticle()
             findUser()
             fetchComments(articleId)
+            deleteCommentModal.style.zIndex = 0
+            rootElement.style.filter = 'unset'
+            rootElement.style.transition = "unset"
+            window.scrollTo({top: 0})
         }
     }, [isDeleted])
     
