@@ -22,6 +22,7 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page,
                         findUser()
                         nav(`/blog-dog/${userInfo.profileName}`)
                     } else if (page === "user") {
+                        findUser()
                         window.location.reload();
                     }
                     
