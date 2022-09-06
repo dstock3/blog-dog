@@ -199,18 +199,19 @@ const Article = ({ isLoggedIn, fetchArticle, findUser, users, article, articleId
                         <CommentForm commentFormClass={commentFormClass} setComments={setComments} fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} findUser={findUser} fetchComments={fetchComments} /> : null
                     }
 
-                    {Object.keys(comments).length !== 0 ?
-                        <ul className={"comments-container " + theme + "-accent"}>
-                            <div className="comment-head-container">
-                                <h3 className="comment-head">Comments {"(" + comments.length + ")"}</h3>
-                                <div className={"show-comments-btn " + theme} onClick={()=> setShowComments(!showComments)}>
-                                    {showComments ? "Minimize Comments" : "Show Comments"}
+                    {comments ? 
+                        Object.keys(comments).length !== 0 ?
+                            <ul className={"comments-container " + theme + "-accent"}>
+                                <div className="comment-head-container">
+                                    <h3 className="comment-head">Comments {"(" + comments.length + ")"}</h3>
+                                    <div className={"show-comments-btn " + theme} onClick={()=> setShowComments(!showComments)}>
+                                        {showComments ? "Minimize Comments" : "Show Comments"}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="message">{commentMessage ? <p>{commentMessage}</p> : null}</div>
-                            <CommentSection showComments={showComments} setShowComments={setShowComments} comments={comments} expandComment={expandImg} theme={theme} userInfo={userInfo} article={article} setCommentUpdate={setCommentUpdate} articleId={articleId} isAdmin={isAdmin} fetchArticle={fetchArticle} findUser={findUser} fetchComments={fetchComments} />
-                        </ul> : 
-                        null
+                                <div className="message">{commentMessage ? <p>{commentMessage}</p> : null}</div>
+                                <CommentSection showComments={showComments} setShowComments={setShowComments} comments={comments} expandComment={expandImg} theme={theme} userInfo={userInfo} article={article} setCommentUpdate={setCommentUpdate} articleId={articleId} isAdmin={isAdmin} fetchArticle={fetchArticle} findUser={findUser} fetchComments={fetchComments} />
+                            </ul> : null
+                        : null
                     }
                 </>
             }
