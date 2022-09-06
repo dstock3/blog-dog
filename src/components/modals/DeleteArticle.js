@@ -16,6 +16,7 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page,
                     });
                 
                 let resJson = await res.json();
+                console.log(res.status)
 
                 if (res.status === (200 || 204)) {
                     if (page === "article") {
