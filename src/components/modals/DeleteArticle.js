@@ -24,8 +24,9 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page,
                         nav(`/blog-dog/${userInfo.profileName}`)
                     } else if (page === "user") {
                         console.log("executed")
+                        
+                        window.location.reload();
                         findUser()
-                        //window.location.reload();
                     }   
                 }
             } catch(err) {
