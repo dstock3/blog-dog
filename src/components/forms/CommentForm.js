@@ -3,7 +3,7 @@ import Prompt from "../basics/Prompt";
 import { parseJwt } from "../../auth/parseToken.js"
 import Timeout from "../modals/Timeout";
 
-const CommentForm = ({commentFormClass, setComments, users, userInfo, articleId, theme, update}) => {
+const CommentForm = ({commentFormClass, setComments, users, userInfo, articleId, theme, update, fetchArticle, findUser, fetchComments}) => {
     const [comment, setComment] = useState("")
     const [message, setMessage] = useState(false)
     const [method, setMethod] = useState("POST")
@@ -83,7 +83,18 @@ const CommentForm = ({commentFormClass, setComments, users, userInfo, articleId,
                     setComment("");
                     setMessage(resJson.message)
                     setComments(resJson.comments)
-                    if (update) { window.location.reload(false) }
+                    if (update) {
+                        let rootElement = document.getElementById('root')
+                        let deleteCommentModal = document.getElementById("comment-delete-modal")
+                        
+                        fetchArticle()
+                        findUser()
+                        fetchComments(articleId)
+                        deleteCommentModal.style.zIndex = 0
+                        rootElement.style.filter = 'unset'
+                        rootElement.style.transition = "unset"
+                        window.scrollTo({top: 0})
+                    }
                 }
             }
         } catch(err) {

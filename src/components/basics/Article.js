@@ -196,7 +196,7 @@ const Article = ({ isLoggedIn, fetchArticle, findUser, users, article, articleId
 
                     {isLoggedIn ?
                         /* Commenting privileges are only enabled if the user is logged in */
-                        <CommentForm commentFormClass={commentFormClass} setComments={setComments} fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
+                        <CommentForm commentFormClass={commentFormClass} setComments={setComments} fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} findUser={findUser} fetchComments={fetchComments} /> : null
                     }
 
                     {Object.keys(comments).length !== 0 ?
