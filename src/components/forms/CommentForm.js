@@ -93,7 +93,6 @@ const CommentForm = ({commentFormClass, setComments, users, userInfo, articleId,
                         deleteCommentModal.style.zIndex = 0
                         rootElement.style.filter = 'unset'
                         rootElement.style.transition = "unset"
-                        window.scrollTo({top: 0})
                     }
                 }
             }
