@@ -29,6 +29,7 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page,
                     }   
                 }
             } catch(err) {
+                console.log(err)
                 setMessage("Some error occured");
             }
         } else {
