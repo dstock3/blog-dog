@@ -50,10 +50,10 @@ const Compose = ({isLoggedIn, getUserData, userInfo, articles, theme, update }) 
         let formData = new FormData();
 
         formData.append("title", title)
-        formData.append("imgDesc", imgDesc)
         formData.append("content", content)
         formData.append("isEdited", isEdited)
         if (img) { formData.append("img", img) };
+        if (imgDesc) { formData.append("imgDesc", imgDesc) };
 
         let token = localStorage.getItem('user');
         try {
