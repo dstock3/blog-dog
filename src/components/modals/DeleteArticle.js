@@ -17,7 +17,7 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page,
                 
                 let resJson = await res.json();
 
-                if (res.status === 200) {
+                if (res.status === (200 || 204)) {
                     if (page === "article") {
                         findUser()
                         nav(`/blog-dog/${userInfo.profileName}`)
