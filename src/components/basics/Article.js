@@ -217,7 +217,7 @@ const Article = ({ isLoggedIn, fetchArticle, findUser, users, article, articleId
             }
 
             {toDelete ?
-                <DeleteArticle theme={theme} toDelete={toDelete} userInfo={userInfo} articleId={articleId} setToDelete={setToDelete} page={page} /> : null}
+                <DeleteArticle theme={theme} toDelete={toDelete} userInfo={userInfo} articleId={articleId} setToDelete={setToDelete} page={page} findUser={findUser} /> : null}
         </article>
     );
 }

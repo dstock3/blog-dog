@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 
-const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page}) => {
+const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page, findUser}) => {
     const [message, setMessage] = useState("")
     const nav = useNavigate()
 
@@ -19,6 +19,7 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page}
 
                 if (res.status === 200) {
                     if (page === "article") {
+                        findUser()
                         nav(`/blog-dog/${userInfo.profileName}`)
                     } else if (page === "user") {
                         window.location.reload();
