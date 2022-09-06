@@ -18,12 +18,14 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page,
                 let resJson = await res.json();
                 
                 if (res.status === 200) {
+                    console.log("executed")
                     if (page === "article") {
                         findUser()
                         nav(`/blog-dog/${userInfo.profileName}`)
                     } else if (page === "user") {
+                        console.log("executed")
                         findUser()
-                        window.location.reload();
+                        //window.location.reload();
                     }   
                 }
             } catch(err) {
