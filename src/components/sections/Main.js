@@ -67,12 +67,12 @@ const Main = ({errorMessage, fetchArticle, findUser, img, isLoggedIn, getUserDat
             {!landing && article ?
                 /* For single articles, the basic layout is enabled */
                 <div className="articles-container basic">
-                    <Article img={img} getUserData={getUserData} fetchArticle={fetchArticle} findUser={findUser} isLoggedIn={isLoggedIn} users={users} userInfo={userInfo} articleId={article._id} article={article} theme={theme} layout={"basic"} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} isAdmin={isAdmin} page={page} />
+                    <Article img={img} fetchArticle={fetchArticle} findUser={findUser} isLoggedIn={isLoggedIn} users={users} userInfo={userInfo} articleId={article._id} article={article} theme={theme} layout={"basic"} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} isAdmin={isAdmin} page={page} />
                 </div> :
                 articles.length !== 0 ?
                     <div className={"articles-container " + thisLayout}>
                         {Object.values(articles).map((articleItem, artIndex) =>
-                            <Article key={artIndex} getUserData={getUserData} fetchArticle={fetchArticle} findUser={findUser} users={users} articleId={articleItem._id} userInfo={userInfo} article={articles[artIndex]} theme={theme} layout={layout} limit={true} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} landing={landing} userPage={userPage} isAdmin={isAdmin} page={page} /> )}
+                            <Article key={artIndex} fetchArticle={fetchArticle} findUser={findUser} users={users} articleId={articleItem._id} userInfo={userInfo} article={articles[artIndex]} theme={theme} layout={layout} limit={true} comments={comments} commentMessage={commentMessage} setCommentMessage={setCommentMessage} setComments={setComments} landing={landing} userPage={userPage} isAdmin={isAdmin} page={page} /> )}
                     </div> :
                     <div className={"articles-container basic"}>
                         <ComposePrompt isAuthorized={isAuthorized} theme={theme} composeImg={composeImg} />

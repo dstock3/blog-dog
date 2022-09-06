@@ -23,7 +23,6 @@ const UserPage = () => {
 
     const fetchUser =  async() => {
         setIsLoading(true)
-
         try {
             let res = await fetch(`https://stormy-waters-34046.herokuapp.com/${username}`, {
                 method: "GET"
@@ -31,14 +30,12 @@ const UserPage = () => {
             let resJson = await res.json();
             
             if (res.status === 200) {
-                setUserInfo(resJson.user[0])
-            } else {
-                
-                setErrorMessage(`Error Code ${res.status} There was a problem loading user data.`) 
+              setUserInfo(resJson.user[0])
+            } else {  
+              setErrorMessage(`Error Code ${res.status} There was a problem loading user data.`) 
             }
-        } catch(err) {
-            
-            setErrorMessage("There was a problem loading user data: " + err)
+        } catch(err) {  
+          setErrorMessage("There was a problem loading user data: " + err)
         }
 
         let newUser = localStorage.getItem('user');
@@ -94,7 +91,7 @@ const UserPage = () => {
         return (
             <div className={"App " + userInfo.themePref + "-accent"}>
                 <Header thisUser={thisUser} isLoggedIn={isLoggedIn} userInfo={userInfo} theme={userInfo.themePref} title={userInfo.blogTitle} profileName={userInfo.profileName} />
-                <Main errorMessage={errorMessage} getUserData={fetchUser} landing={true} userInfo={userInfo} index={false} articles={userInfo.articles} theme={userInfo.themePref} layout={userInfo.layoutPref} userPage={true} isAdmin={isAdmin} page={"user"} />
+                <Main errorMessage={errorMessage} findUser={fetchUser} landing={true} userInfo={userInfo} index={false} articles={userInfo.articles} theme={userInfo.themePref} layout={userInfo.layoutPref} userPage={true} isAdmin={isAdmin} page={"user"} />
                 <Footer theme={userInfo.themePref} />
             </div>
         )

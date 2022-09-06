@@ -23,7 +23,7 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page,
                         nav(`/blog-dog/${userInfo.profileName}`)
                     } else if (page === "user") {
                         findUser()
-                        nav(`/blog-dog/${userInfo.profileName}/`) 
+                        nav(`/blog-dog/${userInfo.profileName}`) 
                     }   
                 }
             } catch(err) {
@@ -37,7 +37,7 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page,
     if (!toDelete) return null
     return ReactDOM.createPortal(
         <div className={"delete-prompt " + theme + "-accent"}>
-            <div className="message">{message ? <p>{message}</p> : null}</div>
+            {/*<div className="message">{message ? <p>{message}</p> : null}</div>*/}
             <div className="delete-article-prompt">
                 Are you sure you want to delete this article?
             </div>
