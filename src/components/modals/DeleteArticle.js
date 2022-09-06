@@ -16,19 +16,16 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page,
                     });
                 
                 let resJson = await res.json();
-                console.log(res.status)
-
-                if (res.status === (200 || 204)) {
+                
+                if (res.status === 200) {
                     if (page === "article") {
                         findUser()
                         nav(`/blog-dog/${userInfo.profileName}`)
                     } else if (page === "user") {
                         findUser()
                         window.location.reload();
-                    }
-                    
-                } else { setMessage("Some error occured") };
-
+                    }   
+                }
             } catch(err) {
                 setMessage("Some error occured");
             }
