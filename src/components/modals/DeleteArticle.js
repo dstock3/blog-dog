@@ -24,6 +24,7 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page,
                     } else if (page === "user") {
                         findUser()
                         setToDelete(false)
+                        setMessage("")
                         window.location.reload();    
                     }   
                 }
