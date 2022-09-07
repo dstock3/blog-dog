@@ -8,8 +8,9 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
     const [thisClass, setThisClass] = useState({picContainer: null, pic: null, profInfo: null})
     const [profilePic, setProfilePic] = useState(null)
     const [imgIsLoading, setImgIsLoading] = useState(false)
-    const [imgStyle, setImgStyle] = useState("")
-
+    const [imgStyle, setImgStyle] = useState({})
+    const [imgContainerStyle, setImgContainerStyle] = useState({})
+    
     useEffect(()=> {
         (async() => {
             setImgIsLoading(true)
@@ -30,9 +31,9 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
                 };
             } else {
                 setProfilePic(defaultImg)
+                setImgContainerStyle({"backgroundColor": "white"})
+                setImgStyle({"width":"85px", "height":"85px"})
                 setImgIsLoading(false)
-                setImgStyle({"background-color": "white"})
-                console.log(imgStyle)
             };
         })();
     }, [userInfo])
@@ -48,10 +49,10 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
     return (
         <div className="profile" id={mode}>
             <Link to = {{pathname: '/blog-dog/' + userInfo["profileName"]}}>
-                <div className={"profile-pic-container " + thisClass.picContainer} style={{imgStyle}}>
+                <div className={"profile-pic-container " + thisClass.picContainer} style={imgContainerStyle}>
                     {imgIsLoading ? 
                         <Spinner theme={theme} isMini={true} userPic={true} /> :
-                        <img className={"profile-pic " + thisClass.pic} src={profilePic} alt={"profile-pic for " + userInfo["profileName"]}></img>
+                        <img className={"profile-pic " + thisClass.pic} style={imgStyle} src={profilePic} alt={"profile-pic for " + userInfo["profileName"]}></img>
                     }
                 </div>
             </Link>
