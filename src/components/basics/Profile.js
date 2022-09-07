@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { decodeEntities } from "../../formatting/decodeEntities";
 import Spinner from "./Spinner";
+import defaultImg from "../../assets/paw.png"
 
 const Profile = ({userInfo, mode, isHome, theme}) => {
     const [thisClass, setThisClass] = useState({picContainer: null, pic: null, profInfo: null})
@@ -9,6 +10,14 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
     const [imgIsLoading, setImgIsLoading] = useState(false)
 
     useEffect(()=> {
+        if (userInfo.profilePic === undefined) {
+            setProfilePic(defaultImg)
+            setImgIsLoading(false)
+        }
+    }, [])
+
+    useEffect(()=> {
+
         (async() => {
             setImgIsLoading(true)
             if (userInfo.profilePic !== undefined) {

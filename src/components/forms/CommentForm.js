@@ -105,25 +105,25 @@ const CommentForm = ({commentFormClass, setComments, users, userInfo, articleId,
     if (userInfo) {
         return (
             <>
-            <form className={"comment-form " + theme + "-accent " + commentFormClass} action="" method="POST">
-                <div className="comment-subcontainer comment-prompt">
-                    <label className="comment-label" htmlFor="comment">
-                        {update ?
-                            "Edit Your Comment" : "Leave a Comment Below"
-                        }
-                    </label>
-                    {message ? <div className="message">{message}</div> : null}
-                    <textarea className="comment-input" type="text" value={comment} htmlFor="comment" onChange={(e) => setComment(e.target.value)}></textarea>
-                </div>
-                <div className="comment-btn-subcontainer">
-                    <div onClick={commentHandler} className={"comment-btn " + theme}>
-                        {update ?
-                            "Edit Comment" : "Submit"
-                        }
+                <form className={"comment-form " + theme + "-accent " + commentFormClass} action="" method="POST">
+                    <div className="comment-subcontainer comment-prompt">
+                        <label className="comment-label" htmlFor="comment">
+                            {update ?
+                                "Edit Your Comment" : "Leave a Comment Below"
+                            }
+                        </label>
+                        {message ? <div className="message">{message}</div> : null}
+                        <textarea className="comment-input" type="text" value={comment} htmlFor="comment" onChange={(e) => setComment(e.target.value)}></textarea>
                     </div>
-                </div>
-            </form>
-            <Timeout isTimedout={isTimedout} theme={theme}/>
+                    <div className="comment-btn-subcontainer">
+                        <div onClick={commentHandler} className={"comment-btn " + theme}>
+                            {update ?
+                                "Edit Comment" : "Submit"
+                            }
+                        </div>
+                    </div>
+                </form>
+                <Timeout isTimedout={isTimedout} theme={theme}/>
             </>
         );
     } else {
