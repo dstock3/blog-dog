@@ -2,22 +2,15 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { decodeEntities } from "../../formatting/decodeEntities";
 import Spinner from "./Spinner";
-import defaultImg from "../../assets/paw.png"
+import defaultImg from '../../assets/paw.png'
 
 const Profile = ({userInfo, mode, isHome, theme}) => {
     const [thisClass, setThisClass] = useState({picContainer: null, pic: null, profInfo: null})
     const [profilePic, setProfilePic] = useState(null)
     const [imgIsLoading, setImgIsLoading] = useState(false)
+    const [imgStyle, setImgStyle] = useState("")
 
     useEffect(()=> {
-        if (userInfo.profilePic === undefined) {
-            setProfilePic(defaultImg)
-            setImgIsLoading(false)
-        }
-    }, [])
-
-    useEffect(()=> {
-
         (async() => {
             setImgIsLoading(true)
             if (userInfo.profilePic !== undefined) {
@@ -35,6 +28,11 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
                 } catch(err) {
                     console.log(err)
                 };
+            } else {
+                setProfilePic(defaultImg)
+                setImgIsLoading(false)
+                setImgStyle({"background-color": "white"})
+                console.log(imgStyle)
             };
         })();
     }, [userInfo])
@@ -49,8 +47,8 @@ const Profile = ({userInfo, mode, isHome, theme}) => {
 
     return (
         <div className="profile" id={mode}>
-            <Link to = {{pathname: '/' + userInfo["profileName"]}}>
-                <div className={"profile-pic-container " + thisClass.picContainer}>
+            <Link to = {{pathname: '/blog-dog/' + userInfo["profileName"]}}>
+                <div className={"profile-pic-container " + thisClass.picContainer} style={{imgStyle}}>
                     {imgIsLoading ? 
                         <Spinner theme={theme} isMini={true} userPic={true} /> :
                         <img className={"profile-pic " + thisClass.pic} src={profilePic} alt={"profile-pic for " + userInfo["profileName"]}></img>
