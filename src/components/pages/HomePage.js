@@ -3,6 +3,7 @@ import Header from '../sections/Header';
 import Home from '../sections/Home';
 import Footer from '../sections/Footer';
 import Spinner from '../basics/Spinner';
+import '../style/spinner.css'
 
 const HomePage = () => {
   const [users, setUsers] = useState(false)
@@ -14,7 +15,6 @@ const HomePage = () => {
   const [isAdmin, setIsAdmin] = useState(false)
     
   const fetchUsers = async() => {
-    setIsLoading(true)
     let token = localStorage.getItem('user');
 
     let response 
@@ -76,11 +76,9 @@ const HomePage = () => {
   }
     
   useEffect(()=> {
-    fetchUsers()
-  }, [])
-
-  useEffect(() => {
     document.title = "BlogDog"  
+    setIsLoading(true)
+    fetchUsers()
   }, [])
 
   useEffect(()=> {
@@ -97,11 +95,13 @@ const HomePage = () => {
   }, [])
 
   if (isLoading) {
-    <div className="App dark-accent">
+    return(
+      <div className="App dark-accent">
         <Header theme="dark" title="BlogDog - Simple CMS" />
         <Spinner theme="dark" />
         <Footer theme="dark" />
-    </div>
+      </div>
+    )
   } else if (users && isLoggedIn) {
     /* If request for users is successful and the user is logged in */
     return (
@@ -131,7 +131,7 @@ const HomePage = () => {
         <Footer theme="dark" />
       </div>
     )
-  } 
+  }
 }
 
 export default HomePage
