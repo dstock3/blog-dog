@@ -12,6 +12,13 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin,
     const [toDelete, setToDelete] = useState(false)
     const [isTimedOut, setIsTimedOut] = useState(false)
     const [isDeleted, setIsDeleted] = useState(false)
+    const [dashboard, setDashboard] = useState({})
+
+    useEffect(()=> {
+        if (!(authorizedToDelete || fullyAuthorized || isAdmin)) {
+            setDashboard({"height": 0, "width": 0})
+        }
+    }, [authorizedToDelete, fullyAuthorized, isAdmin])
 
     useEffect(()=> {
         let rootElement = document.getElementById('root')
@@ -110,7 +117,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin,
                         <div className="comment-date">Posted on {comment.date}</div>
                     } 
                 </div>
-                <div className="comment-dashboard">
+                <div className="comment-dashboard" style={dashboard}>
                     {authorizedToDelete ?
                         <div className={"comment-edit-btn " + theme + "-accent"} onClick={()=>setToDelete(true)}>Delete</div> : null}
                     {fullyAuthorized || isAdmin ?
