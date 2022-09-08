@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import pawIcon from '../../assets/paw.png'
+import Spinner from './Spinner';
 
 const Intro = ({theme}) => {
   return (
     <div className={"intro-container " + theme + "-accent"}>
         <div className="logo">
-          <img src={pawIcon} alt="BlogDog logo"></img>
+          {pawIcon ? 
+            <img src={pawIcon} alt="BlogDog logo"></img> :
+            <Spinner theme={theme} isMini={true} />}
         </div>
         <div className="intro">Welcome to <b>BlogDog</b>, a content management system designed to maximize ease of use.</div>
         <div className="login-prompt">
