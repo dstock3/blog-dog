@@ -17,6 +17,9 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin,
     useEffect(()=> {
         if (!(authorizedToDelete || fullyAuthorized || isAdmin)) {
             setDashboard({"height": 0, "width": 0})
+        } else {
+            setDashboard({"height": "fit-content", "width": "fit-content"})
+
         }
     }, [authorizedToDelete, fullyAuthorized, isAdmin])
 
