@@ -9,7 +9,7 @@ const Header = ({thisUser, isLoggedIn, theme, title, profileName}) => {
     useEffect(()=> {
         if (theme) {
             setThisTheme(theme)
-        }
+        } else
     }, [theme])
     
     return (

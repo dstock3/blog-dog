@@ -9,7 +9,7 @@ import CommentSection from "../sections/CommentSection";
 import { decodeEntities } from "../../formatting/decodeEntities";
 import Spinner from "./Spinner";
 
-const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome, isAdmin, page }) => {
+const Article = ({isLoggedIn, fetchArticle, findUser, users, article, articleId, userInfo, theme, layout, limit, comments, setComments, commentMessage, setCommentMessage, landing, userPage, isHome, isAdmin, page}) => {
     const [abstract, setAbstract] = useState(article["content"])
     const [isAuthorized, setIsAuthorized] = useState(false)
     const [commentUpdate, setCommentUpdate] = useState(false)
@@ -196,27 +196,28 @@ const Article = ({ isLoggedIn, fetchArticle, users, article, articleId, userInfo
 
                     {isLoggedIn ?
                         /* Commenting privileges are only enabled if the user is logged in */
-                        <CommentForm commentFormClass={commentFormClass} setComments={setComments} fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} fetchComments={fetchComments} /> : null
+                        <CommentForm commentFormClass={commentFormClass} setComments={setComments} fetchArticle={fetchArticle} users={users} userInfo={userInfo} articleId={article._id} theme={theme} update={commentUpdate} setShowComments={setShowComments} findUser={findUser} fetchComments={fetchComments} /> : null
                     }
 
-                    {Object.keys(comments).length !== 0 ?
-                        <ul className={"comments-container " + theme + "-accent"}>
-                            <div className="comment-head-container">
-                                <h3 className="comment-head">Comments {"(" + comments.length + ")"}</h3>
-                                <div className={"show-comments-btn " + theme} onClick={()=> setShowComments(!showComments)}>
-                                    {showComments ? "Minimize Comments" : "Show Comments"}
+                    {comments ? 
+                        Object.keys(comments).length !== 0 ?
+                            <ul className={"comments-container " + theme + "-accent"}>
+                                <div className="comment-head-container">
+                                    <h3 className="comment-head">Comments {"(" + comments.length + ")"}</h3>
+                                    <div className={"show-comments-btn " + theme} onClick={()=> setShowComments(!showComments)}>
+                                        {showComments ? "Minimize Comments" : "Show Comments"}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="message">{commentMessage ? <p>{commentMessage}</p> : null}</div>
-                            <CommentSection showComments={showComments} setShowComments={setShowComments} comments={comments} expandComment={expandImg} theme={theme} userInfo={userInfo} article={article} setCommentUpdate={setCommentUpdate} articleId={articleId} isAdmin={isAdmin} />
-                        </ul> : 
-                        null
+                                <div className="message">{commentMessage ? <p>{commentMessage}</p> : null}</div>
+                                <CommentSection showComments={showComments} setShowComments={setShowComments} comments={comments} expandComment={expandImg} theme={theme} userInfo={userInfo} article={article} setCommentUpdate={setCommentUpdate} articleId={articleId} isAdmin={isAdmin} fetchArticle={fetchArticle} findUser={findUser} fetchComments={fetchComments} />
+                            </ul> : null
+                        : null
                     }
                 </>
             }
 
             {toDelete ?
-                <DeleteArticle theme={theme} toDelete={toDelete} userInfo={userInfo} articleId={articleId} setToDelete={setToDelete} page={page} /> : null}
+                <DeleteArticle theme={theme} toDelete={toDelete} userInfo={userInfo} articleId={articleId} setToDelete={setToDelete} page={page} findUser={findUser} /> : null}
         </article>
     );
 }

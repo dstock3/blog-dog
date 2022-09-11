@@ -1,18 +1,42 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { parseJwt } from '../../auth/parseToken.js';
 import { decodeEntities } from "../../formatting/decodeEntities.js";
 import DeleteComment from "../modals/DeleteComment.js";
 import Timeout from "../modals/Timeout.js";
 
-const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin }) => {
+const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin, fetchArticle, findUser, fetchComments }) => {
     const [message, setMessage] = useState("")
     const [authorizedToDelete, setAuthorizedToDelete] = useState(false)
     const [fullyAuthorized, setFullyAuthorized] = useState(false)
     const [toDelete, setToDelete] = useState(false)
     const [isTimedOut, setIsTimedOut] = useState(false)
-    const nav = useNavigate()
+    const [isDeleted, setIsDeleted] = useState(false)
+    const [dashboard, setDashboard] = useState({})
 
+    useEffect(()=> {
+        if (!(authorizedToDelete || fullyAuthorized || isAdmin)) {
+            setDashboard({"height": 0, "width": 0})
+        } else {
+            setDashboard({"height": "fit-content", "width": "fit-content"})
+
+        }
+    }, [authorizedToDelete, fullyAuthorized, isAdmin])
+
+    useEffect(()=> {
+        let rootElement = document.getElementById('root')
+        let deleteCommentModal = document.getElementById("comment-delete-modal")
+        if (isDeleted) {
+            fetchArticle()
+            findUser()
+            fetchComments(articleId)
+            deleteCommentModal.style.zIndex = 0
+            rootElement.style.filter = 'unset'
+            rootElement.style.transition = "unset"
+            window.scrollTo({top: 0})
+        }
+    }, [isDeleted])
+    
     useEffect(()=> {
         let rootElement = document.getElementById('root')
         let deleteCommentModal = document.getElementById("comment-delete-modal")
@@ -74,8 +98,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
                 timedOutModal.style.zIndex = 1000
 
             } else if (res.status === 200) {
-                nav(`/blog-dog/${articleAuthor.profileName}/${articleId}`)
-                window.location.reload();
+                setIsDeleted(true)
             } else {
                 setMessage("Some error occurred")
             }
@@ -97,7 +120,7 @@ const Comment = ({ comment, articleAuthor, articleId, setUpdate, theme, isAdmin 
                         <div className="comment-date">Posted on {comment.date}</div>
                     } 
                 </div>
-                <div className="comment-dashboard">
+                <div className="comment-dashboard" style={dashboard}>
                     {authorizedToDelete ?
                         <div className={"comment-edit-btn " + theme + "-accent"} onClick={()=>setToDelete(true)}>Delete</div> : null}
                     {fullyAuthorized || isAdmin ?

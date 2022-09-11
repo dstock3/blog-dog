@@ -8,7 +8,7 @@ const ThemePrompt = ({themeCheck, setThemeCheck, theme}) => {
         <div className={"theme-prompt " + theme}>
             <div className="close-theme-modal" onClick={()=> setThemeCheck(false)}>X</div>
             <div className="theme-msg">Want to change your theme?</div>
-            <div className={"theme-link-container " + theme + "-accent"}>Check out your <Link className="theme-link" to='/options'>Options</Link>.</div>
+            <div className={"theme-link-container " + theme + "-accent"}>Check out your <Link className="theme-link" to='/blog-dog/options'>Options</Link>.</div>
         </div>,
         document.getElementById('theme-modal')
     )

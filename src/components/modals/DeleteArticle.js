@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 
-const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page}) => {
+const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page, findUser}) => {
     const [message, setMessage] = useState("")
     const nav = useNavigate()
 
@@ -16,20 +16,20 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page}
                     });
                 
                 let resJson = await res.json();
-
+                
                 if (res.status === 200) {
                     if (page === "article") {
+                        findUser()
                         nav(`/blog-dog/${userInfo.profileName}`)
                     } else if (page === "user") {
-                        window.location.reload();
-                    }
-                    
-                } else { setMessage("Some error occured") };
-
+                        findUser()
+                        nav(`/blog-dog/${userInfo.profileName}`) 
+                    }   
+                }
             } catch(err) {
                 setMessage("Some error occured");
             }
-        } else {
+        }  else {
             setMessage("Invalid credentials");
         }
     }
@@ -37,7 +37,7 @@ const DeleteArticle = ({theme, toDelete, userInfo, articleId, setToDelete, page}
     if (!toDelete) return null
     return ReactDOM.createPortal(
         <div className={"delete-prompt " + theme + "-accent"}>
-            <div className="message">{message ? <p>{message}</p> : null}</div>
+            {/*<div className="message">{message ? <p>{message}</p> : null}</div>*/}
             <div className="delete-article-prompt">
                 Are you sure you want to delete this article?
             </div>

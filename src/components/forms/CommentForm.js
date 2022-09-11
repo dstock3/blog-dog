@@ -3,7 +3,7 @@ import Prompt from "../basics/Prompt";
 import { parseJwt } from "../../auth/parseToken.js"
 import Timeout from "../modals/Timeout";
 
-const CommentForm = ({commentFormClass, setComments, users, userInfo, articleId, theme, update}) => {
+const CommentForm = ({commentFormClass, setComments, users, userInfo, articleId, theme, update, fetchArticle, findUser, fetchComments}) => {
     const [comment, setComment] = useState("")
     const [message, setMessage] = useState(false)
     const [method, setMethod] = useState("POST")
@@ -83,7 +83,17 @@ const CommentForm = ({commentFormClass, setComments, users, userInfo, articleId,
                     setComment("");
                     setMessage(resJson.message)
                     setComments(resJson.comments)
-                    if (update) { window.location.reload(false) }
+                    if (update) {
+                        let rootElement = document.getElementById('root')
+                        let deleteCommentModal = document.getElementById("comment-delete-modal")
+                        
+                        fetchArticle()
+                        findUser()
+                        fetchComments(articleId)
+                        deleteCommentModal.style.zIndex = 0
+                        rootElement.style.filter = 'unset'
+                        rootElement.style.transition = "unset"
+                    }
                 }
             }
         } catch(err) {
@@ -95,25 +105,25 @@ const CommentForm = ({commentFormClass, setComments, users, userInfo, articleId,
     if (userInfo) {
         return (
             <>
-            <form className={"comment-form " + theme + "-accent " + commentFormClass} action="" method="POST">
-                <div className="comment-subcontainer comment-prompt">
-                    <label className="comment-label" htmlFor="comment">
-                        {update ?
-                            "Edit Your Comment" : "Leave a Comment Below"
-                        }
-                    </label>
-                    {message ? <div className="message">{message}</div> : null}
-                    <textarea className="comment-input" type="text" value={comment} htmlFor="comment" onChange={(e) => setComment(e.target.value)}></textarea>
-                </div>
-                <div className="comment-btn-subcontainer">
-                    <div onClick={commentHandler} className={"comment-btn " + theme}>
-                        {update ?
-                            "Edit Comment" : "Submit"
-                        }
+                <form className={"comment-form " + theme + "-accent " + commentFormClass} action="" method="POST">
+                    <div className="comment-subcontainer comment-prompt">
+                        <label className="comment-label" htmlFor="comment">
+                            {update ?
+                                "Edit Your Comment" : "Leave a Comment Below"
+                            }
+                        </label>
+                        {message ? <div className="message">{message}</div> : null}
+                        <textarea className="comment-input" type="text" value={comment} htmlFor="comment" onChange={(e) => setComment(e.target.value)}></textarea>
                     </div>
-                </div>
-            </form>
-            <Timeout isTimedout={isTimedout} theme={theme}/>
+                    <div className="comment-btn-subcontainer">
+                        <div onClick={commentHandler} className={"comment-btn " + theme}>
+                            {update ?
+                                "Edit Comment" : "Submit"
+                            }
+                        </div>
+                    </div>
+                </form>
+                <Timeout isTimedout={isTimedout} theme={theme}/>
             </>
         );
     } else {

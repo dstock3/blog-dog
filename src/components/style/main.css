@@ -62,10 +62,14 @@ article {
 }
   
 .img-container {
-    height: 200px;
+    height: 15vh;
     float: left;
     margin-right: 15px;
     padding-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
   
 .article-img {
@@ -459,7 +463,7 @@ article {
 }
 
 
-@media only screen and (max-width: 900px) {    
+@media only screen and (max-width: 1200px) {    
     .title {
         font-size: 1.25em;
     }
