@@ -95,11 +95,13 @@ const HomePage = () => {
 
   if (isLoading) {
     /* Loading page */
-    <div className="App dark-accent">
+    return (
+      <div className="App dark-accent">
         <Header theme="dark" title="BlogDog - Simple CMS" />
         <Spinner theme="dark" />
         <Footer theme="dark" />
       </div>
+    )
   } else if (users && isLoggedIn) {
     /* If request for users is successful and the user is logged in */
     return (
