@@ -227,14 +227,14 @@ main {
 
 .card-child {
   margin-right: 15px;
-  max-width: 25%;
+  max-width: 16vw;
   height: fit-content;
   box-shadow: 2px 5px 10px rgba(22, 22, 22, 0.857);
-  height: fit-content;
+  padding-inline-end: 2.5%;
 }
 
 .img-card-view {
-  height: 125px;
+  width: fit-content;
 }
 
 .compose-link {

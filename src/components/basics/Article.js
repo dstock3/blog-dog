@@ -173,7 +173,7 @@ const Article = ({isLoggedIn, fetchArticle, findUser, users, article, articleId,
                     <img className="article-img" src={thisImg} alt={decodeEntities(article.imgDesc)}></img>
                     <div className="article-img-caption">{decodeEntities(article.imgDesc)}</div>
                 </div> :
-                <div className="img-container">
+                <div className="img-container img-loading-container">
                     <Spinner theme={theme} isMini={true} imgLoader={true} />
                 </div>
             }

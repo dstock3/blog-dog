@@ -62,21 +62,26 @@ article {
 }
   
 .img-container {
-    height: 15vh;
     float: left;
     margin-right: 15px;
     padding-bottom: 25px;
     display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.img-loading-container {
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
   
 .article-img {
-    height: 100%;
+    width: 250px;
 }
   
 .article-img-caption {
+    margin-top: 10px;
     font-size: .75em;
 }
 
