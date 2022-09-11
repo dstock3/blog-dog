@@ -7,7 +7,6 @@ import Spinner from '../basics/Spinner';
 const HomePage = () => {
   const [users, setUsers] = useState(false)
   const [errorMessage, setErrorMessage] = useState(false)
-  /* Layout is set to basic by default */
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -97,6 +96,7 @@ const HomePage = () => {
   }, [])
 
   if (isLoading) {
+    /* Loading page */
     <div className="App dark-accent">
         <Header theme="dark" title="BlogDog - Simple CMS" />
         <Spinner theme="dark" />

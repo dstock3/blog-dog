@@ -3,9 +3,20 @@ import { Link } from 'react-router-dom';
 import menuIcon from '../../assets/hamburger_menu.svg';
 import menuIconBlack from '../../assets/hamburger_menu_black.svg';
 
-const Settings = ({theme, isLoggedIn}) => {
+const Settings = ({theme, isLoggedIn, isHovered, setIsHovered}) => {
     const [optionsStatus, setOptionsStatus] = useState("hidden")
     const [menuImg, setMenuImg] = useState(menuIcon)
+    const [thisTheme, setThisTheme] = useState(theme)
+
+    useEffect(()=> {
+        if (isHovered) {
+            let themeHover = theme + "-hovered"
+            setThisTheme(themeHover)
+        } else {
+            setThisTheme(theme)
+        }
+
+    }, [isHovered])
 
     useEffect(()=> {
         const whiteSet = ["dark", "forest"]
@@ -42,7 +53,7 @@ const Settings = ({theme, isLoggedIn}) => {
             <div onClick={toggleStatus} className="settings-icon">
                 <img src={menuImg} alt="menu icon"></img>
             </div>
-            <div className={"settings-dropdown " + optionsStatus + " " + theme}>
+            <div className={"settings-dropdown " + optionsStatus + " " + thisTheme} onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)}> 
                 <ul className="options-list">
                     {
                         isLoggedIn ?
