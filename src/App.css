@@ -112,6 +112,11 @@ main {
   background-color: rgb(3, 3, 3);
 }
 
+.dark-hovered {
+  background-color: rgb(3, 3, 3);
+
+}
+
 .light {
   background-color: rgb(245, 245, 245);
   color: black;
@@ -132,6 +137,11 @@ main {
   background-color: white;
 }
 
+.light-hovered {
+  background-color: white;
+
+}
+
 .artic {
   background-color: rgb(133, 218, 244);
   color: rgb(3, 9, 73);
@@ -149,6 +159,10 @@ main {
 }
 
 .artic:hover {
+  background-color: rgb(115, 210, 239);
+}
+
+.artic-hovered {
   background-color: rgb(115, 210, 239);
 }
 
@@ -172,6 +186,10 @@ main {
   background-color: rgb(0, 50, 15);
 }
 
+.forest-hovered {
+  background-color: rgb(0, 50, 15);
+}
+
 .azure {
   background-color: rgb(0, 136, 239);
   color: rgb(37, 20, 0);
@@ -188,6 +206,10 @@ main {
 }
 
 .azure:hover {
+  background-color: rgb(0, 142, 251);
+}
+
+.azure-hovered {
   background-color: rgb(0, 142, 251);
 }
 
