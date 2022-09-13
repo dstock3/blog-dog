@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import menuIcon from '../../assets/hamburger_menu.svg';
 import menuIconBlack from '../../assets/hamburger_menu_black.svg';
 
-const Settings = ({theme, isLoggedIn, isHovered, setIsHovered, userInfo}) => {
+const Settings = ({theme, isLoggedIn, isHovered, setIsHovered}) => {
     const [optionsStatus, setOptionsStatus] = useState("hidden")
     const [menuImg, setMenuImg] = useState(menuIcon)
     const [thisTheme, setThisTheme] = useState(theme)
@@ -33,7 +33,7 @@ const Settings = ({theme, isLoggedIn, isHovered, setIsHovered, userInfo}) => {
                 setMenuImg(menuIconBlack)
             }
         }
-    }, [userInfo, theme])
+    }, [theme])
 
     useEffect(() => {
 

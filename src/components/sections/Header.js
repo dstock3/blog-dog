@@ -25,7 +25,7 @@ const Header = ({thisUser, isLoggedIn, theme, title, profileName}) => {
                     <Link to = {{pathname: '/blog-dog/'}}>BlogDog - Simple CMS</Link>
                 }
             </h1>
-            <Settings isLoggedIn={isLoggedIn} theme={theme} isHovered={isHovered} setIsHovered={setIsHovered} userInfo={thisUser}/> 
+            <Settings isLoggedIn={isLoggedIn} theme={theme} isHovered={isHovered} setIsHovered={setIsHovered} /> 
         </header>
     );
 }
