@@ -7,19 +7,8 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPw] = useState("")
     const [message, setMessage] = useState("")
+    const [caps, setCaps] = useState(false)
     const nav = useNavigate()
-    const [capsLock, setCapsLock] = useState(false)
-
-    useEffect(()=> {
-        document.addEventListener('keyup', (e) => {
-            if (e.getModifierState('CapsLock')) {
-                setCapsLock(true)
-            } else {
-                setCapsLock(false)
-            }
-        });
-
-    }, [])
 
     const loginHandler = async (e) => {
         e.preventDefault();
@@ -46,6 +35,24 @@ const Login = () => {
             });  
     }
 
+    const chkCaps = (event) => {
+        if (event.getModifierState('CapsLock')) {
+            setCaps(true);
+        } else {
+            setCaps(false);
+        }
+    };
+
+    useEffect(()=> {
+        document.addEventListener("keydown", function(event) {
+            if (event.getModifierState('CapsLock')) {
+                setCaps(false);
+            } else {
+                setCaps(true);
+            }
+        });
+    }, [caps])
+
     return (
         <div className={"login dark"}>
             <form className="loginForm" action="" method="POST">
@@ -70,7 +77,7 @@ const Login = () => {
                         onChange={(e) => setPw(e.target.value)}
                         required>    
                     </input>
-                    {capsLock ? <div className="caps-warning">Caps Lock is on.</div> : null}
+                    {caps ? <div className="caps-warning">Caps Lock is on.</div> : null}
                 </div>
 
                 <div onClick={loginHandler} className="log-btn dark-accent">Login</div>

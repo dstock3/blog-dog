@@ -15,9 +15,8 @@ const LoginPage = () => {
     rootElement.style.filter = "unset"
     rootElement.style.transition = "unset"
     timeoutModal.style.zIndex = 0
-
   }, [])
-  
+
   return (
     <div className="App dark-accent">
       <Header theme="dark" title="BlogDog - Simple CMS" />
