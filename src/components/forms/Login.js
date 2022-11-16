@@ -35,14 +35,6 @@ const Login = () => {
             });  
     }
 
-    const chkCaps = (event) => {
-        if (event.getModifierState('CapsLock')) {
-            setCaps(true);
-        } else {
-            setCaps(false);
-        }
-    };
-
     useEffect(()=> {
         document.addEventListener("keydown", function(event) {
             if (event.getModifierState('CapsLock')) {
