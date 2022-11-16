@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/login.css'
 
@@ -8,6 +8,18 @@ const Login = () => {
     const [password, setPw] = useState("")
     const [message, setMessage] = useState("")
     const nav = useNavigate()
+    const [capsLock, setCapsLock] = useState(false)
+
+    useEffect(()=> {
+        document.addEventListener('keyup', (e) => {
+            if (e.getModifierState('CapsLock')) {
+                setCapsLock(true)
+            } else {
+                setCapsLock(false)
+            }
+        });
+
+    }, [])
 
     const loginHandler = async (e) => {
         e.preventDefault();
@@ -58,6 +70,7 @@ const Login = () => {
                         onChange={(e) => setPw(e.target.value)}
                         required>    
                     </input>
+                    {capsLock ? <div className="caps-warning">Caps Lock is on.</div> : null}
                 </div>
 
                 <div onClick={loginHandler} className="log-btn dark-accent">Login</div>
